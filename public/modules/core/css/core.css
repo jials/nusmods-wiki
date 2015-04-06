@@ -14,7 +14,7 @@ body {
 	height: 100%;
 }
 
-#sidebar-wrapper {
+.sidebar-wrapper {
 	background-color: #424242;
 	left: 200px;
 	width: 200px;
@@ -24,24 +24,20 @@ body {
 	position: fixed;
 }
 
-#brand {
-	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #FFFFFF;
+.top-nav {
+	background-color: #FF9900;
 }
 
-#signin,
-#signout {
-	color: #FFFFFF;
-}
-
-#top-nav .icon-bar {
+.top-nav .icon-bar {
 	background-color: #FFFFFF;
 }
 
-.nav > li > a {
+nav.sidebar-wrapper > .nav-wrapper > ul.nav > li > a {
 	color: grey;
 	cursor: pointer;
 	-webkit-transition: color .2s; /* Safari */
+	-moz-transition: color .2s; /* Mozilla */
+	-o-transition: color .2s;
     transition: color .2s;
 }
 
@@ -55,22 +51,20 @@ body {
 	color: #FFFFFF;
 }
 
-.nav-wrapper {
-	margin-top: 50px;
+a.signin,
+a.signout,
+a.brand {
+	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #FFFFFF;
 }
 
-#nav-header {
-	font-size: 15px;
-	color: #FFFFFF;
+.nav-wrapper {
+	margin-top: 50px;
 }
 
 .navmenu-fixed-left {
 	top: 0;
 	border-radius: 0;
-}
-
-#top-nav {
-	background-color: #FF9900;
 }
 
 .search-wrapper {
@@ -80,7 +74,7 @@ body {
 	position: relative;
 }
 
-#search {
+input.search {
 	width: 350px;
 	height: 34px;
 	background: #FFFFFF;
@@ -88,18 +82,16 @@ body {
 	font-size: 10pt;
 	float: left;
 	padding-left: 45px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
 
-#search a {
+/*input.search a {
 	color: #FFFFFF;
-}
+}*/
 
-#search:focus {
+/*#search:focus {
 	outline: none;
-}
+}*/
 
 .icon {
 	position: absolute;
@@ -132,17 +124,17 @@ body {
 	background-image: url(../img/bg.png);
 }
 
-#nud-module-wiki-title {
+.nud-module-wiki-title {
 	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 400;
 	font-size: 40px;
 	color: #FFFFFF;
 	text-align: left;
 	margin-top: 10px;
-	text-shadow: 0px 0px 40px #000;
+	text-shadow: 0 0 40px #000;
 }
 
-#nud-module-wiki-text {
+.nud-module-wiki-text {
 	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #FFFFFF;
 	text-align: right;
@@ -151,18 +143,14 @@ body {
 	font-size: 1.5em;
 }
 
-
-
-
-
-#description > .page-header:before,
-#prerequisites > .page-header:before,
-#preclusion > .page-header:before,
-#past-lecturer > .page-header:before,
-#past-ta > .page-header:before,
-#fun-facts > .page-header:before,
-#projects > .page-header:before,
-#others > .page-header:before {
+.description-wrapper > .page-header:before,
+.prerequisites-wrapper > .page-header:before,
+.preclusion-wrapper > .page-header:before,
+.past-lecturer-wrapper > .page-header:before,
+.past-ta-wrapper > .page-header:before,
+.fun-facts-wrapper > .page-header:before,
+.projects-wrapper > .page-header:before,
+.others-wrapper > .page-header:before {
 	display: block; 
 	content: " "; 
 	margin-top: -70px; 
@@ -170,7 +158,7 @@ body {
 	visibility: hidden; 
 }
 
-#content-right {
+.content-right {
 	min-height: 100%;
 	border: solid 1px grey;
 	padding: 10px;

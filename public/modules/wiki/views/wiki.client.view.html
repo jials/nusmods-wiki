@@ -2,7 +2,7 @@
     <div class="nm-wrapper">
         
         <!-- sidebar -->
-        <nav id="sidebar-wrapper" class="navmenu-fixed-left" role="navigation">
+        <nav class="sidebar-wrapper navmenu-fixed-left" role="navigation">
             <div class="nav-wrapper">
                 <ul class="nav">
                     <li><a href="#description">DESCRIPTION</a></li>
@@ -24,43 +24,44 @@
 
                 <div class="row">
                     <div class="col-md-8" ng-repeat="mod in modules | filter:moduleTitle | limitTo:1">
-                        <h1 id="module-title">{{moduleTitle}}</h1>
-                        <div id="description">
+                        <h1 class="module-code">{{mod.ModuleCode}}</h1>
+                        <h2 class="module-title">{{mod.ModuleTitle}}</h2>
+                        <div id="description" class="description-wrapper">
                             <div class="page-header">DESCRIPTION</div>
                             {{mod.ModuleDescription}}
                         </div>
                         
-                        <div id="prerequisite">
+                        <div id="prerequisite" class="prerequisite-wrapper">
                             <div class="page-header">PREREQUISITES</div>
                             {{mod.Prerequisite}}
                         </div>
 
-                        <div id="preclusion">
+                        <div id="preclusion" class="preclusion-wrapper">
                             <div class="page-header">PRECLUSION</div>
                             {{mod.Preclusion}}
                         </div>
 
-                        <div id="past-lecturer">
+                        <div id="past-lecturer" class="past-lecturer-wrapper">
                             <div class="page-header">PAST LECTURER</div>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
                         </div>
 
-                        <div id="past-ta">
+                        <div id="past-ta" class="past-ta-wrapper">
                             <div class="page-header">PAST TA</div>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
                         </div>
 
-                        <div id="fun-facts">
+                        <div id="fun-facts" class="fun-facts-wrapper">
                             <div class="page-header">FUN FACTS</div>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
                         </div>
 
-                        <div id="projects">
+                        <div id="projects" class="projects-wrapper">
                             <div class="page-header">OUTSTANDING PROJECTS</div>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
                         </div>
 
-                        <div id="others">
+                        <div id="others" class="others-wrapper">
                             <div class="page-header">OTHERS</div>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
                         </div>
@@ -68,26 +69,29 @@
 
                     <div class="col-md-4">
 
-                        <div id="content-right">
+                        <div class="content-right">
                             <div ng-repeat="mod in modules | filter:moduleTitle | limitTo:1">
                                 <div class="lecturers">
                                     <div class="page-header">Lecturer(s):</div>
-                                    {{mod.History[0].Lecturers.toString()}} {{mod.History[1].Lecturers.toString()}}
+                                    <span>{{mod.History[0].Lecturers.toString()}} {{mod.History[1].Lecturers.toString()}}</span>
                                 </div>
                                 <div class="module-credits">
                                     <div class="page-header">Module Credits:</div>
-                                    {{mod.ModuleCredit}}
+                                    <span>{{mod.ModuleCredit}}</span>
                                 </div>
                                 <div class="weekly-workload">
                                     <div class="page-header">Weekly Workload:</div>
-                                    {{mod.Workload}}
+                                    <span>{{mod.Workload}}</span>
                                 </div>
-                                <hr>
                                 <div class="exam-date">
-                                    <div class="page-header">Exam Date Semester 1:</div>
-                                    {{mod.History[0].ExamDate | date:'medium'}}
-                                    <div class="page-header">Exam Date Semester 2:</div>
-                                    {{mod.History[1].ExamDate | date:'medium'}}
+                                    <div class="page-header" ng-if="mod.History[0].ExamDate != null">Exam Date Semester 1:</div>
+                                    <span ng-if="mod.History[0].ExamDate != null">{{mod.History[0].ExamDate | date:'medium'}}</span>
+
+                                    <div class="page-header" ng-if="mod.History[1].ExamDate != null">Exam Date Semester 2:</div>
+                                    <span ng-if="mod.History[1].ExamDate != null">{{mod.History[1].ExamDate | date:'medium'}}</span>
+
+                                    <div class="page-header" ng-if="mod.History[0].ExamDate == null && mod.History[1].ExamDate == null">Exam Date:</div>
+                                    <p ng-if="mod.History[0].ExamDate == null && mod.History[1].ExamDate == null">No exams stated</p>
                                 </div>
                             </div>
                         </div>
