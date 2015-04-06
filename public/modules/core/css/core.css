@@ -1,20 +1,194 @@
-.content {
+html {
+	position: relative;
+	height: 100%;
+}
+
+body {
+	position: relative;
+	padding-top: 50px;
+	height: 100%;
+}
+
+#nm-wrapper {
+	padding-left: 200px;
+	height: 100%;
+}
+
+#sidebar-wrapper {
+	background-color: #424242;
+	left: 200px;
+	width: 200px;
+	height: 100%;
+	margin-left: -200px;
+	overflow-y: auto;
+	position: fixed;
+}
+
+#brand {
+	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #FFFFFF;
+}
+
+#signin,
+#signout {
+	color: #FFFFFF;
+}
+
+#top-nav .icon-bar {
+	background-color: #FFFFFF;
+}
+
+.nav > li > a {
+	color: grey;
+	cursor: pointer;
+	-webkit-transition: color .2s; /* Safari */
+    transition: color .2s;
+}
+
+.nav > li > a:hover {
+	background-color: transparent;
+	color: #FFFFFF;
+}
+
+.nav > li > a.active {
+	background-color: #000000;
+	color: #FFFFFF;
+}
+
+#nav {
 	margin-top: 50px;
 }
-.undecorated-link:hover {
-	text-decoration: none;
+
+#nav-header {
+	font-size: 15px;
+	color: #FFFFFF;
 }
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-	display: none !important;
+
+.navmenu-fixed-left {
+	top: 0;
+	border-radius: 0;
 }
-.ng-invalid.ng-dirty {
-	border-color: #FA787E;
+
+#top-nav {
+	background-color: #FF9900;
 }
-.ng-valid.ng-dirty {
-	border-color: #78FA89;
+
+#search-wrapper {
+	width: 400px;
+	vertical-align: middle;
+	white-space: nowrap;
+	position: relative;
 }
-.browsehappy.jumbotron.hide,
-body.ng-cloak
-{
-	display: block;
+
+#search {
+	width: 350px;
+	height: 34px;
+	background: #FFFFFF;
+	border: none;
+	font-size: 10pt;
+	float: left;
+	padding-left: 45px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#search a {
+	color: #FFFFFF;
+}
+
+#search:focus {
+	outline: none;
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	margin-left: 10px;
+	margin-top: 6px;
+	z-index: 1;
+	color: #4f5b66;
+}
+
+#login-wrapper {
+	line-height: 50px;
+}
+
+#page-content-wrapper {
+	width: 100%;
+	min-height: 100%;
+}
+
+.main-container {
+	position: relative;
+	padding-bottom: 265px;
+}
+
+.main-content {
+	padding: 15px 15px 30px;
+	position: relative;
+}
+
+
+
+
+#landing-page-top {
+	width: 100%;
+	background-color: #424242;
+	padding: 100px 0;
+	background-image: url(../img/bg.png);
+}
+
+#nud-module-wiki-title {
+	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 400;
+	font-size: 40px;
+	color: #FFFFFF;
+	text-align: left;
+	margin-top: 10px;
+	text-shadow: 0px 0px 40px #000;
+}
+
+#nud-module-wiki-text {
+	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #FFFFFF;
+	text-align: right;
+	word-wrap: break-word;	
+	margin-top: 10px;
+	font-size: 1.5em;
+}
+
+
+
+
+
+#description > .page-header:before,
+#prerequisites > .page-header:before,
+#preclusion > .page-header:before,
+#past-lecturer > .page-header:before,
+#past-ta > .page-header:before,
+#fun-facts > .page-header:before,
+#projects > .page-header:before,
+#others > .page-header:before {
+	display: block; 
+	content: " "; 
+	margin-top: -70px; 
+	height: 70px; 
+	visibility: hidden; 
+}
+
+#content-right {
+	min-height: 100%;
+	border: solid 1px grey;
+	padding: 10px;
+	margin-top: 50px;
+}
+
+.footer-container {
+	position: relative;
+	bottom: 0;
+	width: 100%;
+	padding-top: 30px;
+	padding-bottom: 15px;
+	background-color: #000000;
 }
