@@ -1,12 +1,12 @@
-<section data-ng-controller="WikiController" setactive>
-    <div id="nm-wrapper">
+<section data-ng-controller="WikiController">
+    <div class="nm-wrapper">
         
         <!-- sidebar -->
         <nav id="sidebar-wrapper" class="navmenu-fixed-left" role="navigation">
-            <div id="nav">
+            <div class="nav-wrapper">
                 <ul class="nav">
                     <li><a href="#description">DESCRIPTION</a></li>
-                    <li><a href="#prerequisites">PREREQUISITES</a></li>
+                    <li><a href="#prerequisite">PREREQUISITE</a></li>
                     <li><a href="#preclusion">PRECLUSION</a></li>
                     <li><a href="#past-lecturer">PAST LECTURER</a></li>
                     <li><a href="#past-ta">PAST TA</a></li>
@@ -18,26 +18,26 @@
         </nav>
         <!-- End sidebar -->
 
-        <div id="page-content-wrapper" class="main-container">
+        <div class="page-content-wrapper main-container" ng-controller="RightbarController">
             
             <div class="main-content container-fluid">
 
                 <div class="row">
-                    <div class="col-md-8">
-                        <h1 id="module-title">{{selectedModule | json}}</h1>
+                    <div class="col-md-8" ng-repeat="mod in modules | filter:moduleTitle | limitTo:1">
+                        <h1 id="module-title">{{moduleTitle}}</h1>
                         <div id="description">
                             <div class="page-header">DESCRIPTION</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
+                            {{mod.ModuleDescription}}
                         </div>
                         
-                        <div id="prerequisites">
+                        <div id="prerequisite">
                             <div class="page-header">PREREQUISITES</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
+                            {{mod.Prerequisite}}
                         </div>
 
                         <div id="preclusion">
                             <div class="page-header">PRECLUSION</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
+                            {{mod.Preclusion}}
                         </div>
 
                         <div id="past-lecturer">
@@ -68,50 +68,26 @@
 
                     <div class="col-md-4">
 
-                        <div id="content-right" ng-controller="rightbar">
-                            {{selectedModule.ModuleCode}}
-                            <div class="row">
-                                <div id="module-logo" class="col-md-12 text-center">
-                                    <img src="http://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg" width="150px" height="150px">
+                        <div id="content-right">
+                            <div ng-repeat="mod in modules | filter:moduleTitle | limitTo:1">
+                                <div class="lecturers">
+                                    <div class="page-header">Lecturer(s):</div>
+                                    {{mod.History[0].Lecturers.toString()}} {{mod.History[1].Lecturers.toString()}}
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <i class="fa fa-home fa-4x"></i>
-                                
-                                    <i class="fa fa-facebook-official fa-4x"></i>
-                            
-                                    <i class="fa fa-shield fa-4x"></i>
+                                <div class="module-credits">
+                                    <div class="page-header">Module Credits:</div>
+                                    {{mod.ModuleCredit}}
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div>
-                                        <div class="page-header text-center">Lecturer Name</div>
-                                        Dr. Steven Halim
-                                    </div>
-
-                                    <div>
-                                        <div class="page-header">Modular Credit (MC)</div>
-                                        4 MC
-                                    </div>
-
-                                    <div>
-                                        <div class="page-header">Weekly Workload</div>
-                                        DAMN HEAVY
-                                    </div>
-
-                                    <div>
-                                        <div class="page-header">Exam Date</div>
-                                        ???
-                                    </div>
-
-                                    <div>
-                                        <div class="page-header">Miscellaneous</div>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
-                                    </div>
+                                <div class="weekly-workload">
+                                    <div class="page-header">Weekly Workload:</div>
+                                    {{mod.Workload}}
+                                </div>
+                                <hr>
+                                <div class="exam-date">
+                                    <div class="page-header">Exam Date Semester 1:</div>
+                                    {{mod.History[0].ExamDate | date:'medium'}}
+                                    <div class="page-header">Exam Date Semester 2:</div>
+                                    {{mod.History[1].ExamDate | date:'medium'}}
                                 </div>
                             </div>
                         </div>

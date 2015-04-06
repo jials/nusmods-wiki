@@ -9,7 +9,7 @@ body {
 	height: 100%;
 }
 
-#nm-wrapper {
+.nm-wrapper {
 	padding-left: 200px;
 	height: 100%;
 }
@@ -55,7 +55,7 @@ body {
 	color: #FFFFFF;
 }
 
-#nav {
+.nav-wrapper {
 	margin-top: 50px;
 }
 
@@ -73,7 +73,7 @@ body {
 	background-color: #FF9900;
 }
 
-#search-wrapper {
+.search-wrapper {
 	width: 400px;
 	vertical-align: middle;
 	white-space: nowrap;
@@ -110,11 +110,7 @@ body {
 	color: #4f5b66;
 }
 
-#login-wrapper {
-	line-height: 50px;
-}
-
-#page-content-wrapper {
+.page-content-wrapper {
 	width: 100%;
 	min-height: 100%;
 }
@@ -129,10 +125,7 @@ body {
 	position: relative;
 }
 
-
-
-
-#landing-page-top {
+.landing-page-top {
 	width: 100%;
 	background-color: #424242;
 	padding: 100px 0;
