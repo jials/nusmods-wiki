@@ -34,11 +34,13 @@
                         <div id="prerequisite" class="prerequisite-wrapper">
                             <div class="page-header"><h3>Prerequisite</h3></div>
                             {{mod.Prerequisite}}
+                            <span ng-if="mod.Prerequisite == null">No prerequisite</span>
                         </div>
 
                         <div id="preclusion" class="preclusion-wrapper">
                             <div class="page-header"><h3>Preclusion</h3></div>
                             {{mod.Preclusion}}
+                            <span ng-if="mod.Preclusion == null">No preclusion</span>
                         </div>
 
                         <div id="past-lecturer" class="past-lecturer-wrapper">
@@ -84,14 +86,13 @@
                                     <span>{{mod.Workload}}</span>
                                 </div>
                                 <div class="exam-date">
-                                    <div class="page-header" ng-if="mod.History[0].ExamDate != null">Exam Date Semester 1:</div>
+                                    <div class="page-header">Exam Date (Semester 1):</div>
                                     <span ng-if="mod.History[0].ExamDate != null">{{mod.History[0].ExamDate | date:'medium'}}</span>
+                                    <span ng-if="mod.History[0].ExamDate == null">No exam</span>
 
-                                    <div class="page-header" ng-if="mod.History[1].ExamDate != null">Exam Date Semester 2:</div>
+                                    <div class="page-header">Exam Date (Semester 2):</div>
                                     <span ng-if="mod.History[1].ExamDate != null">{{mod.History[1].ExamDate | date:'medium'}}</span>
-
-                                    <div class="page-header" ng-if="mod.History[0].ExamDate == null && mod.History[1].ExamDate == null">Exam Date:</div>
-                                    <p ng-if="mod.History[0].ExamDate == null && mod.History[1].ExamDate == null">No exams stated</p>
+                                    <span ng-if="mod.History[1].ExamDate == null">No exam</span>
                                 </div>
                             </div>
                         </div>
