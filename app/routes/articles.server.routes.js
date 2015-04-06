@@ -8,9 +8,9 @@ var users = require('../../app/controllers/users.server.controller'),
 
 module.exports = function(app) {
 	// Article Routes
-	app.route('/articles')
-		.get(articles.list)
-		.post(users.requiresLogin, articles.create);
+	// app.route('/articles')
+	// 	.get(articles.list)
+	// 	.post(users.requiresLogin, articles.create);
 
 	app.route('/articles/:articleId')
 		.get(articles.read)

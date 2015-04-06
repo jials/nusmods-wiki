@@ -6,12 +6,14 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User'),
-	Article = mongoose.model('Article');
+	Article = mongoose.model('Article'),
+	Faculty = mongoose.model('Faculty'),
+	Project = mongoose.model('Project');
 
 /**
  * Globals
  */
-var user, article;
+var user, article, pastLecturer, pastTA, project;
 
 /**
  * Unit tests
@@ -27,11 +29,29 @@ describe('Article Model Unit Tests:', function() {
 			password: 'password'
 		});
 
+		pastLecturer = new Faculty({
+			name: 'john',
+			academicYear: '2014'
+		});
+
+		pastTA = new Faculty({
+			name: 'cow',
+			academicYear: '2014'
+		});
+
+		project = new Project({
+			name: 'project',
+			academicYear: '2014'
+		});
+
 		user.save(function() {
 			article = new Article({
-				title: 'Article Title',
-				content: 'Article Content',
-				user: user
+				moduleCode: 'Article Title',
+				pastLecturer: pastLecturer,
+				pastTA: pastTA,
+				funFacts: "haha",
+				others: "w/e",
+				project: project
 			});
 
 			done();
