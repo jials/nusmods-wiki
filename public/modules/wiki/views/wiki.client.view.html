@@ -1,18 +1,18 @@
 <section data-ng-controller="WikiController">
-    <div class="nm-wrapper">
+    <div class="nm-wrapper" ng-controller="ScrollController">
         
         <!-- sidebar -->
         <nav class="sidebar-wrapper navmenu-fixed-left" role="navigation">
             <div class="nav-wrapper">
                 <ul class="nav">
-                    <li><a href="#description">DESCRIPTION</a></li>
-                    <li><a href="#prerequisite">PREREQUISITE</a></li>
-                    <li><a href="#preclusion">PRECLUSION</a></li>
-                    <li><a href="#past-lecturer">PAST LECTURER</a></li>
-                    <li><a href="#past-ta">PAST TA</a></li>
-                    <li><a href="#fun-facts">FUN FACTS</a></li>
-                    <li><a href="#projects">OUTSTANDING PROJECTS</a></li>
-                    <li><a href="#others">OTHERS</a></li>
+                    <li><a ng-class="{active: isActive('description')}" ng-click="gotoElement('description')">DESCRIPTION</a></li>
+                    <li><a ng-class="{active: isActive('prerequisite')}" ng-click="gotoElement('prerequisite')">PREREQUISITE</a></li>
+                    <li><a ng-class="{active: isActive('preclusion')}" ng-click="gotoElement('preclusion')">PRECLUSION</a></li>
+                    <li><a ng-class="{active: isActive('past-lecturer')}" ng-click="gotoElement('past-lecturer')">PAST LECTURER</a></li>
+                    <li><a ng-class="{active: isActive('past-ta')}" ng-click="gotoElement('past-ta')">PAST TA</a></li>
+                    <li><a ng-class="{active: isActive('fun-facts')}" ng-click="gotoElement('fun-facts')">FUN FACTS</a></li>
+                    <li><a ng-class="{active: isActive('projects')}" ng-click="gotoElement('projects')">OUTSTANDING PROJECTS</a></li>
+                    <li><a ng-class="{active: isActive('others')}" ng-click="gotoElement('others')">OTHERS</a></li>
                 </ul>
             </div>
         </nav>
