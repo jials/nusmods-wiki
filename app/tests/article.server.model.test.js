@@ -49,8 +49,8 @@ describe('Article Model Unit Tests:', function() {
 				moduleCode: 'Article Title',
 				pastLecturer: pastLecturer,
 				pastTA: pastTA,
-				funFacts: "haha",
-				others: "w/e",
+				funFacts: 'haha',
+				others: 'w/e',
 				project: project
 			});
 

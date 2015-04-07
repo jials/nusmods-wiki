@@ -12,7 +12,7 @@ module.exports = function(app) {
 	// 	.get(articles.list)
 	// 	.post(users.requiresLogin, articles.create);
 
-	app.route('/articles/:articleId')
+	app.route('/:articleId')
 		.get(articles.read)
 		.put(users.requiresLogin, articles.hasAuthorization, articles.update)
 		.delete(users.requiresLogin, articles.hasAuthorization, articles.delete);
