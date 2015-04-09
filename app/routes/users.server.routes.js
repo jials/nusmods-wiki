@@ -52,6 +52,13 @@ module.exports = function(app) {
 	app.route('/auth/github').get(passport.authenticate('github'));
 	app.route('/auth/github/callback').get(users.oauthCallback('github'));
 
+	app.get('/auth/openid', passport.authenticate('openid'));
+
+	app.get('/auth/openid/return', passport.authenticate('openid', {
+	    successRedirect: 'localhost:3000',
+	    failureRedirect: '/cp3101b'
+	}));
+
 	// Finish by binding the user middleware
 	app.param('userId', users.userByID);
 };

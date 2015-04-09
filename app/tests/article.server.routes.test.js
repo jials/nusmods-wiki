@@ -6,12 +6,15 @@ var should = require('should'),
 	mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	Article = mongoose.model('Article'),
-	agent = request.agent(app);
+	agent = request.agent(app),
+	Faculty = mongoose.model('Faculty'),
+	Project = mongoose.model('Project');
+
 
 /**
  * Globals
  */
-var credentials, user, article;
+var credentials, user, article, pastLecturer,pastTA,project;
 
 /**
  * Article routes tests
@@ -35,12 +38,31 @@ describe('Article CRUD tests', function() {
 			provider: 'local'
 		});
 
-		// Save a user to the test db and create new article
+
+		pastLecturer = new Faculty({
+			name: 'john',
+			academicYear: '2014'
+		});
+
+		pastTA = new Faculty({
+			name: 'cow',
+			academicYear: '2014'
+		});
+
+		project = new Project({
+			name: 'project',
+			academicYear: '2014'
+		});
+
 		user.save(function() {
-			article = {
-				title: 'Article Title',
-				content: 'Article Content'
-			};
+			article = new Article({
+				moduleCode: 'Article Title',
+				pastLecturer: pastLecturer,
+				pastTA: pastTA,
+				funFacts: 'haha',
+				others: 'w/e',
+				project: project
+			});
 
 			done();
 		});
@@ -190,10 +212,10 @@ describe('Article CRUD tests', function() {
 
 		// Save the article
 		articleObj.save(function() {
-			request(app).get('/articles/' + articleObj._id)
+			request(app).get('/' + articleObj._id)
 				.end(function(req, res) {
 					// Set assertion
-					res.body.should.be.an.Object.with.property('title', article.title);
+					res.body.should.be.an.Object.with.property('moduleCode', article.moduleCode);
 
 					// Call the assertion callback
 					done();
