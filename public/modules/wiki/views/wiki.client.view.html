@@ -1,6 +1,6 @@
 <section data-ng-controller="WikiController">
     <div class="nm-wrapper" ng-controller="ScrollController">
-        
+
         <!-- sidebar -->
         <nav class="sidebar-wrapper navmenu-fixed-left" role="navigation">
             <div class="nav-wrapper">
@@ -23,7 +23,7 @@
             <div class="main-content container-fluid">
 
                 <div class="row">
-                    <div class="col-md-8" ng-repeat="mod in modules | filter:moduleTitle | limitTo:1">
+                    <div class="col-md-8" ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
                         <h1 class="module-code">{{mod.ModuleCode}}</h1>
                         <h2 class="module-title">{{mod.ModuleTitle}}</h2>
                         <div id="description" class="description-wrapper">
@@ -53,14 +53,37 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
                         </div>
 
-                        <div id="fun-facts" class="fun-facts-wrapper">
+                        <div id="fun-facts" class="fun-facts-wrapper" ng-controller="FunFactsController">
                             <div class="page-header"><h3>Fun Facts</h3></div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
+                                <p>{{content}}</p>
+                                
+                                <div ng-controller="CollapseController">
+                                    <div collapse="isCollapsed" style="margin: 5px 0;">
+                                        <form ng-submit="submit()" ng-controller="FunFactsSubmitCtrl">
+                                            <textarea ng-model="content" ng-model-option="{}" style="width:100%;height:200px;"></textarea>
+                                            <button class="btn btn-default">Save</button>
+                                        </form>
+                                    </div>
+                                    <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{text}}</button>
+                                </div>
                         </div>
 
                         <div id="projects" class="projects-wrapper">
                             <div class="page-header"><h3>Outstanding Projects</h3></div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
+                                <div ng-controller="CarouselDemoCtrl">
+                                    <div style="float:left">
+                                    <carousel interval="myInterval">
+                                        <slide ng-repeat="slide in slides" active="slide.active">
+                                            <img ng-src="{{slide.image}}" style="margin:auto;">
+                                            <!-- <div class="carousel-caption"> -->
+                                                <!-- <h4>Slide {{$index}}</h4> hide index-->
+                                                <!-- <p>{{slide.text}}</p> -->
+                                            <!-- </div> -->
+                                        </slide>
+                                    </carousel>
+                                    </div>
+                                    <div style="margin-left:405px;height:200px;overflow-y:scroll">{{description}}</div>
+                                </div>
                         </div>
 
                         <div id="others" class="others-wrapper">
@@ -72,10 +95,29 @@
                     <div class="col-md-4">
 
                         <div class="content-right">
-                            <div ng-repeat="mod in modules | filter:moduleTitle | limitTo:1">
+                            <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
+                                <div class="links" ng-controller="WikiLinksCtrl">
+                                    <ul>{{moduleTitle}}
+                                        <li ng-repeat="link in links">
+                                            <a href="{{link.href}}">{{link.title}}</a>
+                                            <div ng-controller="CollapseController">
+                                                <div collapse="isCollapsed" style="margin: 5px 0;">
+                                                    <form>
+                                                        {{link.title}}<input type="url" value="link.href" ng-model="link.href"></input>
+                                                        <button class="btn btn-default">Save</button>
+                                                    </form>
+                                                </div>
+                                                <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{text}}</button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
                                 <div class="lecturers">
+                                    {{mod.ModuleCode}} <!-- for checking -->
                                     <div class="page-header">Lecturer(s):</div>
-                                    <span>{{mod.History[0].Lecturers.toString()}} {{mod.History[1].Lecturers.toString()}}</span>
+                                    <span ng-if="semester1 = false">{{mod.History[0].Lecturers.toString()}}</span> 
+                                    <span ng-if="semester2 = true">{{mod.History[1].Lecturers.toString()}}</span>
                                 </div>
                                 <div class="module-credits">
                                     <div class="page-header">Module Credits:</div>

@@ -173,3 +173,12 @@ input.search {
 	padding-bottom: 15px;
 	background-color: #000000;
 }
+
+.carousel {
+	width: 400px;
+}
+
+.carousel-indicators {
+	top: auto;
+	bottom: 15px;
+}

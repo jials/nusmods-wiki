@@ -1,12 +1,13 @@
 'use strict';
 
 // Wiki controller
-angular.module('wiki').controller('WikiController', ['$scope', '$stateParams', '$location',
+angular.module('wiki')
+.controller('WikiController', ['$scope', '$stateParams', '$location',
 	function($scope, $stateParams, $location) {
-		$scope.moduleTitle = $location.path().substr(1);
+		$scope.moduleTitle = $stateParams.moduleTitle;
 
 		$scope.isActive = function(item) {
-			if (item == $location.hash()) {
+			if (item === $location.hash()) {
 				return true;
 			}
 

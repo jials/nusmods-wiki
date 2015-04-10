@@ -1,6 +1,5 @@
 'use strict';
 
-// Wiki controller
 angular.module('wiki').controller('RightbarController', ['$scope', '$http', 
 	function($scope, $http) {
 		function getModules() {  
