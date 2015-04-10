@@ -13,7 +13,7 @@ angular.module('wiki').config(['$stateProvider', '$urlRouterProvider',
 		$urlRouterProvider.rule(function ($injector, $location) {
 	    	// what this function returns will be set as the $location.url
 	        var path = $location.path(), normalized = path.toUpperCase();
-	        if (path != normalized) {
+	        if (path !== normalized) {
 	            // change the $location.path directly
 	            $location.replace().path(normalized);
 	        }
