@@ -33,6 +33,12 @@ body {
 	background-color: #FFFFFF;
 }
 
+/* override Bootstrap default */
+.nav > li > a:hover, 
+.nav > li > a:focus {
+	background-color: transparent;
+}
+
 nav.sidebar-wrapper > .nav-wrapper > ul.nav > li > a {
 	color: grey;
 	cursor: pointer;
@@ -42,12 +48,7 @@ nav.sidebar-wrapper > .nav-wrapper > ul.nav > li > a {
     transition: color .2s;
 }
 
-.nav > li > a:hover {
-	background-color: transparent;
-	color: #FFFFFF;
-}
-
-.nav > li > a.active {
+nav.sidebar-wrapper > .nav-wrapper > ul.nav > li > a.active {
 	background-color: #000000;
 	color: #FFFFFF;
 }
@@ -57,6 +58,10 @@ a.signout,
 a.brand {
 	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #FFFFFF;
+}
+
+a.signin:focus {
+
 }
 
 .nav-wrapper {
@@ -182,4 +187,8 @@ input.search {
 .carousel-indicators {
 	top: auto;
 	bottom: 15px;
+}
+
+body.modal-open {
+    overflow: visible;
 }
