@@ -2,28 +2,23 @@
     <div class="nm-wrapper" ng-controller="ScrollController">
 
         <!-- sidebar -->
-        <nav class="sidebar-wrapper navmenu-fixed-left" role="navigation">
+        <nav class="sidebar-wrapper navmenu-fixed-left" role="navigation" ng-controller="LeftBarCtrl">
             <div class="nav-wrapper">
-                <ul class="nav">
-                    <li><a ng-class="{active: isActive('description')}" ng-click="gotoElement('description')">DESCRIPTION</a></li>
-                    <li><a ng-class="{active: isActive('prerequisite')}" ng-click="gotoElement('prerequisite')">PREREQUISITE</a></li>
-                    <li><a ng-class="{active: isActive('preclusion')}" ng-click="gotoElement('preclusion')">PRECLUSION</a></li>
-                    <li><a ng-class="{active: isActive('past-lecturer')}" ng-click="gotoElement('past-lecturer')">PAST LECTURER</a></li>
-                    <li><a ng-class="{active: isActive('past-ta')}" ng-click="gotoElement('past-ta')">PAST TA</a></li>
-                    <li><a ng-class="{active: isActive('fun-facts')}" ng-click="gotoElement('fun-facts')">FUN FACTS</a></li>
-                    <li><a ng-class="{active: isActive('projects')}" ng-click="gotoElement('projects')">OUTSTANDING PROJECTS</a></li>
-                    <li><a ng-class="{active: isActive('others')}" ng-click="gotoElement('others')">OTHERS</a></li>
+                <ul class="nav" ng-repeat="link in links">
+                    <li><a ng-class="{active: isActive(link.title)}" ng-click="gotoElement(link.title)">{{link.title | uppercase}}</a></li>
                 </ul>
             </div>
         </nav>
         <!-- End sidebar -->
 
-        <div class="page-content-wrapper main-container" ng-controller="RightbarController">
+        <div class="page-content-wrapper main-container" ng-controller="MainContentCtrl">
             
+            <!-- <div class="" style="background-color:yellow;height:100px;"></div> -->
             <div class="main-content container-fluid">
 
                 <div class="row">
-                    <div class="col-md-8" ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
+                    <div class="col-md-8">
+                        <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
                         <h1 class="module-code">{{mod.ModuleCode}}</h1>
                         <h2 class="module-title">{{mod.ModuleTitle}}</h2>
                         <div id="description" class="description-wrapper">
@@ -42,6 +37,7 @@
                             {{mod.Preclusion}}
                             <span ng-if="mod.Preclusion == null">No preclusion</span>
                         </div>
+                        </div>
 
                         <div id="past-lecturer" class="past-lecturer-wrapper">
                             <div class="page-header"><h3>Past Lecturer</h3></div>
@@ -54,35 +50,44 @@
                         </div>
 
                         <div id="fun-facts" class="fun-facts-wrapper" ng-controller="FunFactsController">
-                            <div class="page-header"><h3>Fun Facts</h3></div>
-                                <p>{{content}}</p>
-                                
-                                <div ng-controller="CollapseController">
-                                    <div collapse="isCollapsed" style="margin: 5px 0;">
-                                        <form ng-submit="submit()" ng-controller="FunFactsSubmitCtrl">
-                                            <textarea ng-model="content" ng-model-option="{}" style="width:100%;height:200px;"></textarea>
-                                            <button class="btn btn-default">Save</button>
-                                        </form>
-                                    </div>
-                                    <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{text}}</button>
+                            <div class="page-header">
+                                <h3>Fun Facts</h3>
+                            </div>
+                            
+                            <p>{{content}}</p>
+                            
+                            <div ng-controller="CollapseController">
+                                <div collapse="isCollapsed" style="margin: 5px 0;">
+                                    <form ng-submit="submit()" ng-controller="FunFactsSubmitCtrl">
+                                        <textarea ng-model="content" ng-model-option="{}" style="width:100%;height:200px;"></textarea>
+                                        <button class="btn btn-default">Save</button>
+                                    </form>
                                 </div>
+                                <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+                                    {{text}}
+                                </button>
+                            </div>
                         </div>
 
                         <div id="projects" class="projects-wrapper">
                             <div class="page-header"><h3>Outstanding Projects</h3></div>
                                 <div ng-controller="CarouselDemoCtrl">
-                                    <div style="float:left">
-                                    <carousel interval="myInterval">
-                                        <slide ng-repeat="slide in slides" active="slide.active">
-                                            <img ng-src="{{slide.image}}" style="margin:auto;">
-                                            <!-- <div class="carousel-caption"> -->
-                                                <!-- <h4>Slide {{$index}}</h4> hide index-->
-                                                <!-- <p>{{slide.text}}</p> -->
-                                            <!-- </div> -->
-                                        </slide>
-                                    </carousel>
+                                    <div ng-repeat="project in projects">
+                                        <div class="page-header">{{project.user}}</div>
+                                        <div style="float:left">
+                                        <carousel interval="myInterval">
+                                            <slide ng-repeat="slide in project.slides" active="slide.active">
+                                                <img ng-src="{{slide.image}}" style="margin:auto;">
+                                                <!-- <div class="carousel-caption"> -->
+                                                    <!-- <h4>Slide {{$index}}</h4> hide index-->
+                                                    <!-- <p>{{slide.text}}</p> -->
+                                                <!-- </div> -->
+                                            </slide>
+                                        </carousel>
+                                        </div>
+                                        <div style="margin-left:405px;height:200px;overflow-y:scroll">{{description}}</div>
+                                        <!-- <hr> -->
                                     </div>
-                                    <div style="margin-left:405px;height:200px;overflow-y:scroll">{{description}}</div>
                                 </div>
                         </div>
 
@@ -95,26 +100,32 @@
                     <div class="col-md-4">
 
                         <div class="content-right">
-                            <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
-                                <div class="links" ng-controller="WikiLinksCtrl">
-                                    <ul>{{moduleTitle}}
-                                        <li ng-repeat="link in links">
-                                            <a href="{{link.href}}">{{link.title}}</a>
-                                            <div ng-controller="CollapseController">
-                                                <div collapse="isCollapsed" style="margin: 5px 0;">
-                                                    <form>
-                                                        {{link.title}}<input type="url" value="link.href" ng-model="link.href"></input>
-                                                        <button class="btn btn-default">Save</button>
-                                                    </form>
-                                                </div>
-                                                <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{text}}</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="thumbnail">
+                                <img src="" alt="{{moduleTitle}} Logo">
+                            </div>
 
+                            <div class="links row" ng-controller="WikiLinksCtrl">
+                                <!-- {{mod[0].code}} -->
+                                <ul class="nav navbar-nav text-center" style="width:100%;">
+                                    <li class="col-sm-4" ng-repeat="link in mod[0].links">
+                                        <a href="{{link.href}}" style="color:black;">
+                                            <i class="fa fa-{{link.title}} fa-4x"></i>
+                                        </a>
+                                        <!-- <div ng-controller="CollapseController">
+                                            <div collapse="isCollapsed" style="margin-top:50px;">
+                                                <form>
+                                                    <input type="url"></input>
+                                                    <button class="btn btn-default">Save</button>
+                                                </form>
+                                            </div>
+                                            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{text}}</button>
+                                        </div> -->
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
                                 <div class="lecturers">
-                                    {{mod.ModuleCode}} <!-- for checking -->
                                     <div class="page-header">Lecturer(s):</div>
                                     <span ng-if="semester1 = false">{{mod.History[0].Lecturers.toString()}}</span> 
                                     <span ng-if="semester2 = true">{{mod.History[1].Lecturers.toString()}}</span>
@@ -128,13 +139,17 @@
                                     <span>{{mod.Workload}}</span>
                                 </div>
                                 <div class="exam-date">
+                                    <div ng-if="semester1 = false">
                                     <div class="page-header">Exam Date (Semester 1):</div>
                                     <span ng-if="mod.History[0].ExamDate != null">{{mod.History[0].ExamDate | date:'medium'}}</span>
                                     <span ng-if="mod.History[0].ExamDate == null">No exam</span>
+                                    </div>
 
+                                    <div ng-if="semester2 = true">
                                     <div class="page-header">Exam Date (Semester 2):</div>
                                     <span ng-if="mod.History[1].ExamDate != null">{{mod.History[1].ExamDate | date:'medium'}}</span>
                                     <span ng-if="mod.History[1].ExamDate == null">No exam</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
