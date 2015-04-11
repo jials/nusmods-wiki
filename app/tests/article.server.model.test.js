@@ -13,7 +13,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var user, article, pastLecturer, pastTA, project;
+var user, article, pastLecturer1, pastLecturer2, pastTA, project;
 
 /**
  * Unit tests
@@ -29,8 +29,13 @@ describe('Article Model Unit Tests:', function() {
 			password: 'password'
 		});
 
-		pastLecturer = new Faculty({
+		pastLecturer1 = new Faculty({
 			name: 'john',
+			academicYear: '2014'
+		});
+
+		pastLecturer2 = new Faculty({
+			name: 'ali',
 			academicYear: '2014'
 		});
 
@@ -47,13 +52,15 @@ describe('Article Model Unit Tests:', function() {
 		user.save(function() {
 			article = new Article({
 				moduleCode: 'Article Title',
-				pastLecturer: pastLecturer,
+				pastLecturer: [pastLecturer1, pastLecturer2],
 				pastTA: pastTA,
 				funFacts: 'haha',
 				others: 'w/e',
 				project: project
 			});
 
+			article.pastLecturer.push(pastLecturer2);
+			
 			done();
 		});
 	});
