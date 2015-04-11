@@ -88,19 +88,21 @@ exports.list = function(req, res) {
  * Article middleware
  */
 exports.articleByID = function(req, res, next, id) {
-
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		return res.status(400).send({
-			message: 'Article is invalid'
-		});
-	}
-
-	Article.findById(id).populate('user', 'displayName').exec(function(err, article) {
+	Article
+	.findOne({moduleCode: id})
+	.populate('user')
+	.populate('pastLecturer')
+	.populate('pastTA')
+	.populate('outstandingProj')
+	.exec(function(err, article) {
 		if (err) return next(err);
 		if (!article) {
-			return res.status(404).send({
-				message: 'Article not found'
+			article = new Article({
+				moduleCode: id,
 			});
+			// return res.status(404).send({
+			// 	message: 'Article not found'
+			// });
 		}
 		req.article = article;
 		next();
