@@ -24,10 +24,10 @@ var ArticleSchema = new Schema({
 		type: [Schema.ObjectId],
 		ref: 'Faculty'
 	},
-	pastTA: {
-		type: [Schema.ObjectId],
-		ref: 'Faculty'
-	},
+	// pastTA: {
+	// 	type: [Schema.ObjectId],
+	// 	ref: 'Faculty'
+	// },
 	funFacts: {
 		type: String,
 		default: '',
