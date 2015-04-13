@@ -55,8 +55,8 @@ module.exports = function(app) {
 	app.post('/auth/openid', passport.authenticate('openid'));
 
 	app.get('/auth/openid/return', passport.authenticate('openid', {
-	    successRedirect: 'localhost:3000',
-	    failureRedirect: '/'
+	    successRedirect: '/',
+	    failureRedirect: '/auth/openid'
 	}));
 
 	// Finish by binding the user middleware

@@ -11,15 +11,14 @@ var passport = require('passport'),
 module.exports = function() {
       passport.use(new OpenIDStrategy({
         providerURL: 'https://openid.nus.edu.sg/',
-        returnURL: 'http://localhost:3000/',
+        returnURL: 'http://localhost:3000/auth/openid/return',
         realm: 'http://localhost:3000/',
-        stateless: true,
         profile: true
     },
     function(identifier, profile, done) {
+        console.log(identifier);
         profile.id = identifier.split('/').pop();
         done(null, profile);
-        console.log('\n\n\n\n'+identifier+'\n\n\n');
     }
 ));
 };
