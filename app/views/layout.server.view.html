@@ -50,7 +50,7 @@
 
 <body class="ng-cloak">
 	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="top-nav navbar navbar-fixed-top"></header>
-	<section class="content">
+	<section class="content" style="min-height:100%;">
 		{% block content %}{% endblock %}
 		<!-- <section class="container">
 			{% block content %}{% endblock %}
@@ -74,6 +74,8 @@
 
 	<footer data-ng-include="'/modules/core/views/footer.client.view.html'" class="footer-container"></footer>
 	
+	<!-- Filepicker -->
+	<script type="text/javascript" src="https://api.filepicker.io/v1/filepicker.js"></script>
 </body>
 
 </html>

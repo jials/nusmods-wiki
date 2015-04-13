@@ -39,38 +39,82 @@
                         </div>
                         </div>
 
-                        <div id="past-lecturer" class="past-lecturer-wrapper">
-                            <div class="page-header"><h3>Past Lecturer</h3></div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
-                        </div>
+                        <div ng-controller="OtherContentCtrl">
+                            <div id="past-lecturer" class="past-lecturer-wrapper">
+                                <div class="page-header"><h3>Past Lecturer</h3></div>
+                                <p ng-if="pastLecturer === ''">Not past lecturer has been added! Login to edit now!</p>
+                                <p ng-bind="pastLecturer"></p>
 
-                        <div id="past-ta" class="past-ta-wrapper">
-                            <div class="page-header"><h3>Past TA</h3></div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
-                        </div>
-
-                        <div id="fun-facts" class="fun-facts-wrapper" ng-controller="FunFactsController">
-                            <div class="page-header">
-                                <h3>Fun Facts</h3>
-                            </div>
-                            
-                            <p>{{content}}</p>
-                            
-                            <div ng-controller="CollapseController">
-                                <div collapse="isCollapsed" style="margin: 5px 0;">
-                                    <form ng-submit="submit()" ng-controller="FunFactsSubmitCtrl">
-                                        <textarea ng-model="content" ng-model-option="{}" style="width:100%;height:200px;"></textarea>
-                                        <button class="btn btn-default">Save</button>
-                                    </form>
+                                <div ng-controller="PastLecturerCtrl">
+                                    <script type="text/ng-template" id="PastLecturerModalContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Edit Past Lecturer</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <label for="pastLecturer">Past Lecturer:</label><br>
+                                                <input name="pastLecturer" ng-model="pastLecturer"></input>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" ng-click="save()">Save</button>
+                                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                                        </div>
+                                    </script>
+                                    <button class="btn btn-default" ng-click="open()">Edit</button>
                                 </div>
-                                <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
-                                    {{text}}
-                                </button>
                             </div>
-                        </div>
 
-                        <div id="projects" class="projects-wrapper">
-                            <div class="page-header"><h3>Outstanding Projects</h3></div>
+                            <div id="past-ta" class="past-ta-wrapper">
+                                <div class="page-header"><h3>Past TA</h3></div>
+                                <!-- <p ng-if="pastTA === []">Not past lecturer has been added! Login to edit now!</p>
+                                <p ng-bind="pastTA"></p> -->
+
+                                <div ng-controller="PastTACtrl">
+                                    <script type="text/ng-template" id="PastTAModalContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Edit Past TA</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <label for="pastTA">Past TA:</label><br>
+                                                <input name="pastTA" ng-model="pastTA"></input>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" ng-click="save()">Save</button>
+                                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                                        </div>
+                                    </script>
+                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                </div>
+                            </div>
+
+                            <div id="fun-facts" class="fun-facts-wrapper" ng-controller="FunFactsController">
+                                <div class="page-header"><h3>Fun Facts</h3></div>
+                                <div ng-controller="FunFactsModalCtrl">
+                                    <p>{{content}}</p>
+
+                                    <script type="text/ng-template" id="FunFactsModalContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Edit Fun Facts</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <textarea ng-model="content" ng-model-option="{}" style="width:100%;height:200px;"></textarea>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" ng-click="save()">Save</button>
+                                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                                        </div>
+                                    </script>
+                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                </div>
+                            </div>
+
+                            <div id="projects" class="projects-wrapper">
+                                <div class="page-header"><h3>Outstanding Projects</h3></div>
                                 <div ng-controller="CarouselDemoCtrl">
                                     <div ng-repeat="project in projects">
                                         <div class="page-header">{{project.user}}</div>
@@ -89,11 +133,30 @@
                                         <!-- <hr> -->
                                     </div>
                                 </div>
-                        </div>
+                            </div>
 
-                        <div id="others" class="others-wrapper">
-                            <div class="page-header"><h3>Others</h3></div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis leo iaculis, lacinia tortor nec, bibendum sapien. In hac habitasse platea dictumst. Suspendisse fermentum velit et eros convallis pulvinar. Maecenas ac enim sit amet justo aliquam sollicitudin laoreet vitae enim. Cras tempor sem diam, sit amet consequat velit pharetra sed. Maecenas arcu nisi, eleifend non arcu nec, dignissim ullamcorper sem. Maecenas et volutpat eros. Phasellus pellentesque imperdiet eros eu finibus. Aliquam erat volutpat. Morbi in dignissim metus. Quisque sit amet orci hendrerit, condimentum eros et, ornare erat.
+                            <div id="others" class="others-wrapper">
+                                <div class="page-header"><h3>Others</h3></div>
+                                <div ng-controller="OthersModalCtrl">
+                                    <p>{{content}}</p>
+                                    
+                                    <script type="text/ng-template" id="OthersModalContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Edit Others</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <textarea ng-model="content" ng-model-option="{}" style="width:100%;height:200px;"></textarea>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" ng-click="save()">Save</button>
+                                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                                        </div>
+                                    </script>
+                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -104,6 +167,10 @@
                                 <img src="" alt="{{moduleTitle}} Logo">
                             </div>
 
+                            <div ng-controller="FilePickerCtrl">
+                                <button type="button" class="btn btn-default" ng-click="uploadFile()">Upload Image</button>
+                            </div>
+
                             <div class="links row" ng-controller="WikiLinksCtrl">
                                 <!-- {{mod[0].code}} -->
                                 <ul class="nav navbar-nav text-center" style="width:100%;">
@@ -111,17 +178,32 @@
                                         <a href="{{link.href}}" style="color:black;">
                                             <i class="fa fa-{{link.title}} fa-4x"></i>
                                         </a>
-                                        <!-- <div ng-controller="CollapseController">
-                                            <div collapse="isCollapsed" style="margin-top:50px;">
-                                                <form>
-                                                    <input type="url"></input>
-                                                    <button class="btn btn-default">Save</button>
-                                                </form>
-                                            </div>
-                                            <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">{{text}}</button>
-                                        </div> -->
                                     </li>
                                 </ul>
+                            </div>
+
+                            <div ng-controller="LinksModalCtrl">
+                                <script type="text/ng-template" id="LinksModalContent.html">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Edit Links</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <label style="">Home:</label><br>
+                                            <input type="url" ng-model="items[0]"></input><br>
+                                            <label>Facebook:</label><br>
+                                            <input type="url" ng-model="items[1]"></input><br>
+                                            <label>IVLE:</label><br>
+                                            <input type="url" ng-model="items[2]"></input><br>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" ng-click="save()">Save</button>
+                                        <!-- <button class="btn btn-primary" ng-click="ok()">OK</button> -->
+                                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                                    </div>
+                                </script>
+                                <button class="btn btn-default" ng-click="open()">Edit</button>
                             </div>
 
                             <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
