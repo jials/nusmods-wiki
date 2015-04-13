@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Article = mongoose.model('Article'),
+	Faculty = mongoose.model('Faculty'),
 	_ = require('lodash');
 
 /**
@@ -38,14 +39,9 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var article = req.article;
-	console.log(article);
-	console.log(req.body.pastLecturer);
-	// article = _.extend(article, req.body);
-	// console.log(article);
-	// console.log(typeof req.body);
-	// console.log(typeof req.body.pastLecturer);
-	article.pastLecturer = req.body.pastLecturer;
-	console.log(article)
+	req.body.academicYear = 'AY14/15'; // TODO: Add this field into front end so that it is part of the POST request 
+	var faculty = new Faculty(req.body);
+	article.pastLecturer.push(faculty);
 	article.save(function(err) {
 		if (err) {
 			return res.status(400).send({
