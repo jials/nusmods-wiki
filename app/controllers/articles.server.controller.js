@@ -38,9 +38,14 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var article = req.article;
-
-	article = _.extend(article, req.body);
-
+	console.log(article);
+	console.log(req.body.pastLecturer);
+	// article = _.extend(article, req.body);
+	// console.log(article);
+	// console.log(typeof req.body);
+	// console.log(typeof req.body.pastLecturer);
+	article.pastLecturer = req.body.pastLecturer;
+	console.log(article)
 	article.save(function(err) {
 		if (err) {
 			return res.status(400).send({

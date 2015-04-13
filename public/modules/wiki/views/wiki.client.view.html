@@ -1,6 +1,6 @@
 <section data-ng-controller="WikiController">
     <div class="nm-wrapper" ng-controller="ScrollController">
-
+        authentication: {{authentication.user.id}} <!-- for checking authentication -->
         <!-- sidebar -->
         <nav class="sidebar-wrapper navmenu-fixed-left" role="navigation" ng-controller="LeftBarCtrl">
             <div class="nav-wrapper">
@@ -40,9 +40,10 @@
                         </div>
 
                         <div ng-controller="OtherContentCtrl">
+                            {{content}}
                             <div id="past-lecturer" class="past-lecturer-wrapper">
                                 <div class="page-header"><h3>Past Lecturer</h3></div>
-                                <p ng-if="pastLecturer === ''">Not past lecturer has been added! Login to edit now!</p>
+                                <p ng-if="pastLecturer === ''">No past lecturer has been added! Login to edit now!</p>
                                 <p ng-bind="pastLecturer"></p>
 
                                 <div ng-controller="PastLecturerCtrl">
@@ -61,14 +62,14 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
-                            <div id="past-ta" class="past-ta-wrapper">
+                            <!-- <div id="past-ta" class="past-ta-wrapper">
                                 <div class="page-header"><h3>Past TA</h3></div>
-                                <!-- <p ng-if="pastTA === []">Not past lecturer has been added! Login to edit now!</p>
-                                <p ng-bind="pastTA"></p> -->
+                                <p ng-if="pastTA === ''">No past lecturer has been added! Login to edit now!</p>
+                                <p ng-bind="pastTA"></p>
 
                                 <div ng-controller="PastTACtrl">
                                     <script type="text/ng-template" id="PastTAModalContent.html">
@@ -88,7 +89,7 @@
                                     </script>
                                     <button class="btn btn-default" ng-click="open()">Edit</button>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div id="fun-facts" class="fun-facts-wrapper" ng-controller="FunFactsController">
                                 <div class="page-header"><h3>Fun Facts</h3></div>
@@ -109,7 +110,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
@@ -154,7 +155,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -164,11 +165,11 @@
 
                         <div class="content-right">
                             <div class="thumbnail">
-                                <img src="" alt="{{moduleTitle}} Logo">
+                                <img src="/img/{{moduleTitle}}.jpg" alt="{{moduleTitle}} Logo">
                             </div>
 
                             <div ng-controller="FilePickerCtrl">
-                                <button type="button" class="btn btn-default" ng-click="uploadFile()">Upload Image</button>
+                                <button type="button" class="btn btn-default" ng-click="uploadFile()" ng-show="authentication.user">Upload Image</button>
                             </div>
 
                             <div class="links row" ng-controller="WikiLinksCtrl">
@@ -176,7 +177,8 @@
                                 <ul class="nav navbar-nav text-center" style="width:100%;">
                                     <li class="col-sm-4" ng-repeat="link in mod[0].links">
                                         <a href="{{link.href}}" style="color:black;">
-                                            <i class="fa fa-{{link.title}} fa-4x"></i>
+                                            <div ng-if="link.title !== 'ivle'"><i  class="fa fa-{{link.title}} fa-4x"></i></div>
+                                            <div ng-if="link.title === 'ivle'" style="margin-top:-10px;"><img src="http://www.nus.edu.sg/identity/images/identity/logo/NUS%20logo%20black-vertical.jpg" width="60px"/></div>
                                         </a>
                                     </li>
                                 </ul>
@@ -203,7 +205,7 @@
                                         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                     </div>
                                 </script>
-                                <button class="btn btn-default" ng-click="open()">Edit</button>
+                                <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                             </div>
 
                             <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">

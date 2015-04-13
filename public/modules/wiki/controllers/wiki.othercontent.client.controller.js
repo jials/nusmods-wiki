@@ -13,8 +13,8 @@ angular.module('wiki').controller('OtherContentCtrl', ['$scope', '$http', '$stat
 
 		getContent();
 
-		// $http.put('http://localhost:3000/' + $stateParams.moduleTitle, {pastTA:[{name: 'Yang Shun'}]}).success(function(data){
-		// 		console.log('success');
-		// });
+		$http.put('http://localhost:3000/' + $stateParams.moduleTitle, {pastLecturer:[{name: 'Yang Shun'}]}).success(function(data){
+			console.log('success');
+		});
 	}
 ]);

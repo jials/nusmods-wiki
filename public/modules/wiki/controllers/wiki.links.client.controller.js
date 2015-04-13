@@ -15,7 +15,7 @@ angular.module('wiki')
 			{ 	title: 'facebook', 
 			  	href: '//www.facebook.com',  
 			},
-			{ 	title: 'home', // IVLE
+			{ 	title: 'ivle', // IVLE
 			  	href: '//www.ivle.nus.edu.sg', 
 			}]
 		}];
