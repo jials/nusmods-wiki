@@ -4,9 +4,8 @@ angular.module('wiki').controller('LinksModalCtrl', function ($scope, $modal, $l
 
   $scope.home = 'www.nus.edu.sg';
   $scope.facebook = 'www.facebook.com';
-  $scope.ivle = 'www.ivle.nus.edu.sg';
 
-  $scope.links = [$scope.home, $scope.facebook, $scope.ivle];
+  $scope.links = [$scope.home, $scope.facebook];
 
   $scope.open = function (size) {
 
@@ -20,12 +19,6 @@ angular.module('wiki').controller('LinksModalCtrl', function ($scope, $modal, $l
         }
       }
     });
-
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      // $log.info('Modal dismissed at: ' + new Date());
-    });
   };
 });
 
@@ -37,7 +30,7 @@ angular.module('wiki').controller('LinksModalInstanceCtrl', function ($scope, $m
   $scope.items = links;
 
   $scope.save = function () {
-    alert('saving ' + $scope.items[0] + ' ' + $scope.items[1] + ' ' + $scope.items[2]);
+    alert('saving ' + $scope.items[0] + ' ' + $scope.items[1]);
     $modalInstance.close();
   };
 

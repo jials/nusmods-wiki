@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('wiki').controller('MainContentCtrl', ['$scope', '$http', 
-	function($scope, $http) {
+angular.module('wiki').controller('MainContentCtrl', ['$scope', '$http', '$filter', '$stateParams', 'filterFilter',
+	function($scope, $http, $filter, $stateParams, filterFilter) {
 		function getModules() {  
-			$http.get('http://api.nusmods.com/2014-2015/moduleInformation.json').success(function(data){
+			$http.get('http://api.nusmods.com/2014-2015/moduleInformation.json?callback=?').success(function(data){
 				$scope.modules = data;
 			});
 		}

@@ -50,9 +50,13 @@
                                             <h3 class="modal-title">Edit Past Lecturer</h3>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            <form novalidate name="PastLecturerForm">
                                                 <label for="pastLecturer">Past Lecturer:</label><br>
-                                                <input name="pastLecturer" ng-model="pastLecturer"></input>
+                                                <input name="pastLecturer" type="text" ng-model="pastLecturer.name" required></input><br>
+                                                <label for="academicYear">AY:</label>
+                                                <input name="academicYear1" type="number" min="0" ng-model="pastLecturer.academicYear1" style="width:50px;" required></input> /
+                                                <input name="academicYear2" type="number" min="0" ng-model="pastLecturer.academicYear2" style="width:50px;"></input>
+                                                <p ng-bind="error" required></p>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -163,7 +167,7 @@
 
                         <div class="content-right">
                             <div class="thumbnail">
-                                <img src="" alt="{{moduleTitle}} Logo">
+                                <img src="/modules/wiki/img/logo/logo.png" alt="{{moduleTitle}} Logo">
                             </div>
 
                             <div ng-controller="FilePickerCtrl">
@@ -173,9 +177,9 @@
                             <div class="links row" ng-controller="WikiLinksCtrl">
                                 <!-- {{mod[0].code}} -->
                                 <ul class="nav navbar-nav text-center" style="width:100%;">
-                                    <li class="col-sm-4" ng-repeat="link in mod[0].links">
+                                    <li class="col-sm-6" ng-repeat="link in mod[0].links">
                                         <a href="{{link.href}}" style="color:black;">
-                                            <i class="fa fa-{{link.title}} fa-4x"></i>
+                                            <button class="btn btn-default btn-lg btn-block"><i class="fa fa-{{link.title}} fa-1x"></i> {{link.title}}</button>
                                         </a>
                                     </li>
                                 </ul>
@@ -192,8 +196,6 @@
                                             <input type="url" ng-model="items[0]"></input><br>
                                             <label>Facebook:</label><br>
                                             <input type="url" ng-model="items[1]"></input><br>
-                                            <label>IVLE:</label><br>
-                                            <input type="url" ng-model="items[2]"></input><br>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
@@ -208,7 +210,8 @@
                             <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
                                 <div class="lecturers">
                                     <div class="page-header">Lecturer(s):</div>
-                                    <span ng-if="semester1 = false">{{mod.History[0].Lecturers.toString()}}</span> 
+                                    <!-- {{mod.History.length}} -->
+                                    <span ng-if="semester1 = true">{{mod.History[0].Lecturers.toString()}}</span> 
                                     <span ng-if="semester2 = true">{{mod.History[1].Lecturers.toString()}}</span>
                                 </div>
                                 <div class="module-credits">

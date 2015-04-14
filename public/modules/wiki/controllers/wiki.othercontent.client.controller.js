@@ -1,20 +1,14 @@
 'use strict';
 
-angular.module('wiki').controller('OtherContentCtrl', ['$scope', '$http', '$stateParams',
-	function($scope, $http, $stateParams) {
-		function getContent() {  
-			$http.get('http://localhost:3000/' + $stateParams.moduleTitle).success(function(data){
-				$scope.pastLecturer = data.pastLecturer.toString();
-				$scope.created = data.created;
+angular.module('wiki').controller('OtherContentCtrl', ['$scope', '$http', '$stateParams', 'Authentication',
+	function($scope, $http, $stateParams, Authentication) {
+		$http.get('/' + $stateParams.moduleTitle).success(function(data){
+			$scope.pastLecturer = data.pastLecturer.toString();
+			$scope.created = data.created;
 
-				$scope.content = data;
-			});
-		}
+			$scope.content = data;
+		});
 
-		getContent();
-
-		// $http.put('http://localhost:3000/' + $stateParams.moduleTitle, {pastTA:[{name: 'Yang Shun'}]}).success(function(data){
-		// 		console.log('success');
-		// });
+		$scope.id = Authentication.user.id;
 	}
 ]);
