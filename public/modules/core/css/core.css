@@ -293,3 +293,27 @@ body.modal-open {
     background: #FF993A;
     box-shadow: none;
 }
+
+
+.description-wrapper > .page-header,
+.prerequisite-wrapper > .page-header,
+.preclusion-wrapper > .page-header,
+.past-lecturer-wrapper > .page-header,
+.past-ta-wrapper > .page-header,
+.fun-facts-wrapper > .page-header,
+.projects-wrapper > .page-header,
+.others-wrapper > .page-header {
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.description-wrapper > .page-header > h3,
+.prerequisite-wrapper > .page-header > h3,
+.preclusion-wrapper > .page-header > h3,
+.past-lecturer-wrapper > .page-header > h3,
+.past-ta-wrapper > .page-header > h3,
+.fun-facts-wrapper > .page-header > h3,
+.projects-wrapper > .page-header > h3,
+.others-wrapper > .page-header > h3 {
+	font-size: 18px;
+}
