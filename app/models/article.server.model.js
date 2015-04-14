@@ -22,43 +22,35 @@ var ArticleSchema = new Schema({
 	},
 	pastLecturer: {
 		type: [Schema.ObjectId],
-		ref: 'Faculty'
+		ref: 'VersionFaculty'
 	},
 	// pastTA: {
 	// 	type: [Schema.ObjectId],
 	// 	ref: 'Faculty'
 	// },
 	funFacts: {
-		type: String,
-		default: '',
-		trim: true
+		type: [Schema.ObjectId],
+		ref: 'VersionString'
 	},
 	outstandingProj: {
 		type: [Schema.ObjectId],
-		ref: 'Project'
+		ref: 'VersionProject'
 	},
 	others: {
-		type: String,
-		default: '',
-		trim: true
+		type: [Schema.ObjectId],
+		ref: 'VersionString'
 	},
 	facebook: {
-		type: String,
-		default: '',
-		trim: true
+		type: [Schema.ObjectId],
+		ref: 'VersionString'
 	},
 	homePage: {
-		type: String,
-		default: '',
-		trim: true
+		type: [Schema.ObjectId],
+		ref: 'VersionString'
 	},
 	logo: {
-		type: String,
-		default: 'img/module.png', //to be edited to contain stub
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
+		type: [Schema.ObjectId],
+		ref: 'VersionString'
 	}
 });
 
