@@ -39,6 +39,14 @@ body {
 	background-color: transparent;
 }
 
+.nav .open > a {
+	background-color: transparent;
+}
+
+.nav .open > a:focus {
+	background-color: transparent;
+}
+
 nav.sidebar-wrapper > .nav-wrapper > ul.nav > li > a {
 	color: grey;
 	cursor: pointer;
