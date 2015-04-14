@@ -11,31 +11,29 @@
         </nav>
 
         <div class="page-content-wrapper main-container" ng-controller="MainContentCtrl">
-            
+
             <!-- <div class="" style="background-color:yellow;height:100px;"></div> -->
             <div class="main-content container-fluid">
 
                 <div class="row">
                     <div class="col-md-8">
-                        <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
-                        <h1 class="module-code">{{mod.ModuleCode}}</h1>
-                        <h2 class="module-title">{{mod.ModuleTitle}}</h2>
+                        <h1 class="module-code">{{module.ModuleCode}}</h1>
+                        <h2 class="module-title">{{module.ModuleTitle}}</h2>
                         <div id="description" class="description-wrapper">
                             <div class="page-header"><h3>Description</h3></div>
-                            {{mod.ModuleDescription}}
+                            {{module.ModuleDescription}}
                         </div>
                         
                         <div id="prerequisite" class="prerequisite-wrapper">
                             <div class="page-header"><h3>Prerequisite</h3></div>
-                            {{mod.Prerequisite}}
+                            {{module.Prerequisite}}
                             <span ng-if="mod.Prerequisite == null">No prerequisite</span>
                         </div>
 
                         <div id="preclusion" class="preclusion-wrapper">
                             <div class="page-header"><h3>Preclusion</h3></div>
-                            {{mod.Preclusion}}
+                            {{module.Preclusion}}
                             <span ng-if="mod.Preclusion == null">No preclusion</span>
-                        </div>
                         </div>
 
                         <div ng-controller="OtherContentCtrl">
@@ -44,19 +42,37 @@
                                 <p ng-if="pastLecturer === ''">Not past lecturer has been added! Login to edit now!</p>
                                 <p ng-bind="pastLecturer"></p>
 
-                                <div ng-controller="PastLecturerCtrl">
+                                <div ng-controller="PastLecturerCtrl" class="edit">
                                     <script type="text/ng-template" id="PastLecturerModalContent.html">
                                         <div class="modal-header">
                                             <h3 class="modal-title">Edit Past Lecturer</h3>
                                         </div>
+
                                         <div class="modal-body">
                                             <form novalidate name="PastLecturerForm">
+
+                                            <div class="form-group">
                                                 <label for="pastLecturer">Past Lecturer:</label><br>
-                                                <input name="pastLecturer" type="text" ng-model="pastLecturer.name" required></input><br>
-                                                <label for="academicYear">AY:</label>
-                                                <input name="academicYear1" type="number" min="0" ng-model="pastLecturer.academicYear1" style="width:50px;" required></input> /
-                                                <input name="academicYear2" type="number" min="0" ng-model="pastLecturer.academicYear2" style="width:50px;"></input>
-                                                <p ng-bind="error" required></p>
+                                                <input class="form-control" name="pastLecturer" type="text" ng-model="pastLecturer.name" required></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="academicYear">AY:</label><br>
+                                                <div class="row">
+                                                
+                                                <div class="col-xs-4">
+                                                <input class="form-control" placeholder="14" name="academicYear1" type="number" min="0" ng-model="pastLecturer.academicYear1"></input>
+                                                </div>
+                                                
+                                                <div class="col-xs-1">
+                                                    <p class="form-control-static">/</p>
+                                                </div>
+                                                
+                                                <div class="col-xs-4">
+                                                <input class="form-control" placeholder="15" name="academicYear2" type="number" min="0" ng-model="pastLecturer.academicYear2"></input>
+                                                </div>  
+                                            </div>
+
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -64,7 +80,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                    <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
@@ -73,7 +89,7 @@
                                 <!-- <p ng-if="pastTA === []">Not past lecturer has been added! Login to edit now!</p>
                                 <p ng-bind="pastTA"></p> -->
 
-                                <div ng-controller="PastTACtrl">
+                                <div ng-controller="PastTACtrl" class="edit">
                                     <script type="text/ng-template" id="PastTAModalContent.html">
                                         <div class="modal-header">
                                             <h3 class="modal-title">Edit Past TA</h3>
@@ -85,17 +101,17 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-primary" ng-click="save()">Save</button>
+                                            <!-- <button class="btn btn-primary" ng-click="save()">Save</button> -->
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                    <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
                             <div id="fun-facts" class="fun-facts-wrapper" ng-controller="FunFactsController">
                                 <div class="page-header"><h3>Fun Facts</h3></div>
-                                <div ng-controller="FunFactsModalCtrl">
+                                <div ng-controller="FunFactsModalCtrl" class="edit">
                                     <p>{{content}}</p>
 
                                     <script type="text/ng-template" id="FunFactsModalContent.html">
@@ -104,7 +120,9 @@
                                         </div>
                                         <div class="modal-body">
                                             <form>
-                                                <textarea ng-model="content" ng-model-option="{}" style="width:100%;height:200px;"></textarea>
+                                            <div class="form-group">
+                                                <textarea class="form-control" ng-model="content" rows="4"></textarea>
+                                            </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -112,7 +130,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                    <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
@@ -132,7 +150,7 @@
                                             </slide>
                                         </carousel>
                                         </div>
-                                        <div style="margin-left:405px;height:200px;overflow-y:scroll">{{description}}</div>
+                                        <div style="margin-left:405px;height:200px;overflow-y:auto">{{description}}</div>
                                         <!-- <hr> -->
                                     </div>
                                 </div>
@@ -140,7 +158,7 @@
 
                             <div id="others" class="others-wrapper">
                                 <div class="page-header"><h3>Others</h3></div>
-                                <div ng-controller="OthersModalCtrl">
+                                <div ng-controller="OthersModalCtrl" class="edit">
                                     <p>{{content}}</p>
                                     
                                     <script type="text/ng-template" id="OthersModalContent.html">
@@ -149,7 +167,9 @@
                                         </div>
                                         <div class="modal-body">
                                             <form>
-                                                <textarea ng-model="content" ng-model-option="{}" style="width:100%;height:200px;"></textarea>
+                                            <div class="form-group">
+                                                <textarea class="form-control" ng-model="content" rows="4"></textarea>
+                                            </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -157,7 +177,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                    <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -179,61 +199,70 @@
                                 <ul class="nav navbar-nav text-center" style="width:100%;">
                                     <li class="col-sm-6" ng-repeat="link in mod[0].links">
                                         <a href="{{link.href}}" style="color:black;">
-                                            <button class="btn btn-default btn-lg btn-block"><i class="fa fa-{{link.title}} fa-1x"></i> {{link.title}}</button>
+                                            <button class="btn btn-primary btn-lg btn-block sharp">{{link.title}}</button>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
 
-                            <div ng-controller="LinksModalCtrl">
+                            <div ng-controller="LinksModalCtrl" class="edit">
                                 <script type="text/ng-template" id="LinksModalContent.html">
                                     <div class="modal-header">
                                         <h3 class="modal-title">Edit Links</h3>
                                     </div>
                                     <div class="modal-body">
                                         <form>
+                                            <div class="form-group">
                                             <label style="">Home:</label><br>
-                                            <input type="url" ng-model="items[0]"></input><br>
+
+                                            <div class="input-group">
+                                            <div class="input-group-addon">http://</div>
+                                            <input type="url" placeholder="www.homepage.com" class="form-control" type="url" ng-model="items[0]"></input>
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
                                             <label>Facebook:</label><br>
-                                            <input type="url" ng-model="items[1]"></input><br>
+
+                                            <div class="input-group">
+                                            <div class="input-group-addon">http://</div>
+                                            <input placeholder="www.facebook.com/xxx" class="form-control" type="url" ng-model="items[1]" ></input>
+                                            </div>
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-primary" ng-click="save()">Save</button>
-                                        <!-- <button class="btn btn-primary" ng-click="ok()">OK</button> -->
                                         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                     </div>
                                 </script>
-                                <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
                             </div>
 
-                            <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
-                                <div class="lecturers">
-                                    <div class="page-header">Lecturer(s):</div>
-                                    <!-- {{mod.History.length}} -->
-                                    <span ng-if="semester1 = true">{{mod.History[0].Lecturers.toString()}}</span> 
-                                    <span ng-if="semester2 = true">{{mod.History[1].Lecturers.toString()}}</span>
+                            <div class="lecturers">
+                                <div class="page-header">Lecturer(s):</div>
+                                <!-- {{mod.History.length}} -->
+                                <span ng-if="semester1 = true">{{module.History[0].Lecturers.toString()}}</span> 
+                                <span ng-if="semester2 = true">{{module.History[1].Lecturers.toString()}}</span>
+                            </div>
+                            <div class="module-credits">
+                                <div class="page-header">Module Credits:</div>
+                                <span>{{module.ModuleCredit}}</span>
+                            </div>
+                            <div class="weekly-workload">
+                                <div class="page-header">Weekly Workload:</div>
+                                <span>{{module.Workload}}</span>
+                            </div>
+                            <div class="exam-date">
+                                <div ng-if="semester1 = true">
+                                <div class="page-header">Exam Date (Semester 1):</div>
+                                <span ng-if="module.History[0].ExamDate != null">{{module.History[0].ExamDate | date:'medium'}}</span>
+                                <span ng-if="module.History[0].ExamDate == null">No exam</span>
                                 </div>
-                                <div class="module-credits">
-                                    <div class="page-header">Module Credits:</div>
-                                    <span>{{mod.ModuleCredit}}</span>
-                                </div>
-                                <div class="weekly-workload">
-                                    <div class="page-header">Weekly Workload:</div>
-                                    <span>{{mod.Workload}}</span>
-                                </div>
-                                <div class="exam-date">
-                                    <div ng-if="semester1 = false">
-                                    <div class="page-header">Exam Date (Semester 1):</div>
-                                    <span ng-if="mod.History[0].ExamDate != null">{{mod.History[0].ExamDate | date:'medium'}}</span>
-                                    <span ng-if="mod.History[0].ExamDate == null">No exam</span>
-                                    </div>
 
-                                    <div ng-if="semester2 = true">
-                                    <div class="page-header">Exam Date (Semester 2):</div>
-                                    <span ng-if="mod.History[1].ExamDate != null">{{mod.History[1].ExamDate | date:'medium'}}</span>
-                                    <span ng-if="mod.History[1].ExamDate == null">No exam</span>
-                                    </div>
+                                <div ng-if="semester2 = true">
+                                <div class="page-header">Exam Date (Semester 2):</div>
+                                <span ng-if="module.History[1].ExamDate != null">{{module.History[1].ExamDate | date:'medium'}}</span>
+                                <span ng-if="module.History[1].ExamDate == null">No exam</span>
                                 </div>
                             </div>
                         </div>
