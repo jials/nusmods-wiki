@@ -60,7 +60,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
@@ -85,7 +85,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
@@ -108,7 +108,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
@@ -153,7 +153,7 @@
                                             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
-                                    <button class="btn btn-default" ng-click="open()">Edit</button>
+                                    <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                             </div>
 
                             <div ng-controller="FilePickerCtrl">
-                                <button type="button" class="btn btn-default" ng-click="uploadFile()">Upload Image</button>
+                                <button type="button" class="btn btn-default" ng-click="uploadFile()" ng-show="authentication.user">Upload Image</button>
                             </div>
 
                             <div class="links row" ng-controller="WikiLinksCtrl">
@@ -202,7 +202,7 @@
                                         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                     </div>
                                 </script>
-                                <button class="btn btn-default" ng-click="open()">Edit</button>
+                                <button class="btn btn-default" ng-click="open()" ng-show="authentication.user">Edit</button>
                             </div>
 
                             <div ng-repeat="mod in modules | filter:{ModuleCode:moduleTitle} | limitTo:1">
