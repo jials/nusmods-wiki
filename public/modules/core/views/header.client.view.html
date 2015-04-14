@@ -30,7 +30,7 @@
                 <form role="search" ng-controller="SearchController" ng-submit="submit()">
                     <div class="search-wrapper">
                         <span class="icon"><i class="fa fa-search"></i></span>
-                        <input type="search" class="search" placeholder="Search by Module Code" ng-model="selectedModule" typeahead="mod as mod.ModuleCode for mod in modules | filter:{ModuleCode:$viewValue} | limitTo:5" typeahead-min-length='2' typeahead-template-url="searchTemplate.html" />
+                        <input type="search" class="search" placeholder="Search by Module Code" ng-model="selectedModule" typeahead="mod as mod.ModuleCode for mod in modules | filter:{ModuleCode:$viewValue}" typeahead-min-length='2' typeahead-template-url="searchTemplate.html" />
                         <script type="text/ng-template" id="searchTemplate.html">
                             <a tabindex="-1" ng-href="/#!/{{match.model.ModuleCode}}">
                                 <table>
