@@ -14,7 +14,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var credentials, user, article, pastLecturer,pastTA,project;
+var credentials, user, article, pastLecturer1, pastLecturer2, project;
 
 /**
  * Article routes tests
@@ -39,12 +39,12 @@ describe('Article CRUD tests', function() {
 		});
 
 
-		pastLecturer = new Faculty({
+		pastLecturer1 = new Faculty({
 			name: 'john',
 			academicYear: '2014'
 		});
 
-		pastTA = new Faculty({
+		pastLecturer2 = new Faculty({
 			name: 'cow',
 			academicYear: '2014'
 		});
@@ -57,8 +57,8 @@ describe('Article CRUD tests', function() {
 		user.save(function() {
 			article = new Article({
 				moduleCode: 'CP3101B',
-				pastLecturer: pastLecturer,
-				pastTA: pastTA,
+				pastLecturer: [pastLecturer1, pastLecturer2],
+				// pastTA: pastTA,
 				funFacts: 'haha',
 				others: 'w/e',
 				project: project
@@ -107,15 +107,15 @@ describe('Article CRUD tests', function() {
 	// 		});
 	// });
 
-	// it('should not be able to save an article if not logged in', function(done) {
-	// 	agent.post('/articles')
-	// 		.send(article)
-	// 		.expect(401)
-	// 		.end(function(articleSaveErr, articleSaveRes) {
-	// 			// Call the assertion callback
-	// 			done(articleSaveErr);
-	// 		});
-	// });
+	it('should not be able to save an article if not logged in', function(done) {
+		agent.put('/' + article.moduleCode)
+			.send(article)
+			.expect(401)
+			.end(function(articleSaveErr, articleSaveRes) {
+				// Call the assertion callback
+				done(articleSaveErr);
+			});
+	});
 
 	// it('should not be able to save an article if no title is provided', function(done) {
 	// 	// Invalidate title field
@@ -209,7 +209,7 @@ describe('Article CRUD tests', function() {
 	it('should be able to get a single article if not signed in', function(done) {
 		// Create new article model instance
 		var articleObj = new Article(article);
-		
+	
 		// Save the article
 		articleObj.save(function() {
 			request(app).get('/' + articleObj.moduleCode)
