@@ -15,6 +15,7 @@ public/lib/
 app/tests/coverage/
 .bower-*/
 .idea/
+server.json
 
 # MEAN.js app and assets
 # ======================
