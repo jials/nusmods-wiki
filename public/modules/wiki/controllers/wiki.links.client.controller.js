@@ -9,7 +9,7 @@ angular.module('wiki')
 		$scope.mod =
 		[{	code: 'CP3101B',
 			links: 
-			[{ 	title: 'home', 
+			[{ 	title: 'home page', 
 			  	href: '//www.nus.edu.sg', 
 			},
 			{ 	title: 'facebook', 

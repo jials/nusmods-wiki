@@ -23,6 +23,8 @@ body {
 	margin-left: -200px;
 	overflow-y: auto;
 	position: fixed;
+	font-size: 11px;
+	letter-spacing: 1px;
 }
 
 .top-nav {
@@ -66,6 +68,11 @@ a.signout,
 a.brand {
 	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #FFFFFF;
+}
+
+a.brand {
+	font-weight: bold;
+	letter-spacing: .5px;
 }
 
 .nav-wrapper {
@@ -170,8 +177,9 @@ input.search {
 
 .content-right {
 	min-height: 100%;
-	border: solid 1px grey;
-	border-radius: 5px;
+	border-left: solid 1px grey;
+
+	/*border-radius: 5px;*/
 	padding: 10px;
 	margin-top: 50px;
 }
@@ -207,4 +215,81 @@ body.modal-open {
 	filter: gray; /* IE6-9 */
 	filter: grayscale(1); /* Firefox 35+ */
 	-webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+
+/* for links */
+
+.sharp {
+  border-radius:0;
+}
+
+.links > ul > li > a > .btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.links > ul > li > a > .btn:focus, 
+.links > ul > li > a > .btn:active:focus, 
+.links > ul > li > a > .btn.active:focus {
+    outline: 0 none;
+}
+
+.links > ul > li > a > .btn-primary {
+    background: #000000;
+    color: #ffffff;
+}
+
+.links > ul > li > a > .btn-primary:hover, 
+.links > ul > li > a > .btn-primary:focus, 
+.links > ul > li > a > .btn-primary:active, 
+.links > ul > li > a > .btn-primary.active, 
+.links > ul > li > a > .open > .dropdown-toggle.btn-primary {
+    background: #CCCCCC;
+    color: #000000;
+}
+
+.links > ul > li > a > .btn-primary:active, 
+.links > ul > li > a > .btn-primary.active {
+    background: #CCCCCC;
+    box-shadow: none;
+}
+
+/* end of buttons for links */
+
+
+.edit > .btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.edit > .btn:focus, 
+.edit > .btn:active:focus, 
+.edit > .btn.active:focus {
+    outline: 0 none;
+}
+
+.edit > .btn-primary {
+    background: #FF9900;
+    color: #ffffff;
+}
+
+.edit > .btn-primary:hover, 
+.edit > .btn-primary:focus, 
+.edit > .btn-primary:active, 
+.edit > .btn-primary.active, 
+.edit > .open > .dropdown-toggle.btn-primary {
+    background: #FF993A;
+}
+
+.edit > .btn-primary:active, 
+.edit > .btn-primary.active {
+    background: #FF993A;
+    box-shadow: none;
 }
