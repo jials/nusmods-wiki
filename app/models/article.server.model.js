@@ -26,7 +26,7 @@ var ArticleSchema = new Schema({
 	},
 	// pastTA: {
 	// 	type: [Schema.ObjectId],
-	// 	ref: 'Faculty'
+	// 	ref: 'VersionFaculty'
 	// },
 	funFacts: {
 		type: [Schema.ObjectId],
