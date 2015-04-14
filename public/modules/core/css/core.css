@@ -70,7 +70,7 @@ a.brand {
 	color: #FFFFFF;
 }
 
-a.brand {
+a.brand > span {
 	font-weight: bold;
 	letter-spacing: .5px;
 }
@@ -316,4 +316,8 @@ body.modal-open {
 .projects-wrapper > .page-header > h3,
 .others-wrapper > .page-header > h3 {
 	font-size: 18px;
+}
+
+.three-dots-row-spinner {
+	background-color: #FF9900;
 }
