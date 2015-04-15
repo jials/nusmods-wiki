@@ -192,8 +192,8 @@
                                 <img src="/modules/wiki/img/logo/logo.png" alt="{{moduleTitle}} Logo">
                             </div>
 
-                            <div ng-controller="FilePickerCtrl">
-                                <button type="button" class="btn btn-default" ng-click="uploadFile()" ng-show="authentication.user">Upload Image</button>
+                            <div ng-controller="FilePickerCtrl" class="edit">
+                                <button type="button" class="btn btn-primary sharp" ng-click="uploadFile()" ng-show="authentication.user">Upload Image</button>
                             </div>
 
                             <div class="links row" ng-controller="WikiLinksCtrl">
