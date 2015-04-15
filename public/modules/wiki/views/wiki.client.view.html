@@ -27,13 +27,13 @@
                         <div id="prerequisite" class="prerequisite-wrapper">
                             <div class="page-header"><h3>Prerequisite</h3></div>
                             {{module.Prerequisite}}
-                            <span ng-if="mod.Prerequisite == null">No prerequisite</span>
+                            <span ng-if="module.Prerequisite == null">No prerequisite</span>
                         </div>
 
                         <div id="preclusion" class="preclusion-wrapper">
                             <div class="page-header"><h3>Preclusion</h3></div>
                             {{module.Preclusion}}
-                            <span ng-if="mod.Preclusion == null">No preclusion</span>
+                            <span ng-if="module.Preclusion == null">No preclusion</span>
                         </div>
 
                         <div ng-controller="OtherContentCtrl">
@@ -234,23 +234,27 @@
                                         <h3 class="modal-title">Edit Links</h3>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
-                                            <div class="form-group">
-                                            <label style="">Home:</label><br>
+                                        <form name="linksForm">
+                                            <div class="form-group" show-errors>
+                                                <label style="">Home:</label><br>
+                                                <input http-prefix type="url" name="url" placeholder="http://www.homepage.com" class="form-control" ng-model="links.homepage" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledHomepage" required></input>
+                                                <label class="checkbox-inline"><input type="checkbox" ng-model="disabledHomepage">Check if not editing</label>
+                                                <p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
+                                            </div>
 
-                                            <div class="input-group">
-                                            <div class="input-group-addon">http://</div>
-                                            <input type="url" placeholder="www.homepage.com" class="form-control" type="url" ng-model="items[0]"></input>
+                                            <div class="form-group" show-errors>
+                                                <label>Facebook:</label><br>
+                                                <input http-prefix type="url" name="url" placeholder="http://www.facebook.com" class="form-control" ng-model="links.facebook" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledFacebook" required></input>
+                                                <label class="checkbox-inline"><input type="checkbox" ng-model="disabledFacebook">Check if not editing</label>
+                                                <p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
                                             </div>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Facebook:</label><br>
 
-                                            <div class="input-group">
-                                            <div class="input-group-addon">http://</div>
-                                            <input placeholder="www.facebook.com/xxx" class="form-control" type="url" ng-model="items[1]" ></input>
+                                            <div class="form-group" show-errors>
+                                                <label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="1" required>Semester 1</label>
+                                                <label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="2" required>Semester 2</label>
+                                                <p class="help-block" ng-if="linksForm.radio.$error.required">Please select semester</p>
                                             </div>
-                                            </div>
+
                                         </form>
                                     </div>
                                     <div class="modal-footer">
