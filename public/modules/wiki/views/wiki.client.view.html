@@ -153,8 +153,29 @@
                                         </carousel>
                                         </div>
                                         <div style="margin-left:405px;height:200px;overflow-y:auto">{{description}}</div>
-                                        <!-- <hr> -->
                                     </div>
+                                </div>
+                                <hr>
+                                <div ng-controller="ProjectsModalCtrl" class="edit">
+                                    <script type="text/ng-template" id="ProjectsModalContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Edit Links</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                <label style="">Description:</label><br>
+                                                <textarea class="form-control" rows="4"></textarea>
+                                                </div>
+                                                <button type="button" class="btn btn-primary sharp" ng-click="uploadFile()">Upload Image</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary sharp" ng-click="save()">Save</button>
+                                            <button class="btn btn-warning sharp" ng-click="cancel()">Cancel</button>
+                                        </div>
+                                    </script>
+                                    <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
 
@@ -188,11 +209,11 @@
                     <div class="col-md-4">
 
                         <div class="content-right">
-                            <div class="thumbnail">
-                                <img src="/modules/wiki/img/logo/logo.png" alt="{{moduleTitle}} Logo">
-                            </div>
+                            <div ng-controller="ModuleLogoFilePickerCtrl" class="edit">
+                                <div class="thumbnail">
+                                    <img src="{{img}}" alt="{{moduleTitle}} Logo">
+                                </div>
 
-                            <div ng-controller="FilePickerCtrl" class="edit">
                                 <button type="button" class="btn btn-primary sharp" ng-click="uploadFile()" ng-show="authentication.user">Upload Image</button>
                             </div>
 
