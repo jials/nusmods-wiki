@@ -116,7 +116,7 @@ input.search {
 }
 
 .main-container {
-	position: relative;
+	/*position: relative;*/
 	padding-bottom: 265px;
 }
 
@@ -310,6 +310,15 @@ body.modal-open {
 .projects-wrapper > .page-header > h3,
 .others-wrapper > .page-header > h3 {
 	font-size: 18px;
+}
+
+.loader-wrapper {
+    background-color: #FFFFFF;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left:0;
+    z-index: 9999;
 }
 
 .three-dots-row-spinner {
