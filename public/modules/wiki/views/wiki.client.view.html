@@ -52,7 +52,7 @@
 
                                         <div class="modal-body">
                                             <form novalidate name="PastLecturerForm">
-
+                                            <div ng-repeat="pastLecturer in pastLecturers">
                                             <div class="form-group">
                                                 <label for="pastLecturer">Past Lecturer:</label><br>
                                                 <input class="form-control" name="pastLecturer" type="text" ng-model="pastLecturer.name" required></input>
@@ -76,7 +76,9 @@
 
                                                 </div> <!-- end of div.row -->
                                             </div>
+                                            </div> <!-- ng-repeat -->
 
+                                            <button class="btn btn-primary sharp" ng-click="add()">Add Lecturer</button>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -113,7 +115,7 @@
                                 </div>
                             </div>
 
-                            <div id="fun-facts" class="fun-facts-wrapper" ng-controller="FunFactsController">
+                            <div id="fun-facts" class="fun-facts-wrapper">
                                 <div class="page-header"><h3>Fun Facts</h3></div>
                                 <div ng-controller="FunFactsModalCtrl" class="edit">
                                     <p>{{content}}</p>
@@ -193,7 +195,7 @@
                                         <div class="modal-body">
                                             <form>
                                             <div class="form-group">
-                                                <textarea class="form-control" ng-model="content" rows="4"></textarea>
+                                                <textarea class="form-control" ng-model="otherContent" rows="4"></textarea>
                                             </div>
                                             </form>
                                         </div>
