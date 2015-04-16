@@ -312,6 +312,17 @@ body.modal-open {
 	font-size: 18px;
 }
 
+.loader-wrapper {
+    background-color: #FFFFFF;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    /*top: 0;*/
+    left:0;
+    right:0;
+    z-index: 9999;
+}
+
 .three-dots-row-spinner {
 	background-color: #FF9900;
 }
