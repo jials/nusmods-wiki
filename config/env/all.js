@@ -45,7 +45,7 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-				'public/lib/angular-spinkit-0.3.3/build/angular-spinkit.min.css'
+				'public/lib/angular-spinkit/build/angular-spinkit.min.css'
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -54,7 +54,7 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'public/lib/angular-spinkit-0.3.3/build/angular-spinkit.js'
+				'public/lib/angular-spinkit/build/angular-spinkit.js'
 			]
 		},
 		css: [
