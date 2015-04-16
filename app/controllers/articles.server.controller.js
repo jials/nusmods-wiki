@@ -89,7 +89,7 @@ exports.update = function(req, res) {
 		case 'others':
 			updated = new VersionString({
 				author: editor,
-				content: req.body.funFacts
+				content: req.body.others
 			});
 			
 			updated.save();
@@ -99,7 +99,7 @@ exports.update = function(req, res) {
 		case 'facebook':
 			updated = new VersionString({
 				author: editor,
-				content: req.body.funFacts
+				content: req.body.facebook
 			});
 			
 			updated.save();
@@ -109,7 +109,7 @@ exports.update = function(req, res) {
 		case 'homePage':
 			updated = new VersionString({
 				author: editor,
-				content: req.body.funFacts
+				content: req.body.homePage
 			});
 			
 			updated.save();
@@ -119,7 +119,7 @@ exports.update = function(req, res) {
 		case 'logo':
 			updated = new VersionString({
 				author: editor,
-				content: req.body.funFacts
+				content: req.body.logo
 			});
 			
 			updated.save();
