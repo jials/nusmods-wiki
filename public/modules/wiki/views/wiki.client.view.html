@@ -118,6 +118,7 @@
                             <div id="fun-facts" class="fun-facts-wrapper">
                                 <div class="page-header"><h3>Fun Facts</h3></div>
                                 <div ng-controller="FunFactsModalCtrl" class="edit">
+                                    <p ng-if="content === ''">Login and start editing!</p>
                                     <p>{{content}}</p>
 
                                     <script type="text/ng-template" id="FunFactsModalContent.html">
@@ -142,36 +143,50 @@
 
                             <div id="projects" class="projects-wrapper">
                                 <div class="page-header"><h3>Outstanding Projects</h3></div>
-                                <div ng-controller="CarouselDemoCtrl">
-                                    <div ng-repeat="project in projects">
-                                        <div class="page-header">{{project.user}}</div>
-                                        <div style="float:left">
-                                        <carousel interval="myInterval">
-                                            <slide ng-repeat="slide in project.slides" active="slide.active">
-                                                <img ng-src="{{slide.image}}" style="margin:auto;">
-                                                <!-- <div class="carousel-caption"> -->
-                                                    <!-- <h4>Slide {{$index}}</h4> hide index-->
-                                                    <!-- <p>{{slide.text}}</p> -->
-                                                <!-- </div> -->
-                                            </slide>
-                                        </carousel>
-                                        </div>
-                                        <div style="margin-left:405px;height:200px;overflow-y:auto">{{description}}</div>
-                                    </div>
-                                </div>
-                                <hr>
                                 <div ng-controller="ProjectsModalCtrl" class="edit">
+                                    <div>
+                                        <p ng-if="projects.length === 0">Login to add new projects!</p>
+                                        <div ng-repeat="project in projects">
+                                            <div class="page-header">{{project.name}}</div>
+                                            <div style="float:left">
+                                            <carousel interval="myInterval">
+                                                <slide ng-repeat="photo in project.photo" active="slide.active">
+                                                    <img ng-src="{{photo}}/convert?w=400&h=200" style="margin:auto;">
+                                                </slide>
+                                            </carousel>
+                                            </div>
+                                            <div style="margin-left:405px;height:200px;">
+                                                <iframe width="356" height="200" src="{{project.video | trusted}}" frameborder="0" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <script type="text/ng-template" id="ProjectsModalContent.html">
                                         <div class="modal-header">
                                             <h3 class="modal-title">Edit Links</h3>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
-                                                <div class="form-group">
-                                                <label style="">Description:</label><br>
-                                                <textarea class="form-control" rows="4"></textarea>
+                                            <form name="projectForm">
+                                                <div class="form-group" show-errors>
+                                                <label style="">Team Members:</label><br>
+                                                <input type="text" class="form-control" name="names" ng-model="project.name" required></input>
+                                                <p class="help-block" ng-if="projectForm.names.$error.required">Please enter at least one member</p>
                                                 </div>
+
+                                                <div class="form-group" show-errors>
+                                                <label style="">Academic Year:</label><br>
+                                                <input type="number" min="2000" class="form-control" name="academicYear" ng-model="project.academicYear" required></input>
+                                                <p class="help-block" ng-if="projectForm.academicYear.$error.required">Please enter Academic Year</p>
+                                                </div>
+
+                                                <div class="form-group" show-errors>
+                                                <label style="">YouTube Link:</label><br>
+                                                <input http-prefix type="url" name="youtubeUrl" placeholder="http://www.youtube.com/xxx" class="form-control" ng-model="project.video" ng-pattern="/^(?:https?://)?(?:www\.)?youtube\.com/embed\/([^\&\?\/]+)/" ng-disabled="disabledYouTube"></input>
+                                                <label class="checkbox-inline"><input type="checkbox" ng-model="disabledYouTube">No YouTube video</label>
+                                                <p class="help-block" ng-if="projectForm.$error.pattern">Please enter a valid embeded YouTube url</p>
+                                            </div>
+
                                                 <button type="button" class="btn btn-primary sharp" ng-click="uploadFile()">Upload Image</button>
+                                                <p class="help-block">Please upload up to 4 images, max size 800*400</p>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -179,6 +194,7 @@
                                             <button class="btn btn-warning sharp" ng-click="cancel()">Cancel</button>
                                         </div>
                                     </script>
+                                    <hr ng-show="authentication.user">
                                     <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
                                 </div>
                             </div>
@@ -186,6 +202,7 @@
                             <div id="others" class="others-wrapper">
                                 <div class="page-header"><h3>Others</h3></div>
                                 <div ng-controller="OthersModalCtrl" class="edit">
+                                    <p ng-if="content === ''">Login and start editing!</p>
                                     <p>{{content}}</p>
                                     
                                     <script type="text/ng-template" id="OthersModalContent.html">
@@ -195,7 +212,7 @@
                                         <div class="modal-body">
                                             <form>
                                             <div class="form-group">
-                                                <textarea class="form-control" ng-model="otherContent" rows="4"></textarea>
+                                                <textarea class="form-control" ng-model="content" rows="4"></textarea>
                                             </div>
                                             </form>
                                         </div>
@@ -221,18 +238,17 @@
                                 <button type="button" class="btn btn-primary sharp" ng-click="uploadFile()" ng-show="authentication.user">Upload Image</button>
                             </div>
 
-                            <div class="links row" ng-controller="WikiLinksCtrl">
-                                <!-- {{mod[0].code}} -->
-                                <ul class="nav navbar-nav text-center" style="width:100%;">
-                                    <li class="col-sm-6" ng-repeat="link in mod[0].links">
-                                        <a href="{{link.href}}" style="color:black;">
-                                            <button class="btn btn-primary btn-lg btn-block sharp">{{link.title}}</button>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
                             <div ng-controller="LinksModalCtrl" class="edit">
+                                <div class="links row">
+                                    <ul class="nav navbar-nav text-center" style="width:100%;">
+                                        <li class="col-sm-6" ng-repeat="link in links">
+                                            <a href="{{link.content.content}}" style="color:black;">
+                                                <button class="btn btn-primary btn-lg btn-block sharp">{{link.title}}</button>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
                                 <script type="text/ng-template" id="LinksModalContent.html">
                                     <div class="modal-header">
                                         <h3 class="modal-title">Edit Links</h3>
@@ -241,23 +257,23 @@
                                         <form name="linksForm">
                                             <div class="form-group" show-errors>
                                                 <label style="">Home:</label><br>
-                                                <input http-prefix type="url" name="url" placeholder="http://www.homepage.com" class="form-control" ng-model="links.homepage" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledHomepage" required></input>
+                                                <input http-prefix type="url" name="homepageUrl" placeholder="http://www.homepage.com" class="form-control" ng-model="links[0].content.content" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledHomepage" required></input>
                                                 <label class="checkbox-inline"><input type="checkbox" ng-model="disabledHomepage">Check if not editing</label>
                                                 <p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
                                             </div>
 
                                             <div class="form-group" show-errors>
                                                 <label>Facebook:</label><br>
-                                                <input http-prefix type="url" name="url" placeholder="http://www.facebook.com" class="form-control" ng-model="links.facebook" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledFacebook" required></input>
+                                                <input http-prefix type="url" name="facebookUrl" placeholder="http://www.facebook.com" class="form-control" ng-model="links[1].content.content" value="links[1].content" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledFacebook" required></input>
                                                 <label class="checkbox-inline"><input type="checkbox" ng-model="disabledFacebook">Check if not editing</label>
                                                 <p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
                                             </div>
 
-                                            <div class="form-group" show-errors>
+                                            <!--<div class="form-group" show-errors>
                                                 <label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="1" required>Semester 1</label>
                                                 <label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="2" required>Semester 2</label>
                                                 <p class="help-block" ng-if="linksForm.radio.$error.required">Please select semester</p>
-                                            </div>
+                                            </div>-->
 
                                         </form>
                                     </div>
@@ -284,17 +300,13 @@
                                 <span>{{module.Workload}}</span>
                             </div>
                             <div class="exam-date">
-                                <div ng-if="semester1 = true">
                                 <div class="page-header">Exam Date (Semester 1):</div>
                                 <span ng-if="module.History[0].ExamDate != null">{{module.History[0].ExamDate | date:'medium'}}</span>
                                 <span ng-if="module.History[0].ExamDate == null">No exam</span>
-                                </div>
 
-                                <div ng-if="semester2 = true">
                                 <div class="page-header">Exam Date (Semester 2):</div>
                                 <span ng-if="module.History[1].ExamDate != null">{{module.History[1].ExamDate | date:'medium'}}</span>
                                 <span ng-if="module.History[1].ExamDate == null">No exam</span>
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,8 +1,17 @@
 'use strict';
 
-angular.module('wiki').controller('ProjectsModalCtrl', function ($scope, $modal, $log) {
+angular.module('wiki').controller('ProjectsModalCtrl', function ($scope, $modal, $log, $http, $stateParams, Authentication) {
+	$scope.myInterval = -1;
 
-	$scope.content = 'This is fun facts content';
+	$http.get('/' + $stateParams.moduleTitle).success(function(data){
+		if (data.outstandingProj.length !== 0) {
+			$scope.projects = data.outstandingProj[data.outstandingProj.length - 1].projects;
+		} else {
+			$scope.projects = [];
+		}
+	});
+
+
 
 	$scope.open = function (size) {
 
@@ -11,43 +20,42 @@ angular.module('wiki').controller('ProjectsModalCtrl', function ($scope, $modal,
 			controller: 'ProjectsModalInstanceCtrl',
 			size: size,
 			resolve: {
-				content: function () {
-					return $scope.content;
+				projects: function () {
+					return $scope.projects;
 				}
 			}
 		});
-
-		modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
-		}, function () {
-	  // $log.info('Modal dismissed at: ' + new Date());
-	});
 	};
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope, $modalInstance, content, $http, $stateParams, Authentication) {
+angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope, $modalInstance, projects, $http, $stateParams, Authentication) {
+	$scope.projects = projects;
 
-	$scope.content = content;
 	$scope.imgs = [];
+	
+	$scope.project = {name: '', academicYear: '', photo: $scope.imgs, video: ''};
 
-	{
+	$scope.projects.push($scope.project);
+
     // "editedBy": "keepoking",
     // "type": "outstandingProj",
     // "outstandingProj": [{"name": "ai solver", "academicYear": "2030", "photo": ["img/kappa.png", "img/sdasdas.png"], "video": "www.youtube.com"}]
-}
+    
+	$scope.save = function() {
+		if ($scope.projectForm.$invalid || $scope.projectForm.$pristine) { alert('1'); return; }
 
-	$scope.save = function () {
-		alert('saving ' + $scope.imgs);
-
-		$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: "outstandingProj", outstandingProj: [{name: Authentication.user.name, academicYear: "2030", photo: [imgs], video: "www.youtube.com"}]})
+		if (!$scope.projectForm.$invalid) {
+			$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: "outstandingProj", outstandingProj: $scope.projects}).success(function(data){
+			});
+		}
 
 		$modalInstance.close();
 	};
 
-	$scope.cancel = function () {
+	$scope.cancel = function() {
 		$modalInstance.dismiss('cancel');
 	};
 
@@ -58,7 +66,7 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope,
 				mimetypes: 'image/*',
 				container: 'modal',
 				services:['COMPUTER', 'DROPBOX', 'FACEBOOK', 'GMAIL', 'GOOGLE_DRIVE', 'INSTAGRAM'],
-				maxSize: '1024*1024',
+				maxSize: '800*400',
 				maxFiles: '4',
 			},
 
@@ -78,3 +86,9 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope,
 		);
 	};
 });
+
+angular.module('wiki').filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
