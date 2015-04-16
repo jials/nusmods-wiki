@@ -15,9 +15,12 @@ var ProjectSchema = new Schema({
 		required: 'Name cannot be blank'
 	},
 
-	academicYear: {
+	academicYear1: {
 		type: String,
-		required: 'academic year cannot be blank'
+	},
+
+	academicYear2: {
+		type: String,
 	},
 
 	photo: {
