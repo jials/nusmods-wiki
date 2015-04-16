@@ -40,7 +40,7 @@
                             <div id="past-lecturer" class="past-lecturer-wrapper">
                                 <div class="page-header"><h3>Past Lecturer</h3></div>
                                 <p ng-if="pastLecturer === ''">Not past lecturer has been added! Login to edit now!</p>
-                                <p ng-bind="pastLecturer"></p>
+                                <p>{{pastLecturer}}</p>
 
                                 <div ng-controller="PastLecturerCtrl" class="edit">
                                     <script type="text/ng-template" id="PastLecturerModalContent.html">

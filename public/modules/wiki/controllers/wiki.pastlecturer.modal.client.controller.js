@@ -38,7 +38,7 @@ angular.module('wiki').controller('PastLecturerModalInstanceCtrl', function ($sc
 
     $scope.isDisabled = false;
 
-    $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'string', pastLecturer: [{name: $scope.pastLecturer.name, academicYear: $scope.pastLecturer.academicYear1 +'/'+ $scope.pastLecturer.academicYear2}]}).success(function(data){
+    $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastLecturer', pastLecturer: [{name: $scope.pastLecturer.name, academicYear: $scope.pastLecturer.academicYear1 +'/'+ $scope.pastLecturer.academicYear2}]}).success(function(data){
       console.log(success);
     });
 

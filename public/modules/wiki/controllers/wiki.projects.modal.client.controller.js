@@ -28,13 +28,22 @@ angular.module('wiki').controller('ProjectsModalCtrl', function ($scope, $modal,
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope, $modalInstance, content) {
+angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope, $modalInstance, content, $http, $stateParams, Authentication) {
 
 	$scope.content = content;
 	$scope.imgs = [];
 
+	{
+    // "editedBy": "keepoking",
+    // "type": "outstandingProj",
+    // "outstandingProj": [{"name": "ai solver", "academicYear": "2030", "photo": ["img/kappa.png", "img/sdasdas.png"], "video": "www.youtube.com"}]
+}
+
 	$scope.save = function () {
 		alert('saving ' + $scope.imgs);
+
+		$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: "outstandingProj", outstandingProj: [{name: Authentication.user.name, academicYear: "2030", photo: [imgs], video: "www.youtube.com"}]})
+
 		$modalInstance.close();
 	};
 

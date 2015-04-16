@@ -3,7 +3,7 @@
 angular.module('wiki').controller('OtherContentCtrl', ['$scope', '$http', '$stateParams', 'Authentication',
 	function($scope, $http, $stateParams, Authentication) {
 		$http.get('/' + $stateParams.moduleTitle).success(function(data){
-			$scope.pastLecturer = data.pastLecturer.toString();
+			$scope.pastLecturer = data.pastLecturer[0].faculties[0].name;
 			$scope.created = data.created;
 
 			$scope.content = data;
