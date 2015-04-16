@@ -21,6 +21,10 @@ angular.module('wiki').controller('ModuleLogoFilePickerCtrl', ['$scope',
 					console.log(JSON.stringify(Blob));
 					console.log(Blob.url);
 					// TODO send PUT request to store url
+
+					$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'String', pastLecturer: $scope.pastLecturers}).success(function(data){
+				    	console.log(success);
+				    });
 				},
 
 				function(FPError){

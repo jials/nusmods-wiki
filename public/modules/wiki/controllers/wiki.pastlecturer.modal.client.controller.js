@@ -23,22 +23,14 @@ angular.module('wiki').controller('PastLecturerCtrl', function ($scope, $modal, 
 // It is not the same as the $modal service used above.
 
 angular.module('wiki').controller('PastLecturerModalInstanceCtrl', function ($scope, $modalInstance, pastLecturer, $http, $stateParams, Authentication) {
-
-  $scope.pastLecturer = pastLecturer;
+  $http.get('/' + $stateParams.moduleTitle).success(function(data){
+    $scope.pastLecturers = data.pastLecturer[data.pastLecturer.length - 1].faculties;
+  });
 
   $scope.save = function () {
-    // checks for empty past lecturer name
-    // if ($scope.pastLecturer.name === '') {
-    //   return;
-    // }
+    $scope.pastLecturers.push({name: $scope.pastLecturer.name, academicYear: $scope.pastLecturer.academicYear1 +'/'+ $scope.pastLecturer.academicYear2});
 
-    // if (Math.abs($scope.pastLecturer.academicYear1 - $scope.pastLecturer.academicYear2) > 2) {
-    //   return;
-    // }
-
-    $scope.isDisabled = false;
-
-    $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastLecturer', pastLecturer: [{name: $scope.pastLecturer.name, academicYear: $scope.pastLecturer.academicYear1 +'/'+ $scope.pastLecturer.academicYear2}]}).success(function(data){
+    $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastLecturer', pastLecturer: $scope.pastLecturers}).success(function(data){
       console.log(success);
     });
 
