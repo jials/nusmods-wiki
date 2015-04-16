@@ -23,6 +23,8 @@ body {
 	margin-left: -200px;
 	overflow-y: auto;
 	position: fixed;
+	font-size: 11px;
+	letter-spacing: 1px;
 }
 
 .top-nav {
@@ -68,6 +70,11 @@ a.brand {
 	color: #FFFFFF;
 }
 
+a.brand > span {
+	font-weight: bold;
+	letter-spacing: .5px;
+}
+
 .nav-wrapper {
 	margin-top: 50px;
 }
@@ -95,14 +102,6 @@ input.search {
 	border-radius: 5px;
 }
 
-/*input.search a {
-	color: #FFFFFF;
-}*/
-
-/*#search:focus {
-	outline: none;
-}*/
-
 .icon {
 	position: absolute;
 	top: 50%;
@@ -114,7 +113,6 @@ input.search {
 
 .page-content-wrapper {
 	width: 100%;
-	/*min-height: 100%;*/
 }
 
 .main-container {
@@ -170,8 +168,9 @@ input.search {
 
 .content-right {
 	min-height: 100%;
-	border: solid 1px grey;
-	border-radius: 5px;
+	border-left: solid 1px grey;
+
+	/*border-radius: 5px;*/
 	padding: 10px;
 	margin-top: 50px;
 }
@@ -207,4 +206,120 @@ body.modal-open {
 	filter: gray; /* IE6-9 */
 	filter: grayscale(1); /* Firefox 35+ */
 	-webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+
+/* for links */
+
+.sharp {
+  border-radius:0;
+}
+
+.links > ul > li > a > .btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.links > ul > li > a > .btn:focus, 
+.links > ul > li > a > .btn:active:focus, 
+.links > ul > li > a > .btn.active:focus {
+    outline: 0 none;
+}
+
+.links > ul > li > a > .btn-primary {
+    background: #000000;
+    color: #ffffff;
+}
+
+.links > ul > li > a > .btn-primary:hover, 
+.links > ul > li > a > .btn-primary:focus, 
+.links > ul > li > a > .btn-primary:active, 
+.links > ul > li > a > .btn-primary.active, 
+.links > ul > li > a > .open > .dropdown-toggle.btn-primary {
+    background: #CCCCCC;
+    color: #000000;
+}
+
+.links > ul > li > a > .btn-primary:active, 
+.links > ul > li > a > .btn-primary.active {
+    background: #CCCCCC;
+    box-shadow: none;
+}
+
+/* end of buttons for links */
+
+/* edit buttons */
+
+.edit > .btn {
+    padding: 10px 20px;
+    border: 0 none;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.edit > .btn:focus, 
+.edit > .btn:active:focus, 
+.edit > .btn.active:focus {
+    outline: 0 none;
+}
+
+.edit > .btn-primary {
+    background: #FF9900;
+    color: #ffffff;
+}
+
+.edit > .btn-primary:hover, 
+.edit > .btn-primary:focus, 
+.edit > .btn-primary:active, 
+.edit > .btn-primary.active, 
+.edit > .open > .dropdown-toggle.btn-primary {
+    background: #FF993A;
+}
+
+.edit > .btn-primary:active, 
+.edit > .btn-primary.active {
+    background: #FF993A;
+    box-shadow: none;
+}
+
+/* end of edit buttons */
+
+.description-wrapper > .page-header,
+.prerequisite-wrapper > .page-header,
+.preclusion-wrapper > .page-header,
+.past-lecturer-wrapper > .page-header,
+.past-ta-wrapper > .page-header,
+.fun-facts-wrapper > .page-header,
+.projects-wrapper > .page-header,
+.others-wrapper > .page-header {
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.description-wrapper > .page-header > h3,
+.prerequisite-wrapper > .page-header > h3,
+.preclusion-wrapper > .page-header > h3,
+.past-lecturer-wrapper > .page-header > h3,
+.past-ta-wrapper > .page-header > h3,
+.fun-facts-wrapper > .page-header > h3,
+.projects-wrapper > .page-header > h3,
+.others-wrapper > .page-header > h3 {
+	font-size: 18px;
+}
+
+.three-dots-row-spinner {
+	background-color: #FF9900;
+}
+
+.form-group .help-block {
+    display: none;
+}
+
+.form-group.has-error .help-block {
+    display: block;
 }
