@@ -1,11 +1,12 @@
 'use strict';
 
-angular.module('wiki').controller('LinksModalCtrl', function ($scope, $modal, $log) {
+angular.module('wiki').controller('LinksModalCtrl', function ($scope, $modal, $log, $http, $stateParams) {
+    $scope.links = [{content: '', title: 'home page'}, {content: '', title: 'facebook'}];
 
-	$scope.home = 'www.nus.edu.sg';
-	$scope.facebook = 'www.facebook.com';
-
-	$scope.links = [$scope.home, $scope.facebook];
+	$http.get('/' + $stateParams.moduleTitle).success(function(data){
+        $scope.links[0].content = data.homePage[data.homePage.length - 1];
+        $scope.links[1].content = data.facebook[data.facebook.length - 1];
+    });
 
 	$scope.open = function (size) {
 
@@ -25,18 +26,40 @@ angular.module('wiki').controller('LinksModalCtrl', function ($scope, $modal, $l
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('LinksModalInstanceCtrl', function ($scope, $modalInstance, links) {
-
-	// $scope.items = links;
-
-	$scope.links = { homepage : '', facebook: '' };
+angular.module('wiki').controller('LinksModalInstanceCtrl', function ($scope, $modalInstance, links, $http, $stateParams, Authentication) {
+	$scope.links = links;
 
 	$scope.save = function () {
 		$scope.$broadcast('show-errors-check-validity');
-  		if ($scope.linksForm.$invalid && (!$scope.disabledHomepage || !$scope.disabledFacebook)) { return; }
 
-		alert('saving ' + JSON.stringify($scope.links) + ' ' + $scope.semester);
-		$modalInstance.close();
+        // don't allow if both checked and untouched
+  		if (!$scope.linksForm.$dirty && $scope.linksForm.$invalid && $scope.disabledHomepage && $scope.disabledFacebook) { return; }
+
+        // don't allow if both checked
+        if ($scope.linksForm.$invalid && $scope.disabledHomepage && $scope.disabledFacebook) { return; }
+
+        // don't allow if homepage is blank
+        if (!$scope.linksForm.$invalid && !$scope.disabledHomepage && $scope.disabledFacebook) {
+            $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'homePage', homePage: $scope.links[0].content.content}).success(function(data){     
+            });
+            $modalInstance.close();
+        }
+
+        // don't allow if facebook is blank
+        if (!$scope.linksForm.$invalid && $scope.disabledHomepage && !$scope.disabledFacebook) {
+            $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'facebook', facebook: $scope.links[1].content.content}).success(function(data){     
+            });
+            $modalInstance.close();
+        }
+
+
+        if (!$scope.linksForm.$invalid && !$scope.disabledHomepage && !$scope.disabledFacebook) {
+            $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'homePage', homePage: $scope.links[0].content.content}).success(function(data){     
+            });
+            $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'facebook', facebook: $scope.links[1].content.content}).success(function(data){     
+            });
+            $modalInstance.close();
+        }
 	};
 
 	$scope.cancel = function () {
