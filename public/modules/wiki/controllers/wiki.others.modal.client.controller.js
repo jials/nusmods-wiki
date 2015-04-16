@@ -1,43 +1,44 @@
 'use strict';
 
-angular.module('wiki').controller('OthersModalCtrl', function ($scope, $modal, $log) {
+angular.module('wiki').controller('OthersModalCtrl', function ($scope, $modal, $log, $http, $stateParams, Authentication) {
 
-  $scope.content = 'This is others content';
-
-  $scope.open = function (size) {
-
-    var modalInstance = $modal.open({
-      templateUrl: 'OthersModalContent.html',
-      controller: 'OthersModalInstanceCtrl',
-      size: size,
-      resolve: {
-        content: function () {
-          return $scope.content;
+    $http.get('/' + $stateParams.moduleTitle).success(function(data){
+        if (data.others.length > 1) {
+            $scope.content = data.others[data.others.length - 1].content;
+        } else {
+            $scope.content = '';
         }
-      }
     });
 
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      // $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
+    $scope.open = function (size) {
+
+        var modalInstance = $modal.open({
+            templateUrl: 'OthersModalContent.html',
+            controller: 'OthersModalInstanceCtrl',
+            size: size,
+            resolve: {
+                content: function () {
+                    return $scope.content;
+                }
+            }
+        });
+    };
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('OthersModalInstanceCtrl', function ($scope, $modalInstance, content) {
+angular.module('wiki').controller('OthersModalInstanceCtrl', function ($scope, $modalInstance, content, $http, $stateParams, Authentication) {
 
-  $scope.content = content;
+    $scope.content = content;
 
-  $scope.save = function () {
-    alert('saving ' + $scope.content);
-    $modalInstance.close();
-  };
+    $scope.save = function () {
+        $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'others', others: $scope.content}).success(function(data){
+        });
+        $modalInstance.close();
+    };
 
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
 });
