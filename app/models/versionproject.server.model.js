@@ -11,18 +11,18 @@ var mongoose = require('mongoose'),
  *stores a version of a list of outstanding projects
  */
 var VersionProjectsSchema = new Schema({
-	version: {
-		type: Number, default: 0,
-		required: 'version number cannot be blank'
+	created: {
+		type: Date,
+		default: Date.now
 	},
 	author:{
 		type: String,
 		required: 'author cannot be blank' 
 	},
-	outstanding: {
-		type: [Schema.ObjectId],
+	projects: [{
+		type: Schema.Types.ObjectId,
 		ref: 'Project'	
-	}
+	}]
 	
 });
 		

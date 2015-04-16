@@ -10,48 +10,44 @@ var mongoose = require('mongoose'),
  * Article Schema
  */
 var ArticleSchema = new Schema({
-	created: {
-		type: Date,
-		default: Date.now
-	},
 	moduleCode: {
 		type: String,
 		default: '',
 		trim: true,
 		required: 'Module Code cannot be blank'
 	},
-	pastLecturer: {
-		type: [Schema.ObjectId],
+	pastLecturer: [{
+		type: Schema.Types.ObjectId,
 		ref: 'VersionFaculty'
-	},
+	}],
 	// pastTA: {
 	// 	type: [Schema.ObjectId],
 	// 	ref: 'VersionFaculty'
 	// },
-	funFacts: {
-		type: [Schema.ObjectId],
+	funFacts: [{
+		type: Schema.Types.ObjectId,
 		ref: 'VersionString'
-	},
-	outstandingProj: {
-		type: [Schema.ObjectId],
+	}],
+	outstandingProj: [{
+		type: Schema.Types.ObjectId,
 		ref: 'VersionProject'
-	},
-	others: {
-		type: [Schema.ObjectId],
+	}],
+	others: [{
+		type: Schema.Types.ObjectId,
 		ref: 'VersionString'
-	},
-	facebook: {
-		type: [Schema.ObjectId],
+	}],
+	facebook: [{
+		type: Schema.Types.ObjectId,
 		ref: 'VersionString'
-	},
-	homePage: {
-		type: [Schema.ObjectId],
+	}],
+	homePage: [{
+		type: Schema.Types.ObjectId,
 		ref: 'VersionString'
-	},
-	logo: {
-		type: [Schema.ObjectId],
+	}],
+	logo: [{
+		type: Schema.Types.ObjectId,
 		ref: 'VersionString'
-	}
+	}]
 });
 
 mongoose.model('Article', ArticleSchema);

@@ -10,16 +10,15 @@ var mongoose = require('mongoose'),
  * version string Schema
  */
 var VersionStringSchema = new Schema({
-
-	version: {
-		type: Number, default: 0,
-		required: 'version number cannot be blank'
+	created: {
+		type: Date,
+		default: Date.now
 	},
 	author:{
 		type: String,
 		required: 'author cannot be blank' 
 	},
-	funFacts: {
+	content: {
 		type: String,
 	},
 });

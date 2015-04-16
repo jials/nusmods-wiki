@@ -11,18 +11,18 @@ var mongoose = require('mongoose'),
  *stores a version of a list of faculty members
  */
 var VersionFacultySchema = new Schema({
-	version: {
-		type: Number, default: 0,
-		required: 'version number cannot be blank'
+	created: {
+		type: Date,
+		default: Date.now
 	},
 	author: {
 		type: String,
 		required: 'author cannot be blank' 
 	},
-	faculties: {
-		type: [Schema.ObjectId],
+	faculties: [{
+		type: Schema.Types.ObjectId,
 		ref: 'Faculty'	
-	}
+	}]
 	
 });
 		

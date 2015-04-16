@@ -6,6 +6,12 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Article = mongoose.model('Article'),
+	Faculty = mongoose.model('Faculty'),
+	Project = mongoose.model('Project'),
+	VersionFaculty = mongoose.model('VersionFaculty'),
+	VersionProject = mongoose.model('VersionProject'),
+	VersionString = mongoose.model('VersionString'),
+	async = require('async'),
 	_ = require('lodash');
 
 /**
@@ -13,6 +19,7 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var article = new Article(req.body);
+
 	article.user = req.user;
 
 	article.save(function(err) {
@@ -30,7 +37,7 @@ exports.create = function(req, res) {
  * Show the current article
  */
 exports.read = function(req, res) {
-		res.json(req.article);
+	res.json(req.article);
 };
 
 /**
@@ -38,8 +45,88 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var article = req.article;
+	var editor = req.body.editedBy;
+	var objectType = req.body.type;
+	var updated;
+	switch(objectType) {
+		case 'pastLecturer': 
+			updated = new VersionFaculty({
+				author: editor
+			});
 
-	article = _.extend(article, req.body);
+			for (var i = 0; i < req.body.pastLecturer.length; i++) {
+				var lecturer = new Faculty(req.body.pastLecturer[i]);
+				updated.faculties.push(lecturer);
+				lecturer.save();
+			}		
+			updated.save();
+			article.pastLecturer.push(updated);
+			break;
+
+		case 'outstandingProj': 
+			updated = new VersionProject({
+				author: editor
+			});
+			for (var i = 0; i < req.body.outstandingProj.length; i++) {
+				var project = new Project(req.body.outstandingProj[i]);
+				updated.projects.push(project);
+				project.save();
+			}
+			updated.save();
+			article.outstandingProj.push(updated);
+			break;
+
+		case 'funFacts':
+			updated = new VersionString({
+				author: editor,
+				content: req.body.funFacts
+			});
+			
+			updated.save();
+			article.funFacts.push(updated);
+			break;
+
+		case 'others':
+			updated = new VersionString({
+				author: editor,
+				content: req.body.funFacts
+			});
+			
+			updated.save();
+			article.others.push(updated);
+			break;
+
+		case 'facebook':
+			updated = new VersionString({
+				author: editor,
+				content: req.body.funFacts
+			});
+			
+			updated.save();
+			article.facebook.push(updated);
+			break;
+
+		case 'homePage':
+			updated = new VersionString({
+				author: editor,
+				content: req.body.funFacts
+			});
+			
+			updated.save();
+			article.homePage.push(updated);
+			break;
+
+		case 'logo':
+			updated = new VersionString({
+				author: editor,
+				content: req.body.funFacts
+			});
+			
+			updated.save();
+			article.logo.push(updated);
+			break;
+
+	}
 
 	article.save(function(err) {
 		if (err) {
@@ -89,11 +176,12 @@ exports.list = function(req, res) {
  */
 exports.articleByID = function(req, res, next, id) {
 	Article
-	.findOne({moduleCode: id})
-	.populate('user')
-	.populate('pastLecturer')
-	.populate('pastTA')
-	.populate('outstandingProj')
+	.findOne({'moduleCode': id})
+	.populate('pastLecturer outstandingProj funFacts others facebook homePage logo')
+	// .populate({
+	// 	path: 'pastTA',
+	// 	match: {version : {$max}}
+	// })
 	.exec(function(err, article) {
 		if (err) return next(err);
 		if (!article) {
@@ -104,8 +192,19 @@ exports.articleByID = function(req, res, next, id) {
 			// 	message: 'Article not found'
 			// });
 		}
-		req.article = article;
-		next();
+
+		async.waterfall([
+			function(callback) {
+				Faculty.populate(article, {'path': 'pastLecturer.faculties', 'model': 'Faculty'}, callback);
+			},
+			function(article, callback) {
+				Project.populate(article, {'path': 'outstandingProj.projects', 'model': 'Project'}, callback);
+			}
+		], function(err, article) {
+			if (err) return next(err);
+			req.article = article;
+			next();	
+		});
 	});
 };
 
@@ -113,7 +212,7 @@ exports.articleByID = function(req, res, next, id) {
  * Article authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.article.user.id !== req.user.id) {
+	if (req.article.User.id !== req.user.id) {
 		return res.status(403).send({
 			message: 'User is not authorized'
 		});
