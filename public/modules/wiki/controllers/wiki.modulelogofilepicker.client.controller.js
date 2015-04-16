@@ -1,11 +1,17 @@
 'use strict';
 
-angular.module('wiki').controller('ModuleLogoFilePickerCtrl', ['$scope', 
-	function ($scope) {
+angular.module('wiki').controller('ModuleLogoFilePickerCtrl', ['$scope', '$http', '$stateParams', 'Authentication',
+	function ($scope, $http, $stateParams, Authentication) {
+		$scope.logo = [];
 
-		$scope.module = { img: '' }; // TODO send get request to database to retrieve img url
-
-		$scope.img = ($scope.module.img !== '') ? $scope.module.img : '/modules/wiki/img/logo/logo.png';
+		$http.get('/' + $stateParams.moduleTitle).success(function(data){
+			if (data.logo.length > 1) {
+		        $scope.logo.push(data.logo[data.logo.length - 1]);
+		        $scope.img = $scope.logo[0].content;
+	    	} else {
+	    		$scope.img = '/modules/wiki/img/logo/logo.png';
+	    	}
+	    });
 
 	    $scope.uploadFile = function() {
 	    	filepicker.setKey('ABMzRUFagRuyMHNU9Jksvz');
@@ -18,12 +24,9 @@ angular.module('wiki').controller('ModuleLogoFilePickerCtrl', ['$scope',
 				},
 
 				function(Blob){
-					console.log(JSON.stringify(Blob));
-					console.log(Blob.url);
-					// TODO send PUT request to store url
-
-					$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'String', pastLecturer: $scope.pastLecturers}).success(function(data){
-				    	console.log(success);
+					// console.log(JSON.stringify(Blob));
+					// console.log(Blob.url);
+					$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'logo', logo: Blob.url}).success(function(data){
 				    });
 				},
 
