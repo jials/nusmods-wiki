@@ -12,7 +12,6 @@
 
         <div class="page-content-wrapper main-container" ng-controller="MainContentCtrl">
             <div class="loader-wrapper" ng-show="showSpinner"><rotating-plane-spinner ng-show="showSpinner"></rotating-plane-spinner></div>
-            <!-- <div class="" style="background-color:yellow;height:100px;"></div> -->
             <div class="main-content container-fluid">
 
                 <div class="row">
@@ -359,10 +358,11 @@
                             </div>
 
                             <div class="lecturers">
-                                <div class="page-header">Lecturer(s):</div>
-                                <!-- {{mod.History.length}} -->
-                                <span ng-if="semester1 = true">{{module.History[0].Lecturers.toString()}}</span> 
-                                <span ng-if="semester2 = true">{{module.History[1].Lecturers.toString()}}</span>
+                                <div class="page-header">Lecturer(s) (Semester 1):</div>
+                                <span>{{module.History[0].Lecturers.toString()}}</span> 
+
+                                <div class="page-header">Lecturer(s) (Semester 2):</div>
+                                <span>{{module.History[1].Lecturers.toString()}}</span>
                             </div>
                             <div class="module-credits">
                                 <div class="page-header">Module Credits:</div>
