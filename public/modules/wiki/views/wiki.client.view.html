@@ -1,484 +1,498 @@
 <section data-ng-controller="WikiController">
-    <div class="nm-wrapper" ng-controller="ScrollController">
+	<div class="nm-wrapper" ng-controller="ScrollController">
 
-        <!-- sidebar -->
-        <nav class="sidebar-wrapper navmenu-fixed-left" role="navigation" ng-controller="LeftBarCtrl">
-            <div class="nav-wrapper">
-                <ul class="nav" ng-repeat="link in links">
-                    <li>
-                        <a ng-class="{active: isActive(link.title)}" ng-click="gotoElement(link.title)">
-                            <paper-ripple fit></paper-ripple>
-                            {{link.title | uppercase}}
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+		<!-- sidebar -->
+		<nav class="sidebar-wrapper navmenu-fixed-left" role="navigation" ng-controller="LeftBarCtrl">
+			<div class="nav-wrapper">
+				<ul class="nav" ng-repeat="link in links">
+					<li>
+						<a ng-class="{active: isActive(link.title)}" ng-click="gotoElement(link.title)">
+							<paper-ripple fit></paper-ripple>
+							{{link.title | uppercase}}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 
-        <div class="page-content-wrapper main-container" ng-controller="MainContentCtrl">
-            <div class="loader-wrapper" ng-show="showSpinner"><rotating-plane-spinner ng-show="showSpinner"></rotating-plane-spinner></div>
-            <div class="main-content container-fluid">
+		<div class="page-content-wrapper main-container" ng-controller="MainContentCtrl">
+			<div class="loader-wrapper" ng-show="showSpinner"><rotating-plane-spinner ng-show="showSpinner"></rotating-plane-spinner></div>
+			<div class="main-content container-fluid">
 
-                <div class="row">
-                    <div class="col-md-8">
-                        <h1 class="module-code">{{module.ModuleCode}}</h1>
-                        <h2 class="module-title">{{module.ModuleTitle}}</h2>
-                        <div id="description" class="description-wrapper">
-                            <div class="page-header"><h3>Description</h3></div>
-                            {{module.ModuleDescription}}
-                        </div>
-                        
-                        <div id="prerequisite" class="prerequisite-wrapper">
-                            <div class="page-header"><h3>Prerequisite</h3></div>
-                            {{module.Prerequisite}}
-                            <span ng-if="module.Prerequisite == null">No prerequisite</span>
-                        </div>
+				<div class="row">
+					<div class="col-md-8">
+						<h1 class="module-code">{{module.ModuleCode}}</h1>
+						<h2 class="module-title">{{module.ModuleTitle}}</h2>
+						<div id="description" class="description-wrapper">
+							<div class="page-header"><h3>Description</h3></div>
+							{{module.ModuleDescription}}
+						</div>
+						
+						<div id="prerequisite" class="prerequisite-wrapper">
+							<div class="page-header"><h3>Prerequisite</h3></div>
+							{{module.Prerequisite}}
+							<span ng-if="module.Prerequisite == null">No prerequisite</span>
+						</div>
 
-                        <div id="preclusion" class="preclusion-wrapper">
-                            <div class="page-header"><h3>Preclusion</h3></div>
-                            {{module.Preclusion}}
-                            <span ng-if="module.Preclusion == null">No preclusion</span>
-                        </div>
+						<div id="preclusion" class="preclusion-wrapper">
+							<div class="page-header"><h3>Preclusion</h3></div>
+							{{module.Preclusion}}
+							<span ng-if="module.Preclusion == null">No preclusion</span>
+						</div>
 
-                        <div id="past-lecturer" class="past-lecturer-wrapper">
-                            <div class="page-header"><h3>Past Lecturer</h3></div>
-                            <div ng-controller="PastLecturerCtrl" class="edit">
-                                <p ng-if="pastLecturer === '' && !authentication.user">Login in to add past lecturers!</p>
-                                <div ng-repeat="pastLecturer in pastLecturers">
-                                    <div style="height:168px;margin-bottom:5px;">
-                                        <div class="text-center" style="float:left;width:132px;height:168px;background-color:#D3D3D3;">
-                                            <i class="fa fa-user big-icon" style="opacity:0.6;" ng-hide="pastLecturer.photo"></i>
-                                            <img ng-if="pastLecturer.photo" ng-src="{{pastLecturer.photo}}/convert?w=132&h=168">
-                                        </div>
-                                        <div style="padding-left:-132px;width:100%;">
-                                            <span style="margin-left:5px;">Name: {{pastLecturer.name}}</span><br>
-                                            <span style="margin-left:5px;">AY: {{pastLecturer.academicYearStart}}/{{pastLecturer.academicYearEnd}}</span>
-                                        </div>
-                                    </div>
-                                </div>
+						<div id="past-lecturer" class="past-lecturer-wrapper">
+							<div class="page-header"><h3>Past Lecturer</h3></div>
+							<div ng-controller="PastLecturerCtrl" class="edit">
+								<div ng-repeat="pastLecturer in pastLecturers">
+									<div style="height:168px;margin-bottom:5px;">
+										<div class="text-center" style="float:left;width:132px;height:168px;background-color:#D3D3D3;">
+											<i class="fa fa-user big-icon" style="opacity:0.6;" ng-hide="pastLecturer.photo"></i>
+											<img ng-if="pastLecturer.photo" ng-src="{{pastLecturer.photo}}/convert?w=132&h=168">
+										</div>
+										<div style="padding-left:-132px;width:100%;">
+											<span style="margin-left:5px;">Name: {{pastLecturer.name}}</span><br>
+											<span style="margin-left:5px;">AY: {{pastLecturer.academicYearStart}}/{{pastLecturer.academicYearEnd}}</span>
+										</div>
+									</div>
+								</div>
 
-                                <script type="text/ng-template" id="PastLecturerModalContent.html">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">Edit Past Lecturer</h3>
-                                    </div>
+								<script type="text/ng-template" id="PastLecturerModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Edit Past Lecturer</h3>
+									</div>
 
-                                    <div class="modal-body">
-                                        <form novalidate name="PastLecturerForm">
-                                        <div ng-repeat="pastLecturer in pastLecturers">
-                                        <div class="form-group" show-errors>
-                                            <label for="pastLecturer">Past Lecturer:</label><br>
-                                            <input class="form-control" name="pastLecturer" type="text" ng-model="pastLecturer.name" required></input>
-                                            <p class="help-block" ng-if="PastLecturerForm.pastLecturer.$error.required">Please enter lecturer name</p>
-                                        </div>
+									<div class="modal-body">
+										<form novalidate name="PastLecturerForm">
+										<div ng-repeat="pastLecturer in pastLecturers">
+										<div class="form-group" show-errors>
+											<label for="pastLecturer">Past Lecturer:</label><br>
+											<input class="form-control" name="pastLecturer" type="text" ng-model="pastLecturer.name" required></input>
+											<p class="help-block" ng-if="PastLecturerForm.pastLecturer.$error.required">Please enter lecturer name</p>
+										</div>
 
-                                        <div class="form-group" show-errors>
-                                            <label for="academicYear">AY:</label><br>
-                                            <div class="row">
-                                            
-                                                <div class="col-xs-4">
-                                                <input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="pastLecturer.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
-                                                </div>
-                                            
-                                                <div class="col-xs-1" style="padding: 0;">
-                                                    <p class="form-control-static text-center">/</p>
-                                                </div>
-                                            
-                                                <div class="col-xs-4">
-                                                <input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="pastLecturer.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
-                                                </div>
+										<div class="form-group" show-errors>
+											<label for="academicYear">AY:</label><br>
+											<div class="row">
+											
+												<div class="col-xs-4">
+												<input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="pastLecturer.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
+												</div>
+											
+												<div class="col-xs-1" style="padding: 0;">
+													<p class="form-control-static text-center">/</p>
+												</div>
+											
+												<div class="col-xs-4">
+												<input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="pastLecturer.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
+												</div>
 
-                                            </div> <!-- end of div.row -->
-                                        </div>
+											</div> <!-- end of div.row -->
+										</div>
 
-                                        <div class="form-group">
-                                            <div class="button raised blue" ng-click="uploadFile($index)">
-                                                <div class="text-center">UPLOAD IMAGE</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        </div>
+										<div class="form-group">
+											<div class="button raised blue" ng-click="uploadFile($index)">
+												<div class="text-center">UPLOAD IMAGE</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										</div>
 
-                                        </div> <!-- ng-repeat -->
+										</div> <!-- ng-repeat -->
 
-                                        <div class="button raised blue" ng-click="add()">
-                                            <div class="text-center">ADD LECTURER</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="button label-blue" ng-click="save()">
-                                            <div class="text-center">SAVE</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        <div class="button" ng-click="cancel()">
-                                            <div class="text-center">CANCEL</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                    </div>
-                                </script>
-                                <br ng-show="authentication.user">
-                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
-                                    <div class="text-center">EDIT</div>
-                                    <paper-ripple fit></paper-ripple>
-                                </div>
-                            </div>
-                        </div>
+										<div class="button raised blue" ng-click="add()">
+											<div class="text-center">ADD LECTURER</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<div class="button label-blue" ng-click="save()">
+											<div class="text-center">SAVE</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										<div class="button" ng-click="cancel()">
+											<div class="text-center">CANCEL</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+									</div>
+								</script>
+								<br ng-show="authentication.user">
+								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+							</div>
+						</div>
 
-                        <div id="past-ta" class="past-ta-wrapper">
-                            <div class="page-header"><h3>Past TA</h3></div>
-                            <div ng-controller="PastTACtrl" class="edit">
-                                <p ng-if="pastLecturer === '' && !authentication.user">Login in to add past lecturers!</p>
-                                <div ng-repeat="pastTA in pastTAs">
-                                    <div style="height:168px;margin-bottom:5px;">
-                                        <div class="text-center" style="float:left;width:132px;height:168px;background-color:#D3D3D3;">
-                                            <i class="fa fa-user big-icon" style="opacity:0.6;" ng-hide="pastTA.photo"></i>
-                                            <img ng-if="pastTA.photo" ng-src="{{pastTA.photo}}/convert?w=132&h=168">
-                                        </div>
-                                        <div style="padding-left:-132px;width:100%;">
-                                            <span style="margin-left:5px;">Name: {{pastTA.name}}</span><br>
-                                            <span style="margin-left:5px;">AY: {{pastTA.academicYearStart}}/{{pastTA.academicYearEnd}}</span>
-                                        </div>
-                                    </div>
-                                </div>
+						<div id="past-ta" class="past-ta-wrapper">
+							<div class="page-header"><h3>Past TA</h3></div>
+							<div ng-controller="PastTACtrl" class="edit">
+								<div ng-repeat="pastTA in pastTAs">
+									<div style="height:168px;margin-bottom:5px;">
+										<div class="text-center" style="float:left;width:132px;height:168px;background-color:#D3D3D3;">
+											<i class="fa fa-user big-icon" style="opacity:0.6;" ng-hide="pastTA.photo"></i>
+											<img ng-if="pastTA.photo" ng-src="{{pastTA.photo}}/convert?w=132&h=168">
+										</div>
+										<div style="padding-left:-132px;width:100%;">
+											<span style="margin-left:5px;">Name: {{pastTA.name}}</span><br>
+											<span style="margin-left:5px;">AY: {{pastTA.academicYearStart}}/{{pastTA.academicYearEnd}}</span>
+										</div>
+									</div>
+								</div>
 
-                                <script type="text/ng-template" id="PastTAModalContent.html">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">Edit Past TA</h3>
-                                    </div>
+								<script type="text/ng-template" id="PastTAModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Edit Past TA</h3>
+									</div>
 
-                                    <div class="modal-body">
-                                        <form novalidate name="PastTAForm">
-                                        <div ng-repeat="pastTA in pastTAs">
-                                        <div class="form-group" show-errors>
-                                            <label for="pastTA">Past Lecturer:</label><br>
-                                            <input class="form-control" name="pastTA" type="text" ng-model="pastTA.name" required></input>
-                                            <p class="help-block" ng-if="PastTAForm.pastTA.$error.required">Please enter lecturer name</p>
-                                        </div>
+									<div class="modal-body">
+										<form novalidate name="PastTAForm">
+										<div ng-repeat="pastTA in pastTAs">
+										<div class="form-group" show-errors>
+											<label for="pastTA">Past Lecturer:</label><br>
+											<input class="form-control" name="pastTA" type="text" ng-model="pastTA.name" required></input>
+											<p class="help-block" ng-if="PastTAForm.pastTA.$error.required">Please enter lecturer name</p>
+										</div>
 
-                                        <div class="form-group" show-errors>
-                                            <label for="academicYear">AY:</label><br>
-                                            <div class="row">
-                                            
-                                                <div class="col-xs-4">
-                                                <input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="pastTA.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
-                                                </div>
-                                            
-                                                <div class="col-xs-1" style="padding: 0;">
-                                                    <p class="form-control-static text-center">/</p>
-                                                </div>
-                                            
-                                                <div class="col-xs-4">
-                                                <input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="pastTA.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
-                                                </div>
+										<div class="form-group" show-errors>
+											<label for="academicYear">AY:</label><br>
+											<div class="row">
+											
+												<div class="col-xs-4">
+												<input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="pastTA.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
+												</div>
+											
+												<div class="col-xs-1" style="padding: 0;">
+													<p class="form-control-static text-center">/</p>
+												</div>
+											
+												<div class="col-xs-4">
+												<input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="pastTA.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
+												</div>
 
-                                            </div> <!-- end of div.row -->
-                                        </div>
+											</div> <!-- end of div.row -->
+										</div>
 
-                                        <div class="form-group">
-                                            <div class="button raised blue" ng-click="uploadFile($index)">
-                                                <div class="text-center">UPLOAD IMAGE</div>
-                                                <paper-ripple fit></paper-ripple>
-                                            </div>
-                                        </div>
+										<div class="form-group">
+											<div class="button raised blue" ng-click="uploadFile($index)">
+												<div class="text-center">UPLOAD IMAGE</div>
+												<paper-ripple fit></paper-ripple>
+											</div>
+										</div>
 
-                                        </div> <!-- ng-repeat -->
+										</div> <!-- ng-repeat -->
 
-                                        <div class="button raised blue" ng-click="add()">
-                                            <div class="text-center">ADD TA</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="button label-blue" ng-click="save()">
-                                            <div class="text-center">SAVE</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        <div class="button" ng-click="cancel()">
-                                            <div class="text-center">CANCEL</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                    </div>
-                                </script>
-                                <br ng-show="authentication.user">
-                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
-                                    <div class="text-center">EDIT</div>
-                                    <paper-ripple fit></paper-ripple>
-                                </div>
-                            </div>
-                        </div>
+										<div class="button raised blue" ng-click="add()">
+											<div class="text-center">ADD TA</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<div class="button label-blue" ng-click="save()">
+											<div class="text-center">SAVE</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										<div class="button" ng-click="cancel()">
+											<div class="text-center">CANCEL</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+									</div>
+								</script>
+								<br ng-show="authentication.user">
+								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+							</div>
+						</div>
 
-                        <div id="fun-facts" class="fun-facts-wrapper">
-                            <div class="page-header"><h3>Fun Facts</h3></div>
-                            <div ng-controller="FunFactsModalCtrl" class="edit">
-                                <p ng-if="content === '' && !authentication.user">Login and start editing!</p>
-                                <p>{{content}}</p>
+						<div id="fun-facts" class="fun-facts-wrapper">
+							<div class="page-header"><h3>Fun Facts</h3></div>
+							<div ng-controller="FunFactsModalCtrl" class="edit">
+								<p ng-if="content === '' && !authentication.user">Login and start editing!</p>
+								<p>{{content}}</p>
 
-                                <script type="text/ng-template" id="FunFactsModalContent.html">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">Edit Fun Facts</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                        <div class="form-group">
-                                            <textarea class="form-control" ng-model="content" rows="4"></textarea>
-                                        </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="button label-blue" ng-click="save()">
-                                            <div class="text-center">SAVE</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        <div class="button" ng-click="cancel()">
-                                            <div class="text-center">CANCEL</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                    </div>
-                                </script>
-                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
-                                    <div class="text-center">EDIT</div>
-                                    <paper-ripple fit></paper-ripple>
-                                </div>
-                            </div>
-                        </div>
+								<script type="text/ng-template" id="FunFactsModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Edit Fun Facts</h3>
+									</div>
+									<div class="modal-body">
+										<form>
+										<div class="form-group">
+											<textarea class="form-control" ng-model="content" rows="4"></textarea>
+										</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<div class="button label-blue" ng-click="save()">
+											<div class="text-center">SAVE</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										<div class="button" ng-click="cancel()">
+											<div class="text-center">CANCEL</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+									</div>
+								</script>
+								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+							</div>
+						</div>
 
-                        <div id="projects" class="projects-wrapper">
-                            <div class="page-header"><h3>Outstanding Projects</h3></div>
-                            <div ng-controller="ProjectsModalCtrl" class="edit" set-ng-animate="false">
-                                <div>
-                                    <p ng-if="projects.length === 0 && !authentication.user">Login to add new projects!</p>
-                                    <div ng-repeat="project in projects">
-                                        <div class="page-header">{{project.name}} [AY:{{project.academicYearStart}}/{{project.academicYearEnd}}]</div>
-                                        <div style="float:left">
-                                        <carousel interval="myInterval">
-                                            <slide ng-repeat="photo in project.photo" active="slide.active">
-                                                <img ng-src="{{photo}}/convert?w=400&h=200" style="margin:auto;">
-                                            </slide>
-                                        </carousel>
-                                        </div>
-                                        <div style="margin-left:405px;height:200px;">
-                                            <iframe width="356" height="200" src="{{project.video | trusted}}" frameborder="0" allowfullscreen></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                                <script type="text/ng-template" id="ProjectsModalContent.html">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">Edit Links</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form name="projectForm">
-                                        <div ng-repeat="project in projects">
-                                            <div class="form-group" show-errors>
-                                            <label style="">Project Name:</label><br>
-                                            <input type="text" class="form-control" name="names" ng-model="project.name" required></input>
-                                            <p class="help-block" ng-if="projectForm.names.$error.required">Please enter project name</p>
-                                            </div>
+						<div id="projects" class="projects-wrapper">
+							<div class="page-header"><h3>Outstanding Projects</h3></div>
+							<div ng-controller="ProjectsModalCtrl" class="edit" set-ng-animate="false">
+								<div>
+									<p ng-if="projects.length === 0 && !authentication.user">Login to add new projects!</p>
+									<div ng-repeat="project in projects">
+										<div class="page-header">{{project.name}} [AY:{{project.academicYearStart}}/{{project.academicYearEnd}}]</div>
+										<div style="float:left">
+										<carousel interval="myInterval">
+											<slide ng-repeat="photo in project.photo" active="slide.active">
+												<img ng-src="{{photo}}/convert?w=400&h=200" style="margin:auto;">
+											</slide>
+										</carousel>
+										</div>
+										<div style="margin-left:405px;height:200px;">
+											<iframe width="356" height="200" src="{{project.video | trusted}}" frameborder="0" allowfullscreen></iframe>
+										</div>
+									</div>
+								</div>
+								<script type="text/ng-template" id="ProjectsModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Edit Links</h3>
+									</div>
+									<div class="modal-body">
+										<form name="projectForm">
+										<div ng-repeat="project in projects">
+											<div class="form-group" show-errors>
+											<label style="">Project Name:</label><br>
+											<input type="text" class="form-control" name="names" ng-model="project.name" required></input>
+											<p class="help-block" ng-if="projectForm.names.$error.required">Please enter project name</p>
+											</div>
 
-                                            <div class="form-group" show-errors>
-                                            <label for="academicYear">AY:</label><br>
-                                            <div class="row">
-                                                <div class="col-xs-4">
-                                                <input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="project.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
-                                                </div>
-                                            
-                                                <div class="col-xs-1" style="padding: 0;">
-                                                    <p class="form-control-static text-center">/</p>
-                                                </div>
-                                            
-                                                <div class="col-xs-4">
-                                                <input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="project.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
-                                                </div>
-                                            </div> <!-- end of div.row -->
-                                            <p class="help-block" ng-if="projectForm.academicYearStart.$error.required || projectForm.academicYearEnd.$error.required">Please enter academic year</p>
-                                            </div>
+											<div class="form-group" show-errors>
+											<label for="academicYear">AY:</label><br>
+											<div class="row">
+												<div class="col-xs-4">
+												<input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="project.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
+												</div>
+											
+												<div class="col-xs-1" style="padding: 0;">
+													<p class="form-control-static text-center">/</p>
+												</div>
+											
+												<div class="col-xs-4">
+												<input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="project.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
+												</div>
+											</div> <!-- end of div.row -->
+											<p class="help-block" ng-if="projectForm.academicYearStart.$error.required || projectForm.academicYearEnd.$error.required">Please enter academic year</p>
+											</div>
 
-                                            <div class="form-group" show-errors>
-                                            <label style="">YouTube Link:</label><br>
-                                            <input http-prefix type="url" name="youtubeUrl" placeholder="http://www.youtube.com/embed/xxx" class="form-control" ng-model="project.video" ng-pattern="/^(?:https?://)?(?:www\.)?youtube\.com/embed\/([^\&\?\/]+)/" ng-disabled="disabledYouTube"></input>
-                                            <label class="checkbox-inline"><input type="checkbox" ng-model="disabledYouTube">No YouTube video</label>
-                                            <p class="help-block" ng-if="projectForm.$error.pattern">Please enter a valid embeded YouTube url</p>
-                                        </div>
+											<div class="form-group" show-errors>
+											<label style="">YouTube Link:</label><br>
+											<input http-prefix type="url" name="youtubeUrl" placeholder="http://www.youtube.com/embed/xxx" class="form-control" ng-model="project.video" ng-pattern="/^(?:https?://)?(?:www\.)?youtube\.com/embed\/([^\&\?\/]+)/" ng-disabled="disabledYouTube"></input>
+											<label class="checkbox-inline"><input type="checkbox" ng-model="disabledYouTube">No YouTube video</label>
+											<p class="help-block" ng-if="projectForm.$error.pattern">Please enter a valid embeded YouTube url</p>
+										</div>
 
-                                            <div class="button raised blue" ng-click="uploadFile($index)">
-                                                <div class="text-center">UPLOAD IMAGE</div>
-                                                <paper-ripple fit></paper-ripple>
-                                            </div>
-                                            <p class="help-block">Please upload at least 2 images (up to 4 images), max size 800*400</p>
-                                        </div>
-                                        </form>
-                                        <div class="button raised blue" ng-click="add()">
-                                            <div class="text-center">ADD PROJECT</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="button label-blue" ng-click="save()">
-                                            <div class="text-center">SAVE</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        <div class="button" ng-click="cancel()">
-                                            <div class="text-center">CANCEL</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                    </div>
-                                </script>
-                                <br ng-show="authentication.user">
-                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
-                                    <div class="text-center">ADD / EDIT</div>
-                                    <paper-ripple fit></paper-ripple>
-                                </div>
-                            </div>
-                        </div>
+											<div class="button raised blue" ng-click="uploadFile($index)">
+												<div class="text-center">UPLOAD IMAGE</div>
+												<paper-ripple fit></paper-ripple>
+											</div>
+											<p class="help-block">Please upload at least 2 images (up to 4 images), max size 800*400</p>
+										</div>
+										</form>
+										<div class="button raised blue" ng-click="add()">
+											<div class="text-center">ADD PROJECT</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<div class="button label-blue" ng-click="save()">
+											<div class="text-center">SAVE</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										<div class="button" ng-click="cancel()">
+											<div class="text-center">CANCEL</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+									</div>
+								</script>
+								<br ng-show="authentication.user">
+								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+									<div class="text-center">ADD / EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+							</div>
+						</div>
 
-                        <div id="others" class="others-wrapper">
-                            <div class="page-header"><h3>Others</h3></div>
-                            <div ng-controller="OthersModalCtrl" class="edit">
-                                <p ng-if="content === '' && !authentication.user">Login and start editing!</p>
-                                <p>{{content}}</p>
-                                
-                                <script type="text/ng-template" id="OthersModalContent.html">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">Edit Others</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                        <div class="form-group">
-                                            <textarea class="form-control" ng-model="content" rows="4"></textarea>
-                                        </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="button label-blue" ng-click="save()">
-                                            <div class="text-center" fit>SAVE</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        <div class="button" ng-click="cancel()">
-                                            <div class="text-center" fit>CANCEL</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                    </div>
-                                </script>
-                                <div class="button raised orange" ng-click="open()" ng-show="authentication.user">
-                                    <div class="text-center">EDIT</div>
-                                    <paper-ripple fit></paper-ripple>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+						<div id="others" class="others-wrapper">
+							<div class="page-header"><h3>Others</h3></div>
+							<div ng-controller="OthersModalCtrl" class="edit">
+								<p ng-if="content === '' && !authentication.user">Login and start editing!</p>
+								<p>{{content}}</p>
+								
+								<script type="text/ng-template" id="OthersModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Edit Others</h3>
+									</div>
+									<div class="modal-body">
+										<form>
+										<div class="form-group">
+											<textarea class="form-control" ng-model="content" rows="4"></textarea>
+										</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<div class="button label-blue" ng-click="save()">
+											<div class="text-center" fit>SAVE</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										<div class="button" ng-click="cancel()">
+											<div class="text-center" fit>CANCEL</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+									</div>
+								</script>
+								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                    <div class="col-md-4">
+					<div class="col-md-4">
 
-                        <div class="content-right">
-                            <div ng-controller="ModuleLogoFilePickerCtrl" class="edit">
-                                <div class="text-center" style="margin-bottom:20px;" ng-if="img === '/modules/wiki/img/logo/logo.png'"> 
-                                    <img ng-src="{{img}}" alt="{{moduleTitle}} Logo">
-                                </div>
-                                <div class="text-center" style="margin-bottom:20px;" ng-if="img !== '/modules/wiki/img/logo/logo.png'"> 
-                                    <img ng-src="{{img}}/convert?w=310&h=256" alt="{{moduleTitle}} Logo">
-                                </div>
+						<div class="content-right">
+							<div ng-controller="ModuleLogoFilePickerCtrl" class="edit">
+								<div class="text-center" style="margin-bottom:20px;" ng-if="img === '/modules/wiki/img/logo/logo.png'"> 
+									<img ng-src="{{img}}" alt="{{moduleTitle}} Logo">
+								</div>
+								<div class="text-center" style="margin-bottom:20px;" ng-if="img !== '/modules/wiki/img/logo/logo.png'"> 
+									<img ng-src="{{img}}/convert?w=310&h=256" alt="{{moduleTitle}} Logo">
+								</div>
 
-                                <div class="button raised" ng-click="uploadFile()" ng-show="authentication.user">
-                                    <div class="text-center">UPLOAD</div>
-                                    <paper-ripple fit></paper-ripple>
-                                </div>
-                            </div>
+								<div class="button raised" ng-click="uploadFile()" ng-show="authentication.user">
+									<div class="text-center">UPLOAD</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+							</div>
 
-                            <div ng-controller="LinksModalCtrl" class="edit">
-                                <div class="links row">
-                                    <ul class="nav navbar-nav text-center" style="width:100%;">
-                                        <li class="col-sm-6">
-                                            <a href="{{links[0].content.content}}">
-                                                <div class="button raised home">
-                                                    <div class="text-center">{{links[0].title | uppercase}}</div>
-                                                    <paper-ripple fit></paper-ripple>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="col-sm-6">
-                                            <a href="{{links[1].content.content}}">
-                                                <div class="button raised facebook">
-                                                    <div class="text-center">{{links[1].title | uppercase}}</div>
-                                                    <paper-ripple fit></paper-ripple>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+							<div ng-controller="LinksModalCtrl" class="edit">
+								<div class="links row">
+									<ul class="nav navbar-nav text-center" style="width:100%;">
+										<li class="col-sm-6">
+											<a href="{{links[0].content.content}}">
+												<div class="button raised home">
+													<div class="text-center">{{links[0].title | uppercase}}</div>
+													<paper-ripple fit></paper-ripple>
+												</div>
+											</a>
+										</li>
+										<li class="col-sm-6">
+											<a href="{{links[1].content.content}}">
+												<div class="button raised facebook">
+													<div class="text-center">{{links[1].title | uppercase}}</div>
+													<paper-ripple fit></paper-ripple>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</div>
 
-                                <script type="text/ng-template" id="LinksModalContent.html">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">Edit Links</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form name="linksForm">
-                                            <div class="form-group" show-errors>
-                                                <label style="">Home:</label><br>
-                                                <input http-prefix type="url" name="homepageUrl" placeholder="http://www.homepage.com" class="form-control" ng-model="links[0].content.content" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledHomepage" required></input>
-                                                <label class="checkbox-inline"><input type="checkbox" ng-model="disabledHomepage">Check if not editing</label>
-                                                <p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
-                                            </div>
+								<script type="text/ng-template" id="LinksModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Edit Links</h3>
+									</div>
+									<div class="modal-body">
+										<form name="linksForm">
+											<div class="form-group" show-errors>
+												<label style="">Home:</label><br>
+												<input http-prefix type="url" name="homepageUrl" placeholder="http://www.homepage.com" class="form-control" ng-model="links[0].content.content" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledHomepage" required></input>
+												<label class="checkbox-inline"><input type="checkbox" ng-model="disabledHomepage">Check if not editing</label>
+												<p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
+											</div>
 
-                                            <div class="form-group" show-errors>
-                                                <label>Facebook:</label><br>
-                                                <input http-prefix type="url" name="facebookUrl" placeholder="http://www.facebook.com" class="form-control" ng-model="links[1].content.content" value="links[1].content" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledFacebook" required></input>
-                                                <label class="checkbox-inline"><input type="checkbox" ng-model="disabledFacebook">Check if not editing</label>
-                                                <p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
-                                            </div>
+											<div class="form-group" show-errors>
+												<label>Facebook:</label><br>
+												<input http-prefix type="url" name="facebookUrl" placeholder="http://www.facebook.com" class="form-control" ng-model="links[1].content.content" value="links[1].content" ng-pattern="/^((?:http|ftp)s?:\/\/)(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|localhost|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(?::\d+)?(?:\/?|[\/?]\S+)$/i" ng-disabled="disabledFacebook" required></input>
+												<label class="checkbox-inline"><input type="checkbox" ng-model="disabledFacebook">Check if not editing</label>
+												<p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
+											</div>
 
-                                            <!--<div class="form-group" show-errors>
-                                                <label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="1" required>Semester 1</label>
-                                                <label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="2" required>Semester 2</label>
-                                                <p class="help-block" ng-if="linksForm.radio.$error.required">Please select semester</p>
-                                            </div>-->
+											<!--<div class="form-group" show-errors>
+												<label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="1" required>Semester 1</label>
+												<label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="2" required>Semester 2</label>
+												<p class="help-block" ng-if="linksForm.radio.$error.required">Please select semester</p>
+											</div>-->
 
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="button label-blue" ng-click="save()">
-                                            <div class="text-center">SAVE</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                        <div class="button" ng-click="cancel()">
-                                            <div class="text-center">CANCEL</div>
-                                            <paper-ripple fit></paper-ripple>
-                                        </div>
-                                    </div>
-                                </script>
-                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
-                                    <div class="text-center">EDIT</div>
-                                    <paper-ripple fit></paper-ripple>
-                                </div>
-                            </div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<div class="button label-blue" ng-click="save()">
+											<div class="text-center">SAVE</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										<div class="button" ng-click="cancel()">
+											<div class="text-center">CANCEL</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+									</div>
+								</script>
+								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+							</div>
 
-                            <div class="lecturers">
-                                <div class="page-header">Lecturer<span ng-if="module.History[0].Lecturers.length > 1">s</span> (Semester 1):</div>
-                                <span>{{module.History[0].Lecturers.toString()}}</span> 
+							<div ng-controller="RightBarContentCtrl" class="tabsDemoStaticTabs sample" style="height:300px;">
+								<md-content class="md-padding" style="height:300px;">
+									<md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-stretch-tabs="always">
+										<md-tab id="tab1">
+											<md-tab-label>SEMESTER 1</md-tab-label>
+											<md-tab-body>
+											<div class="text-center">
+												<hr>Lecturers<hr>
+												{{module.History[0].Lecturers.toString()}}
+												<hr>Exam Date<hr>
+												<span ng-if="module.History[0].ExamDate != null">{{module.History[0].ExamDate | date:'medium'}}</span>
+												<span ng-if="module.History[0].ExamDate == null">No exam</span>
+											</div>
+											</md-tab-body>
+										</md-tab>
 
-                                <div class="page-header">Lecturer<span ng-if="module.History[1].Lecturers.length > 1">s</span> (Semester 2):</div>
-                                <span>{{module.History[1].Lecturers.toString()}}</span>
-                            </div>
-                            <div class="module-credits">
-                                <div class="page-header">Module Credits:</div>
-                                <span>{{module.ModuleCredit}}</span>
-                            </div>
-                            <div class="weekly-workload">
-                                <div class="page-header">Weekly Workload:</div>
-                                <span>{{module.Workload}}</span>
-                            </div>
-                            <div class="exam-date">
-                                <div class="page-header">Exam Date (Semester 1):</div>
-                                <span ng-if="module.History[0].ExamDate != null">{{module.History[0].ExamDate | date:'medium'}}</span>
-                                <span ng-if="module.History[0].ExamDate == null">No exam</span>
+										<md-tab id="tab2">
+											<md-tab-label>SEMESTER 2</md-tab-label>
+											<md-tab-body>
+											<div class="text-center">
+												<hr>Lecturers<hr>
+												{{module.History[1].Lecturers.toString()}}
+												<hr>Exam Date<hr>
+												<span ng-if="module.History[1].ExamDate != null">{{module.History[1].ExamDate | date:'medium'}}</span>
+												<span ng-if="module.History[1].ExamDate == null">No exam</span>
+											</div>
+											</md-tab-body>
+										</md-tab>
+									</md-tabs>
+								</md-content>
+							</div>
 
-                                <div class="page-header">Exam Date (Semester 2):</div>
-                                <span ng-if="module.History[1].ExamDate != null">{{module.History[1].ExamDate | date:'medium'}}</span>
-                                <span ng-if="module.History[1].ExamDate == null">No exam</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							<div class="module-credits text-center">
+								<hr><div>Module Credits</div><hr>
+								<span>{{module.ModuleCredit}}</span>
+							</div>
+							<div class="weekly-workload text-center">
+								<hr><div>Weekly Workload</div><hr>
+								<span>{{module.Workload}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

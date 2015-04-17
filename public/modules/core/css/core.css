@@ -413,3 +413,40 @@ h1, h2,
 .label-blue {
 	color: #4285f4; 
 }
+
+
+md-tabs.md-default-theme.md-accent .md-header {
+	background-color: #FFFFFF;
+}
+
+md-tabs.md-default-theme.md-accent md-tab:not([disabled]).active {
+	color: #000000;
+}
+
+md-tabs.md-default-theme.md-accent md-tab:not([disabled]) {
+	color: #FF9900;
+}
+
+md-tabs.md-default-theme md-tabs-ink-bar {
+	background: #FF9900;
+}
+
+md-content.md-padding {
+	padding: 0;
+}
+
+.md-tabs-content .md-tab-content {
+	height: 220px;
+}
+
+.tabsdemoStaticTabs .sample md-tab-content {
+	padding: 25px; 
+}
+
+.tabsdemoStaticTabs .sample .after-tabs-area > span {
+	margin-top: 25px;
+	padding-right: 15px;
+	vertical-align: middle;
+	line-height: 30px;
+	height: 35px; 
+}
