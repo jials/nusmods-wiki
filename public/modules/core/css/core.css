@@ -106,7 +106,7 @@ input.search {
 	position: absolute;
 	top: 50%;
 	margin-left: 10px;
-	margin-top: 6px;
+	margin-top: 8px;
 	z-index: 1;
 	color: #4f5b66;
 }
@@ -203,11 +203,7 @@ body.modal-open {
 
 /* for links */
 
-.sharp {
-  border-radius:0;
-}
-
-.links > ul > li > a > .btn {
+/*.links > ul > li > a > .btn {
 	padding: 14px 24px;
 	border: 0 none;
 	font-weight: 700;
@@ -240,51 +236,9 @@ body.modal-open {
 .links > ul > li > a > .btn-primary.active {
 	background: #CCCCCC;
 	box-shadow: none;
-}
+}*/
 
 /* end of buttons for links */
-
-/* edit buttons */
-
-.edit > .btn {
-	padding: 10px 20px;
-	border: 0 none;
-	font-size: 10px;
-	font-weight: 700;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	-moz-box-shadow: 0 0 5px #888;
-	-webkit-box-shadow: 0 0 5px#888;
-	box-shadow: 0 0 5px #888;
-	border-radius: 2px;
-}
-
-.edit > .btn:focus, 
-.edit > .btn:active:focus, 
-.edit > .btn.active:focus {
-	outline: 0 none;
-}
-
-.edit > .btn-primary {
-	background: #FF9900;
-	color: #ffffff;
-}
-
-.edit > .btn-primary:hover, 
-.edit > .btn-primary:focus, 
-.edit > .btn-primary:active, 
-.edit > .btn-primary.active, 
-.edit > .open > .dropdown-toggle.btn-primary {
-	background: #FF993A;
-}
-
-.edit > .btn-primary:active, 
-.edit > .btn-primary.active {
-	background: #FF993A;
-	box-shadow: none;
-}
-
-/* end of edit buttons */
 
 .description-wrapper > .page-header,
 .prerequisite-wrapper > .page-header,
@@ -340,14 +294,12 @@ h1 {
 	font-size: 45px;
 }
 
-h1, h2, 
+body, h1, h2, 
 .page-header {
 	font-family: 'Roboto', sans-serif; 
 }
 
-
 /* Google Buttons */
-
 .button {
 	display: inline-block;
 	position: relative;
@@ -366,10 +318,6 @@ h1, h2,
 	overflow: hidden;
 }
 
-.button.narrow {
-	width: 60px;
-}
-
 .button.home {
 	background-color: #3299BB;
 	color: #FFF;
@@ -380,10 +328,6 @@ h1, h2,
 	color: #FFF;
 }
 
-.button.grey {
-	background-color: #eee;
-}
-
 .button.facebook {
 	background-color: #3B5998;
 	color: #fff;
@@ -391,11 +335,6 @@ h1, h2,
 
 .button.blue {
 	background-color: #4285f4;
-	color: #fff;
-}
-
-.button.green {
-	background-color: #0f9d58;
 	color: #fff;
 }
 
@@ -414,7 +353,7 @@ h1, h2,
 	color: #4285f4; 
 }
 
-
+/* Rightbar tabs */
 md-tabs.md-default-theme.md-accent .md-header {
 	background-color: #FFFFFF;
 }
@@ -439,14 +378,15 @@ md-content.md-padding {
 	height: 220px;
 }
 
-.tabsdemoStaticTabs .sample md-tab-content {
-	padding: 25px; 
-}
-
-.tabsdemoStaticTabs .sample .after-tabs-area > span {
+.rightBarTabs .after-tabs-area > span {
 	margin-top: 25px;
 	padding-right: 15px;
 	vertical-align: middle;
 	line-height: 30px;
 	height: 35px; 
+}
+
+/* remove outline highlight */
+a:focus {
+	outline: none;
 }
