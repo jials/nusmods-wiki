@@ -5,7 +5,12 @@
         <nav class="sidebar-wrapper navmenu-fixed-left" role="navigation" ng-controller="LeftBarCtrl">
             <div class="nav-wrapper">
                 <ul class="nav" ng-repeat="link in links">
-                    <li><a ng-class="{active: isActive(link.title)}" ng-click="gotoElement(link.title)">{{link.title | uppercase}}</a></li>
+                    <li>
+                        <a ng-class="{active: isActive(link.title)}" ng-click="gotoElement(link.title)">
+                            <paper-ripple fit></paper-ripple>
+                            {{link.title | uppercase}}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -47,7 +52,7 @@
                                         </div>
                                         <div style="padding-left:-132px;width:100%;">
                                             <span style="margin-left:5px;">Name: {{pastLecturer.name}}</span><br>
-                                            <span style="margin-left:5px;">AY: {{pastLecturer.academicYear1}}/{{pastLecturer.academicYear2}}</span>
+                                            <span style="margin-left:5px;">AY: {{pastLecturer.academicYearStart}}/{{pastLecturer.academicYearEnd}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +76,7 @@
                                             <div class="row">
                                             
                                                 <div class="col-xs-4">
-                                                <input class="form-control" placeholder="14" name="academicYear1" type="text" min="0" ng-model="pastLecturer.academicYear1" ng-pattern="/^[0-9]{2}$/" required></input>
+                                                <input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="pastLecturer.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
                                                 </div>
                                             
                                                 <div class="col-xs-1" style="padding: 0;">
@@ -79,28 +84,43 @@
                                                 </div>
                                             
                                                 <div class="col-xs-4">
-                                                <input class="form-control" placeholder="15" name="academicYear2" type="text" min="0" ng-model="pastLecturer.academicYear2" ng-pattern="/^[0-9]{2}$/" required></input>
+                                                <input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="pastLecturer.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
                                                 </div>
 
                                             </div> <!-- end of div.row -->
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-primary sharp" ng-click="uploadFile($index)">Upload Image</button>
+                                            <div class="button raised blue" ng-click="uploadFile($index)">
+                                                <div class="text-center">UPLOAD IMAGE</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                         </div>
 
                                         </div> <!-- ng-repeat -->
 
-                                        <button class="btn btn-primary sharp" ng-click="add()">Add Lecturer</button>
+                                        <div class="button raised blue" ng-click="add()">
+                                            <div class="text-center">ADD LECTURER</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary sharp" ng-click="save()">Save</button>
-                                        <button class="btn btn-warning sharp" ng-click="cancel()">Cancel</button>
+                                        <div class="button label-blue" ng-click="save()">
+                                            <div class="text-center">SAVE</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
+                                        <div class="button" ng-click="cancel()">
+                                            <div class="text-center">CANCEL</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                     </div>
                                 </script>
                                 <br ng-show="authentication.user">
-                                <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
+                                    <div class="text-center">EDIT</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
                             </div>
                         </div>
 
@@ -116,7 +136,7 @@
                                         </div>
                                         <div style="padding-left:-132px;width:100%;">
                                             <span style="margin-left:5px;">Name: {{pastTA.name}}</span><br>
-                                            <span style="margin-left:5px;">AY: {{pastTA.academicYear1}}/{{pastTA.academicYear2}}</span>
+                                            <span style="margin-left:5px;">AY: {{pastTA.academicYearStart}}/{{pastTA.academicYearEnd}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +160,7 @@
                                             <div class="row">
                                             
                                                 <div class="col-xs-4">
-                                                <input class="form-control" placeholder="14" name="academicYear1" type="text" min="0" ng-model="pastTA.academicYear1" ng-pattern="/^[0-9]{2}$/" required></input>
+                                                <input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="pastTA.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
                                                 </div>
                                             
                                                 <div class="col-xs-1" style="padding: 0;">
@@ -148,28 +168,43 @@
                                                 </div>
                                             
                                                 <div class="col-xs-4">
-                                                <input class="form-control" placeholder="15" name="academicYear2" type="text" min="0" ng-model="pastTA.academicYear2" ng-pattern="/^[0-9]{2}$/" required></input>
+                                                <input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="pastTA.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
                                                 </div>
 
                                             </div> <!-- end of div.row -->
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-primary sharp" ng-click="uploadFile($index)">Upload Image</button>
+                                            <div class="button raised blue" ng-click="uploadFile($index)">
+                                                <div class="text-center">UPLOAD IMAGE</div>
+                                                <paper-ripple fit></paper-ripple>
+                                            </div>
                                         </div>
 
                                         </div> <!-- ng-repeat -->
 
-                                        <button class="btn btn-primary sharp" ng-click="add()">Add Lecturer</button>
+                                        <div class="button raised blue" ng-click="add()">
+                                            <div class="text-center">ADD TA</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary sharp" ng-click="save()">Save</button>
-                                        <button class="btn btn-warning sharp" ng-click="cancel()">Cancel</button>
+                                        <div class="button label-blue" ng-click="save()">
+                                            <div class="text-center">SAVE</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
+                                        <div class="button" ng-click="cancel()">
+                                            <div class="text-center">CANCEL</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                     </div>
                                 </script>
                                 <br ng-show="authentication.user">
-                                <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
+                                    <div class="text-center">EDIT</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
                             </div>
                         </div>
 
@@ -191,21 +226,30 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary sharp" ng-click="save()">Save</button>
-                                        <button class="btn btn-warning sharp" ng-click="cancel()">Cancel</button>
+                                        <div class="button label-blue" ng-click="save()">
+                                            <div class="text-center">SAVE</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
+                                        <div class="button" ng-click="cancel()">
+                                            <div class="text-center">CANCEL</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                     </div>
                                 </script>
-                                <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
+                                    <div class="text-center">EDIT</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
                             </div>
                         </div>
 
                         <div id="projects" class="projects-wrapper">
                             <div class="page-header"><h3>Outstanding Projects</h3></div>
-                            <div ng-controller="ProjectsModalCtrl" class="edit">
+                            <div ng-controller="ProjectsModalCtrl" class="edit" set-ng-animate="false">
                                 <div>
                                     <p ng-if="projects.length === 0 && !authentication.user">Login to add new projects!</p>
                                     <div ng-repeat="project in projects">
-                                        <div class="page-header">{{project.name}} [AY:{{project.academicYear1}}/{{project.academicYear2}}]</div>
+                                        <div class="page-header">{{project.name}} [AY:{{project.academicYearStart}}/{{project.academicYearEnd}}]</div>
                                         <div style="float:left">
                                         <carousel interval="myInterval">
                                             <slide ng-repeat="photo in project.photo" active="slide.active">
@@ -235,7 +279,7 @@
                                             <label for="academicYear">AY:</label><br>
                                             <div class="row">
                                                 <div class="col-xs-4">
-                                                <input class="form-control" placeholder="14" name="academicYear1" type="text" min="0" ng-model="project.academicYear1" ng-pattern="/^[0-9]{2}$/" required></input>
+                                                <input class="form-control" placeholder="14" name="academicYearStart" type="text" min="0" ng-model="project.academicYearStart" ng-pattern="/^[0-9]{2}$/" required></input>
                                                 </div>
                                             
                                                 <div class="col-xs-1" style="padding: 0;">
@@ -243,10 +287,10 @@
                                                 </div>
                                             
                                                 <div class="col-xs-4">
-                                                <input class="form-control" placeholder="15" name="academicYear2" type="text" min="0" ng-model="project.academicYear2" ng-pattern="/^[0-9]{2}$/" required></input>
+                                                <input class="form-control" placeholder="15" name="academicYearEnd" type="text" min="0" ng-model="project.academicYearEnd" ng-pattern="/^[0-9]{2}$/" required></input>
                                                 </div>
                                             </div> <!-- end of div.row -->
-                                            <p class="help-block" ng-if="projectForm.academicYear1.$error.required || projectForm.academicYear2.$error.required">Please enter academic year</p>
+                                            <p class="help-block" ng-if="projectForm.academicYearStart.$error.required || projectForm.academicYearEnd.$error.required">Please enter academic year</p>
                                             </div>
 
                                             <div class="form-group" show-errors>
@@ -256,26 +300,41 @@
                                             <p class="help-block" ng-if="projectForm.$error.pattern">Please enter a valid embeded YouTube url</p>
                                         </div>
 
-                                            <button type="button" class="btn btn-primary sharp" ng-click="uploadFile($index)">Upload Image</button>
+                                            <div class="button raised blue" ng-click="uploadFile($index)">
+                                                <div class="text-center">UPLOAD IMAGE</div>
+                                                <paper-ripple fit></paper-ripple>
+                                            </div>
                                             <p class="help-block">Please upload at least 2 images (up to 4 images), max size 800*400</p>
                                         </div>
                                         </form>
-                                        <button type="button" class="btn btn-primary sharp" ng-click="add()">Add project</button>
+                                        <div class="button raised blue" ng-click="add()">
+                                            <div class="text-center">ADD PROJECT</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary sharp" ng-click="save()">Save</button>
-                                        <button class="btn btn-warning sharp" ng-click="cancel()">Cancel</button>
+                                        <div class="button label-blue" ng-click="save()">
+                                            <div class="text-center">SAVE</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
+                                        <div class="button" ng-click="cancel()">
+                                            <div class="text-center">CANCEL</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                     </div>
                                 </script>
                                 <br ng-show="authentication.user">
-                                <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Add / Edit</button>
+                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
+                                    <div class="text-center">ADD / EDIT</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
                             </div>
                         </div>
 
                         <div id="others" class="others-wrapper">
                             <div class="page-header"><h3>Others</h3></div>
                             <div ng-controller="OthersModalCtrl" class="edit">
-                                <p ng-if="content === '' && !authentication.user">"Login and start editing!</p>
+                                <p ng-if="content === '' && !authentication.user">Login and start editing!</p>
                                 <p>{{content}}</p>
                                 
                                 <script type="text/ng-template" id="OthersModalContent.html">
@@ -290,11 +349,20 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary sharp" ng-click="save()">Save</button>
-                                        <button class="btn btn-warning sharp" ng-click="cancel()">Cancel</button>
+                                        <div class="button label-blue" ng-click="save()">
+                                            <div class="text-center" fit>SAVE</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
+                                        <div class="button" ng-click="cancel()">
+                                            <div class="text-center" fit>CANCEL</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                     </div>
                                 </script>
-                                <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                <div class="button raised orange" ng-click="open()" ng-show="authentication.user">
+                                    <div class="text-center">EDIT</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -303,19 +371,36 @@
 
                         <div class="content-right">
                             <div ng-controller="ModuleLogoFilePickerCtrl" class="edit">
-                                <div class="thumbnail">
-                                    <img src="{{img}}" alt="{{moduleTitle}} Logo">
+                                <div class="text-center" style="margin-bottom:20px;" ng-if="img === '/modules/wiki/img/logo/logo.png'"> 
+                                    <img ng-src="{{img}}" alt="{{moduleTitle}} Logo">
+                                </div>
+                                <div class="text-center" style="margin-bottom:20px;" ng-if="img !== '/modules/wiki/img/logo/logo.png'"> 
+                                    <img ng-src="{{img}}/convert?w=310&h=256" alt="{{moduleTitle}} Logo">
                                 </div>
 
-                                <button type="button" class="btn btn-primary sharp" ng-click="uploadFile()" ng-show="authentication.user">Upload Image</button>
+                                <div class="button raised" ng-click="uploadFile()" ng-show="authentication.user">
+                                    <div class="text-center">UPLOAD</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
                             </div>
 
                             <div ng-controller="LinksModalCtrl" class="edit">
                                 <div class="links row">
                                     <ul class="nav navbar-nav text-center" style="width:100%;">
-                                        <li class="col-sm-6" ng-repeat="link in links">
-                                            <a href="{{link.content.content}}" style="color:black;">
-                                                <button class="btn btn-primary btn-lg btn-block sharp">{{link.title}}</button>
+                                        <li class="col-sm-6">
+                                            <a href="{{links[0].content.content}}">
+                                                <div class="button raised home">
+                                                    <div class="text-center">{{links[0].title | uppercase}}</div>
+                                                    <paper-ripple fit></paper-ripple>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="col-sm-6">
+                                            <a href="{{links[1].content.content}}">
+                                                <div class="button raised facebook">
+                                                    <div class="text-center">{{links[1].title | uppercase}}</div>
+                                                    <paper-ripple fit></paper-ripple>
+                                                </div>
                                             </a>
                                         </li>
                                     </ul>
@@ -350,11 +435,20 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary sharp" ng-click="save()">Save</button>
-                                        <button class="btn btn-warning sharp" ng-click="cancel()">Cancel</button>
+                                        <div class="button label-blue" ng-click="save()">
+                                            <div class="text-center">SAVE</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
+                                        <div class="button" ng-click="cancel()">
+                                            <div class="text-center">CANCEL</div>
+                                            <paper-ripple fit></paper-ripple>
+                                        </div>
                                     </div>
                                 </script>
-                                <button class="btn btn-primary sharp" ng-click="open()" ng-show="authentication.user">Edit</button>
+                                <div class="button raised" ng-click="open()" ng-show="authentication.user">
+                                    <div class="text-center">EDIT</div>
+                                    <paper-ripple fit></paper-ripple>
+                                </div>
                             </div>
 
                             <div class="lecturers">
