@@ -207,7 +207,7 @@
                                     <div>
                                         <p ng-if="projects.length === 0 && !authentication.user">Login to add new projects!</p>
                                         <div ng-repeat="project in projects">
-                                            <div class="page-header">{{project.name}} [AY:{{project.academicYear1}}/{{project.academicYear1}}]</div>
+                                            <div class="page-header">{{project.name}} [AY:{{project.academicYear1}}/{{project.academicYear2}}]</div>
                                             <div style="float:left">
                                             <carousel interval="myInterval">
                                                 <slide ng-repeat="photo in project.photo" active="slide.active">
@@ -226,6 +226,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form name="projectForm">
+                                            <div ng-repeat="project in projects">
                                                 <div class="form-group" show-errors>
                                                 <label style="">Project Name:</label><br>
                                                 <input type="text" class="form-control" name="names" ng-model="project.name" required></input>
@@ -257,9 +258,11 @@
                                                 <p class="help-block" ng-if="projectForm.$error.pattern">Please enter a valid embeded YouTube url</p>
                                             </div>
 
-                                                <button type="button" class="btn btn-primary sharp" ng-click="uploadFile()">Upload Image</button>
-                                                <p class="help-block">Please upload at least 2 images (up to 4 images)</p>
+                                                <button type="button" class="btn btn-primary sharp" ng-click="uploadFile($index)">Upload Image</button>
+                                                <p class="help-block">Please upload at least 2 images (up to 4 images), max size 800*400</p>
+                                            </div>
                                             </form>
+                                            <button type="button" class="btn btn-primary sharp" ng-click="add()">Add project</button>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-primary sharp" ng-click="save()">Save</button>
