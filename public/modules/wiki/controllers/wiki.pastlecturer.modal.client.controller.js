@@ -48,8 +48,8 @@ angular.module('wiki').controller('PastLecturerModalInstanceCtrl', function ($sc
 	$scope.add = function () {
 		$scope.pastLecturers.push({ 
 			name: '',
-			academicYear1: '',
-			academicYear2: '',
+			academicYearStart: '',
+			academicYearEnd: '',
 			photo: ''
 		});
 	};
