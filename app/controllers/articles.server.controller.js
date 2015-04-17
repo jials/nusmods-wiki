@@ -63,6 +63,20 @@ exports.update = function(req, res) {
 			article.pastLecturer.push(updated);
 			break;
 
+		case 'pastTA': 
+			updated = new VersionFaculty({
+				author: editor
+			});
+
+			for (var i = 0; i < req.body.pastTA.length; i++) {
+				var ta = new Faculty(req.body.pastTA[i]);
+				updated.faculties.push(ta);
+				ta.save();
+			}		
+			updated.save();
+			article.pastTA.push(updated);
+			break;
+
 		case 'outstandingProj': 
 			updated = new VersionProject({
 				author: editor

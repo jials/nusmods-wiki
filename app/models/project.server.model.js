@@ -15,11 +15,11 @@ var ProjectSchema = new Schema({
 		required: 'Name cannot be blank'
 	},
 
-	academicYear1: {
+	academicYearStart: {
 		type: String,
 	},
 
-	academicYear2: {
+	academicYearEnd: {
 		type: String,
 	},
 

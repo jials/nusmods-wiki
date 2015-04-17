@@ -20,10 +20,10 @@ var ArticleSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'VersionFaculty'
 	}],
-	// pastTA: {
-	// 	type: [Schema.ObjectId],
-	// 	ref: 'VersionFaculty'
-	// },
+	pastTA: [{
+		type: Schema.Types.ObjectId,
+		ref: 'VersionFaculty'
+	}],
 	funFacts: [{
 		type: Schema.Types.ObjectId,
 		ref: 'VersionString'
