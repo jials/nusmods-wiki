@@ -358,10 +358,10 @@
                             </div>
 
                             <div class="lecturers">
-                                <div class="page-header">Lecturer(s) (Semester 1):</div>
+                                <div class="page-header">Lecturer<span ng-if="module.History[0].Lecturers.length > 1">s</span> (Semester 1):</div>
                                 <span>{{module.History[0].Lecturers.toString()}}</span> 
 
-                                <div class="page-header">Lecturer(s) (Semester 2):</div>
+                                <div class="page-header">Lecturer<span ng-if="module.History[1].Lecturers.length > 1">s</span> (Semester 2):</div>
                                 <span>{{module.History[1].Lecturers.toString()}}</span>
                             </div>
                             <div class="module-credits">
