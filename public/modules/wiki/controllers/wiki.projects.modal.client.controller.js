@@ -38,8 +38,8 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope,
 	$scope.add = function () {
 		$scope.projects.push({ 
 			name: '',
-			academicYear1: '',
-			academicYear2: '',
+			academicYearStart: '',
+			academicYearEnd: '',
 			photo: []
 		});
 	};
@@ -54,7 +54,7 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope,
 		}
 
 		if (!$scope.projectForm.$invalid) {
-			$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: "outstandingProj", outstandingProj: $scope.projects}).success(function(data){
+			$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'outstandingProj', outstandingProj: $scope.projects}).success(function(data){
 			});
 		}
 
