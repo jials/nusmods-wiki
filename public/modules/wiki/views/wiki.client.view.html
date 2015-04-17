@@ -43,8 +43,9 @@
 						<div id="past-lecturer" class="past-lecturer-wrapper">
 							<div class="page-header"><h3>Past Lecturer</h3></div>
 							<div ng-controller="PastLecturerCtrl" class="edit">
+								<div class="row">
 								<div ng-repeat="pastLecturer in pastLecturers">
-									<div style="height:168px;margin-bottom:20px;box-shadow:0px 2px 5px 0 rgba(0, 0, 0, 0.26)">
+									<div class="col-xs-5 card-wrapper">
 										<div class="text-center" style="float:left;width:132px;height:168px;background-color:#D3D3D3;">
 											<i class="fa fa-user big-icon" style="opacity:0.6;" ng-hide="pastLecturer.photo"></i>
 											<img ng-if="pastLecturer.photo" ng-src="{{pastLecturer.photo}}/convert?w=132&h=168">
@@ -54,6 +55,7 @@
 											<span style="margin-left:5px;">AY: {{pastLecturer.academicYearStart}}/{{pastLecturer.academicYearEnd}}</span>
 										</div>
 									</div>
+								</div>
 								</div>
 
 								<script type="text/ng-template" id="PastLecturerModalContent.html">
@@ -123,11 +125,12 @@
 							</div>
 						</div>
 
-						<div id="past-ta" class="past-ta-wrapper">
+						<div id="past-ta" class="past-ta-wrapper" style="width:100%;">
 							<div class="page-header"><h3>Past TA</h3></div>
 							<div ng-controller="PastTACtrl" class="edit">
+								<div class="row">
 								<div ng-repeat="pastTA in pastTAs">
-									<div style="height:168px;margin-bottom:5px;box-shadow:0px 2px 5px 0 rgba(0, 0, 0, 0.26)">
+									<div class="col-xs-5 card-wrapper">
 										<div class="text-center" style="float:left;width:132px;height:168px;background-color:#D3D3D3;">
 											<i class="fa fa-user big-icon" style="opacity:0.6;" ng-hide="pastTA.photo"></i>
 											<img ng-if="pastTA.photo" ng-src="{{pastTA.photo}}/convert?w=132&h=168">
@@ -137,6 +140,7 @@
 											<span style="margin-left:5px;">AY: {{pastTA.academicYearStart}}/{{pastTA.academicYearEnd}}</span>
 										</div>
 									</div>
+								</div>
 								</div>
 
 								<script type="text/ng-template" id="PastTAModalContent.html">
