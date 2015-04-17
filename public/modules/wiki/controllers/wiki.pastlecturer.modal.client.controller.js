@@ -1,43 +1,75 @@
 'use strict';
 
-angular.module('wiki').controller('PastLecturerCtrl', function ($scope, $modal, $log) {
+angular.module('wiki').controller('PastLecturerCtrl', function ($scope, $modal, $log, $http, $stateParams, Authentication) {
+	$http.get('/' + $stateParams.moduleTitle).success(function(data){
+		if (data.pastLecturer.length !== 0) {
+			$scope.pastLecturers = data.pastLecturer[data.pastLecturer.length - 1].faculties;
+		} else {
+			$scope.pastLecturers = [];
+		}
+	});
 
-  $scope.pastLecturer = {name: '', academicYear: ''};
-
-  $scope.open = function (size) {
-
-    var modalInstance = $modal.open({
-      templateUrl: 'PastLecturerModalContent.html',
-      controller: 'PastLecturerModalInstanceCtrl',
-      size: size,
-      resolve: {
-        pastLecturer: function () {
-          return $scope.pastLecturer;
-        }
-      }
-    });
-  };
+	$scope.open = function (size) {
+		var modalInstance = $modal.open({
+			templateUrl: 'PastLecturerModalContent.html',
+			controller: 'PastLecturerModalInstanceCtrl',
+			size: size,
+			resolve: {
+				pastLecturers: function () {
+					return $scope.pastLecturers;
+				}
+			}
+		});
+	};
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('PastLecturerModalInstanceCtrl', function ($scope, $modalInstance, pastLecturer, $http, $stateParams, Authentication) {
-  $http.get('/' + $stateParams.moduleTitle).success(function(data){
-    $scope.pastLecturers = data.pastLecturer[data.pastLecturer.length - 1].faculties;
-  });
+angular.module('wiki').controller('PastLecturerModalInstanceCtrl', function ($scope, $modalInstance, pastLecturers, $http, $stateParams, Authentication) {
+	for (var j = 0; j < pastLecturers.length; j++) {
+		delete pastLecturers[j]._id;
+	}
 
-  $scope.save = function () {
-    $scope.pastLecturers.push({name: $scope.pastLecturer.name, academicYear: $scope.pastLecturer.academicYear1 +'/'+ $scope.pastLecturer.academicYear2});
+	$scope.pastLecturers = pastLecturers;
 
-    $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastLecturer', pastLecturer: $scope.pastLecturers}).success(function(data){
-      console.log(success);
-    });
+	$scope.save = function () {
+		if ($scope.PastLecturerForm.$invalid) { return; }
 
-    $modalInstance.close();
-  };
+		$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastLecturer', pastLecturer: $scope.pastLecturers}).success(function(data){
+		});
+		$modalInstance.close();
+	};
 
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
+	$scope.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
+
+	$scope.add = function () {
+		$scope.pastLecturers.push({ 
+			name: '',
+			academicYear1: '',
+			academicYear2: '',
+			photo: ''
+		});
+	};
+
+	$scope.uploadFile = function(index) {
+		filepicker.setKey('ABMzRUFagRuyMHNU9Jksvz');
+		filepicker.pickMultiple(
+			{
+				mimetypes: 'image/*',
+				container: 'modal',
+				services:['COMPUTER', 'DROPBOX', 'FACEBOOK', 'GMAIL', 'GOOGLE_DRIVE', 'INSTAGRAM'],
+				maxSize: '1584*2016',
+				maxFiles: '1',
+			},
+			function(Blob){
+				$scope.pastLecturers[index].photo = Blob[0].url;
+			},
+			function(FPError){
+				console.log(FPError.toString());
+			}
+		);
+	};
 });
