@@ -214,6 +214,9 @@ exports.articleByID = function(req, res, next, id) {
 			function(article, callback) {
 				Project.populate(article, {'path': 'outstandingProj.projects', 'model': 'Project'}, callback);
 			}
+			function(article, callback) {
+				Faculty.populate(article, {'path': 'pastTA.faculties', 'model': 'Faculty'}, callback);
+			}
 		], function(err, article) {
 			if (err) return next(err);
 			req.article = article;
