@@ -3,7 +3,7 @@
 angular.module('wiki').controller('FunFactsModalCtrl', function ($scope, $modal, $log, $http, $stateParams, Authentication) {
 
 	$http.get('/' + $stateParams.moduleTitle).success(function(data){
-        if (data.funFacts.length > 1) {
+        if (data.funFacts.length !== 0) {
             $scope.content = data.funFacts[data.funFacts.length - 1].content;
         } else {
             $scope.content = '';

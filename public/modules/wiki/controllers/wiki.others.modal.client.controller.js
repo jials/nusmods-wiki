@@ -3,7 +3,7 @@
 angular.module('wiki').controller('OthersModalCtrl', function ($scope, $modal, $log, $http, $stateParams, Authentication) {
 
     $http.get('/' + $stateParams.moduleTitle).success(function(data){
-        if (data.others.length > 1) {
+        if (data.others.length !== 0) {
             $scope.content = data.others[data.others.length - 1].content;
         } else {
             $scope.content = '';
