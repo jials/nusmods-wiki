@@ -3,7 +3,7 @@
 angular.module('wiki').controller('PastTACtrl', function ($scope, $modal, $log, $http, $stateParams, Authentication) {
 	$http.get('/' + $stateParams.moduleTitle).success(function(data){
 		if (data.pastTA.length !== 0) {
-			$scope.pastTAs = data.pastLecturer[data.pastTA.length - 1].faculties;
+			$scope.pastTAs = data.pastTA[data.pastTA.length - 1].faculties;
 		} else {
 			$scope.pastTAs = [];
 		}
@@ -34,6 +34,7 @@ angular.module('wiki').controller('PastTAModalInstanceCtrl', function ($scope, $
 	$scope.pastTAs = pastTAs;
 
 	$scope.save = function () {
+		alert(JSON.stringify($scope.pastTAs));
 		$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastTA', pastTA: $scope.pastTAs}).success(function(data){
 		});
 		$modalInstance.close();
