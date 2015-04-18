@@ -6,7 +6,7 @@ angular.module('wiki').controller('ModuleLogoFilePickerCtrl', ['$scope', '$http'
 			if (data.logo.length !== 0) {
 		        $scope.img = data.logo[0].content;
 	    	} else {
-	    		$scope.img = '/modules/wiki/img/logo/logo.png';
+	    		$scope.img = '';
 	    	}
 	    });
 	}

@@ -377,11 +377,11 @@
 
 						<div class="content-right">
 							<div ng-controller="ModuleLogoFilePickerCtrl" class="edit">
-								<div class="text-center" style="margin-bottom:20px;" ng-if="img === '/modules/wiki/img/logo/logo.png'"> 
-									<img ng-src="{{img}}" alt="{{moduleTitle}} Logo">
+								<div class="text-center" style="margin-bottom:20px;" ng-if="img === ''"> 
+									<img src="/modules/wiki/img/logo/logo.png" alt="{{moduleTitle}} Logo">
 								</div>
-								<div class="text-center" style="margin-bottom:20px;" ng-if="img !== '/modules/wiki/img/logo/logo.png'"> 
-									<img src="{{img}}/convert?w=310&h=256" alt="{{moduleTitle}} Logo">
+								<div class="text-center" style="margin-bottom:20px;" ng-if="img !== ''"> 
+									<img ng-src="{{img}}/convert?w=310&h=256" alt="{{moduleTitle}} Logo">
 								</div>
 							</div>
 
