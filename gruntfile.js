@@ -180,4 +180,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['test:server', 'test:client']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
+
+	grunt.loadNpmTasks('grunt-forever');
 };
