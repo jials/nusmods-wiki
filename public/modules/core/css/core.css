@@ -334,6 +334,11 @@ body, h1, h2,
 	color: #fff;
 }
 
+.button.edit {
+	background-color: #614FD4;
+	color: #FFF;
+}
+
 .button.blue {
 	background-color: #4285f4;
 	color: #fff;
@@ -421,4 +426,8 @@ h4.section-title {
 
 .quote-wrapper .by {
 	font-size: 18px;
+}
+
+.rightbar-header {
+	font-weight: 700;
 }

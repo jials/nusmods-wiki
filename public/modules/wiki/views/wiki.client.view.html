@@ -118,7 +118,7 @@
 									</div>
 								</script>
 								<br ng-show="authentication.user">
-								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">EDIT</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
@@ -203,7 +203,7 @@
 									</div>
 								</script>
 								<br ng-show="authentication.user">
-								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">EDIT</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
@@ -238,7 +238,7 @@
 										</div>
 									</div>
 								</script>
-								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">EDIT</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
@@ -330,7 +330,7 @@
 									</div>
 								</script>
 								<br ng-show="authentication.user">
-								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">ADD / EDIT</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
@@ -365,7 +365,7 @@
 										</div>
 									</div>
 								</script>
-								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">EDIT</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
@@ -448,7 +448,7 @@
 										</div>
 									</div>
 								</script>
-								<div class="button raised" ng-click="open()" ng-show="authentication.user">
+								<div class="button raised edit" ng-click="open()" ng-show="authentication.user" style="margin-left:15px;">
 									<div class="text-center">EDIT</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
@@ -457,26 +457,26 @@
 							<div ng-controller="RightBarContentCtrl" class="rightBarTabs sample" style="height:300px;margin-top:10px;">
 								<md-content class="md-padding" style="height:300px;">
 									<md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}" md-stretch-tabs="always">
-										<md-tab id="tab1">
+										<md-tab id="tab1" ng-disabled="semesterOneDisabled">
 											<md-tab-label>SEMESTER 1</md-tab-label>
 											<md-tab-body>
 											<div class="text-center">
-												<hr>Lecturers<hr>
+												<hr><span class="rightbar-header">Lecturers</span><hr>
 												{{module.History[0].Lecturers.toString()}}
-												<hr>Exam Date<hr>
+												<hr><span class="rightbar-header">Exam Date</span><hr>
 												<span ng-if="module.History[0].ExamDate != null">{{module.History[0].ExamDate | date:'medium'}}</span>
 												<span ng-if="module.History[0].ExamDate == null">No exam</span>
 											</div>
 											</md-tab-body>
 										</md-tab>
 
-										<md-tab id="tab2">
+										<md-tab id="tab2" ng-disabled="semesterTwoDisabled">
 											<md-tab-label>SEMESTER 2</md-tab-label>
 											<md-tab-body>
 											<div class="text-center">
-												<hr>Lecturers<hr>
+												<hr><span class="rightbar-header">Lecturers</span><hr>
 												{{module.History[1].Lecturers.toString()}}
-												<hr>Exam Date<hr>
+												<hr><span class="rightbar-header">Exam Date</span><hr>
 												<span ng-if="module.History[1].ExamDate != null">{{module.History[1].ExamDate | date:'medium'}}</span>
 												<span ng-if="module.History[1].ExamDate == null">No exam</span>
 											</div>
@@ -487,11 +487,11 @@
 							</div>
 
 							<div class="module-credits text-center">
-								<hr><div>Module Credits</div><hr>
+								<hr><span class="rightbar-header">Module Credits</span><hr>
 								<span>{{module.ModuleCredit}}</span>
 							</div>
 							<div class="weekly-workload text-center">
-								<hr><div>Weekly Workload</div><hr>
+								<hr><span class="rightbar-header">Weekly Workload</span><hr>
 								<span>{{module.Workload}}</span>
 							</div>
 						</div>
