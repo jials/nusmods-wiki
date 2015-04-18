@@ -18,7 +18,7 @@ module.exports = {
 		}
 	},
 	app: {
-		title: 'NUS Modules Wiki - Development Environment'
+		title: 'NUS Module Wiki - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

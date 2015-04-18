@@ -2,8 +2,8 @@
 
 module.exports = {
 	app: {
-		title: 'NUS Modules Wiki',
-		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
+		title: 'NUS Module Wiki',
+		description: 'The aim of NUS Module Wiki is to expand on extra module informations with the inclusion of more user-generated content',
 		keywords: 'mongodb, express, angularjs, node.js, mongoose, passport'
 	},
 	port: process.env.PORT || 80,
