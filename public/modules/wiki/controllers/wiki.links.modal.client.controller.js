@@ -29,6 +29,27 @@ angular.module('wiki').controller('LinksModalCtrl', function ($scope, $modal, $l
 angular.module('wiki').controller('LinksModalInstanceCtrl', function ($scope, $modalInstance, links, $http, $stateParams, Authentication) {
 	$scope.links = links;
 
+    $scope.uploadFile = function() {
+        filepicker.setKey('ABMzRUFagRuyMHNU9Jksvz');
+        filepicker.pick(
+            {
+                mimetypes: 'image/*',
+                container: 'modal',
+                services:['COMPUTER', 'DROPBOX', 'FACEBOOK', 'GMAIL', 'GOOGLE_DRIVE', 'INSTAGRAM'],
+                maxSize: '1024*1024',
+            },
+
+            function(Blob){
+                $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'logo', logo: Blob.url}).success(function(data){
+                });
+            },
+
+            function(FPError){
+                console.log(FPError.toString());
+            }
+        );
+    };
+
 	$scope.save = function () {
 		$scope.$broadcast('show-errors-check-validity');
 

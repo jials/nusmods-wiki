@@ -12,7 +12,6 @@ body {
 
 .nm-wrapper {
 	padding-left: 200px;
-	background-color: #E9E9E9;
 	/*height: 100%;*/
 }
 
@@ -399,13 +398,27 @@ a:focus {
 	margin: 0 10px 10px 10px;
 }
 
-.section-title {
-	font-family: 'Roboto', sans-serif; 
-	font-weight: 700;
+h4.section-title {
+	font-weight: 400;
 	color: #A1A1A1;
+	margin-bottom: 0;
 }
 
-.nm-social li{
-	display:inline-block;
-	margin-right:10px;
+.nm-social li {
+	display: inline-block;
+	/*margin-right:10px;*/
+}
+
+.quote-wrapper {
+	background-color: #E9E9E9;
+	min-height: 200px;
+	padding:10% 50px;
+}
+
+.quote-wrapper .content {
+	font-size: 20px;
+}
+
+.quote-wrapper .by {
+	font-size: 18px;
 }
