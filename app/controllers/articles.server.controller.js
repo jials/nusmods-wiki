@@ -191,7 +191,7 @@ exports.list = function(req, res) {
 exports.articleByID = function(req, res, next, id) {
 	Article
 	.findOne({'moduleCode': id})
-	.populate('pastLecturer outstandingProj funFacts others facebook homePage logo')
+	.populate('pastLecturer pastTA outstandingProj funFacts others facebook homePage logo')
 	// .populate({
 	// 	path: 'pastTA',
 	// 	match: {version : {$max}}
