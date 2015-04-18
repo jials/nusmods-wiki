@@ -31,6 +31,7 @@ angular.module('wiki').controller('ProjectsModalCtrl', function ($scope, $modal,
 angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope, $modalInstance, projects, $http, $stateParams, Authentication) {
 	for (var j = 0; j < projects.length; j++) {
 		delete projects[j]._id;
+		projects[j].del = false;
 	}
 
 	$scope.projects = projects;
@@ -40,7 +41,8 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope,
 			name: '',
 			academicYearStart: '',
 			academicYearEnd: '',
-			photo: []
+			photo: [],
+			del: ''
 		});
 	};
 
@@ -52,6 +54,15 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', function ($scope,
 				return;
 			}
 		}
+
+		var temp = [];
+		for (var j = 0; j < projects.length; j++) {
+			if (projects[j].del === false || projects[j].del === '') {
+				temp.push(projects[j]);
+			}
+		}
+
+		$scope.projects = temp;
 
 		if (!$scope.projectForm.$invalid) {
 			$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'outstandingProj', outstandingProj: $scope.projects}).success(function(data){
