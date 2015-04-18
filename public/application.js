@@ -10,12 +10,6 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 	}
 ]);
 
-angular.module(ApplicationConfiguration.applicationModuleName).config(['$httpProvider', 
-    function($httpProvider) {
-        delete $httpProvider.defaults.headers.common["X-Requested-With"];
-    }
-]);
-
 //Then define the init function for starting up the application
 angular.element(document).ready(function() {
 	//Fixing facebook bug with redirect
