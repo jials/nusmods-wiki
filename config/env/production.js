@@ -22,7 +22,7 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.min.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
-				'public/lib/angular-spinkit-0.3.3/build/angular-spinkit.min.css'
+				'public/lib/angular-spinkit/build/angular-spinkit.min.css'
 				'public/lib/angular-material/angular-material.min.css',
 			],
 			js: [
