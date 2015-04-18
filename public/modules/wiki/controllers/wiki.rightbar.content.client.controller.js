@@ -16,7 +16,7 @@ angular.module('wiki').controller('RightBarContentCtrl', [ '$scope', '$http', '$
 		};
 
 
-		$http.get('http://api.nusmods.com/2014-2015/moduleList.json?callback=?').success(function(data) {
+		$http.get('http://api.nusmods.com/2014-2015/moduleList.json?callback=JSON_CALLBACK').success(function(data, status, headers, config) {
 			// alert(JSON.stringify(data));
 
 			var semester;
