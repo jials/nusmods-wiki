@@ -34,7 +34,6 @@ angular.module('wiki').controller('PastTAModalInstanceCtrl', function ($scope, $
 	$scope.pastTAs = pastTAs;
 
 	$scope.save = function () {
-		alert(JSON.stringify($scope.pastTAs));
 		$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastTA', pastTA: $scope.pastTAs}).success(function(data){
 		});
 		$modalInstance.close();
