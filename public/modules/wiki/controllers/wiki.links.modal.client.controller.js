@@ -60,19 +60,18 @@ angular.module('wiki').controller('LinksModalInstanceCtrl', function ($scope, $m
         if ($scope.linksForm.$invalid && $scope.disabledHomepage && $scope.disabledFacebook) { return; }
 
         // don't allow if homepage is blank
-        if (!$scope.linksForm.$invalid && !$scope.disabledHomepage && $scope.disabledFacebook) {
+        if (!$scope.disabledHomepage && $scope.disabledFacebook) {
             $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'homePage', homePage: $scope.links[0].content.content}).success(function(data){     
             });
             $modalInstance.close();
         }
 
         // don't allow if facebook is blank
-        if (!$scope.linksForm.$invalid && $scope.disabledHomepage && !$scope.disabledFacebook) {
+        if ($scope.disabledHomepage && !$scope.disabledFacebook) {
             $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'facebook', facebook: $scope.links[1].content.content}).success(function(data){     
             });
             $modalInstance.close();
         }
-
 
         if (!$scope.linksForm.$invalid && !$scope.disabledHomepage && !$scope.disabledFacebook) {
             $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'homePage', homePage: $scope.links[0].content.content}).success(function(data){     
