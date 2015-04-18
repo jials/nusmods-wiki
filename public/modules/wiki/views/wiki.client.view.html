@@ -381,12 +381,7 @@
 									<img ng-src="{{img}}" alt="{{moduleTitle}} Logo">
 								</div>
 								<div class="text-center" style="margin-bottom:20px;" ng-if="img !== '/modules/wiki/img/logo/logo.png'"> 
-									<img ng-src="{{img}}/convert?w=310&h=256" alt="{{moduleTitle}} Logo">
-								</div>
-
-								<div class="button raised" ng-click="uploadFile()" ng-show="authentication.user">
-									<div class="text-center">UPLOAD</div>
-									<paper-ripple fit></paper-ripple>
+									<img src="{{img}}/convert?w=310&h=256" alt="{{moduleTitle}} Logo">
 								</div>
 							</div>
 
@@ -435,14 +430,12 @@
 												</md-checkbox>
 												<p class="help-block" ng-if="linksForm.$error.pattern">Please enter a valid url</p>
 											</div>
-
-											<!--<div class="form-group" show-errors>
-												<label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="1" required>Semester 1</label>
-												<label class="radio-inline"><input type="radio" name="radio" ng-model="semester" value="2" required>Semester 2</label>
-												<p class="help-block" ng-if="linksForm.radio.$error.required">Please select semester</p>
-											</div>-->
-
 										</form>
+
+										<div class="button raised blue" ng-click="uploadFile()">
+											<div class="text-center">UPLOAD</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
 									</div>
 									<div class="modal-footer">
 										<div class="button label-blue" ng-click="save()">
