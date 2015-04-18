@@ -29,12 +29,22 @@ angular.module('wiki').controller('PastLecturerCtrl', function ($scope, $modal, 
 angular.module('wiki').controller('PastLecturerModalInstanceCtrl', function ($scope, $modalInstance, pastLecturers, $http, $stateParams, Authentication) {
 	for (var j = 0; j < pastLecturers.length; j++) {
 		delete pastLecturers[j]._id;
+		pastLecturers[j].del = false;
 	}
 
 	$scope.pastLecturers = pastLecturers;
 
 	$scope.save = function () {
 		if ($scope.PastLecturerForm.$invalid) { return; }
+
+		var temp = [];
+		for (var j = 0; j < pastLecturers.length; j++) {
+			if (pastLecturers[j].del === false || pastLecturers[j].del === '') {
+				temp.push(pastLecturers[j]);
+			}
+		}
+
+		$scope.pastLecturers = temp;
 
 		$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastLecturer', pastLecturer: $scope.pastLecturers}).success(function(data){
 		});
@@ -50,7 +60,8 @@ angular.module('wiki').controller('PastLecturerModalInstanceCtrl', function ($sc
 			name: '',
 			academicYearStart: '',
 			academicYearEnd: '',
-			photo: ''
+			photo: '',
+			del: ''
 		});
 	};
 

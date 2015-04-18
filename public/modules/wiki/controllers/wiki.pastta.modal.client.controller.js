@@ -29,11 +29,23 @@ angular.module('wiki').controller('PastTACtrl', function ($scope, $modal, $log, 
 angular.module('wiki').controller('PastTAModalInstanceCtrl', function ($scope, $modalInstance, pastTAs, $http, $stateParams, Authentication) {
 	for (var j = 0; j < pastTAs.length; j++) {
 		delete pastTAs[j]._id;
+		pastTAs[j].del = false;
 	}	
 
 	$scope.pastTAs = pastTAs;
 
 	$scope.save = function () {
+		if ($scope.PastTAForm.$invalid) { return; }
+
+		var temp = [];
+		for (var j = 0; j < pastTAs.length; j++) {
+			if (pastTAs[j].del === false || pastTAs[j].del === '') {
+				temp.push(pastTAs[j]);
+			}
+		}
+
+		$scope.pastTAs = temp;
+
 		$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastTA', pastTA: $scope.pastTAs}).success(function(data){
 		});
 		$modalInstance.close();
@@ -48,7 +60,8 @@ angular.module('wiki').controller('PastTAModalInstanceCtrl', function ($scope, $
 			name: '',
 			academicYearStart: '',
 			academicYearEnd: '',
-			photo: ''
+			photo: '',
+			del: ''
 		});
 	};
 
