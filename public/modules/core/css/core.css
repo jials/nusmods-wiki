@@ -129,7 +129,7 @@ input.search {
 	width: 100%;
 	background-color: #424242;
 	padding: 100px 0;
-	background-image: url(../img/bg.png);
+	background-image: url(/modules/core/img/bg.png);
 }
 
 .nud-module-wiki-title {
