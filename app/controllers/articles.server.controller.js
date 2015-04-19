@@ -68,8 +68,8 @@ exports.update = function(req, res) {
 				author: editor
 			});
 
-			for (var i = 0; i < req.body.pastTA.length; i++) {
-				var ta = new Faculty(req.body.pastTA[i]);
+			for (var j = 0; j < req.body.pastTA.length; j++) {
+				var ta = new Faculty(req.body.pastTA[j]);
 				updated.faculties.push(ta);
 				ta.save();
 			}		
@@ -81,8 +81,8 @@ exports.update = function(req, res) {
 			updated = new VersionProject({
 				author: editor
 			});
-			for (var i = 0; i < req.body.outstandingProj.length; i++) {
-				var project = new Project(req.body.outstandingProj[i]);
+			for (var k = 0; k < req.body.outstandingProj.length; k++) {
+				var project = new Project(req.body.outstandingProj[k]);
 				updated.projects.push(project);
 				project.save();
 			}

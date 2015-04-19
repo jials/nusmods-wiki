@@ -4,9 +4,7 @@ angular.module('wiki').controller('RightBarContentCtrl', [ '$scope', '$http', '$
 	function ($scope, $http, $stateParams) {
 		$scope.data = {
 			selectedIndex: 0,
-			secondLocked:  true,
-			secondLabel:   "Item Two",
-			bottom:        false
+			bottom: false
 		};
 		$scope.next = function() {
 			$scope.data.selectedIndex = Math.min($scope.data.selectedIndex + 1, 2) ;
@@ -21,7 +19,7 @@ angular.module('wiki').controller('RightBarContentCtrl', [ '$scope', '$http', '$
 
 			var semester;
 			for (var i = 0; i < data.length; i++) {
-				if (data[i].ModuleCode == $stateParams.moduleTitle) {
+				if (data[i].ModuleCode === $stateParams.moduleTitle) {
 					semester = data[i].Semesters;
 				}
 			}
