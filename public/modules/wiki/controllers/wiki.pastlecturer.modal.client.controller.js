@@ -28,8 +28,8 @@ angular.module('wiki').controller('PastLecturerCtrl', [ '$scope', '$modal', '$lo
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('PastLecturerModalInstanceCtrl', [ '$scope', '$modalInstance', 'pastLecturers', '$http', '$stateParams', 'Authentication',
-	function ($scope, $modalInstance, pastLecturers, $http, $stateParams, Authentication) {
+angular.module('wiki').controller('PastLecturerModalInstanceCtrl', [ '$scope', '$modalInstance', 'pastLecturers', '$http', '$stateParams', 'Authentication', '$state',
+	function ($scope, $modalInstance, pastLecturers, $http, $stateParams, Authentication, $state) {
 		for (var j = 0; j < pastLecturers.length; j++) {
 			delete pastLecturers[j]._id;
 			pastLecturers[j].del = false;

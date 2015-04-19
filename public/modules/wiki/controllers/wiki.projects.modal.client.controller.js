@@ -30,8 +30,8 @@ angular.module('wiki').controller('ProjectsModalCtrl', [ '$scope', '$modal', '$l
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('ProjectsModalInstanceCtrl', [ '$scope', '$modalInstance', 'projects', '$http', '$stateParams', 'Authentication', 
-	function ($scope, $modalInstance, projects, $http, $stateParams, Authentication) {
+angular.module('wiki').controller('ProjectsModalInstanceCtrl', [ '$scope', '$modalInstance', 'projects', '$http', '$stateParams', 'Authentication', '$state',
+	function ($scope, $modalInstance, projects, $http, $stateParams, Authentication, $state) {
 		for (var j = 0; j < projects.length; j++) {
 			delete projects[j]._id;
 			projects[j].del = false;
@@ -69,6 +69,8 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', [ '$scope', '$mod
 
 			if (!$scope.projectForm.$invalid) {
 				$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'outstandingProj', outstandingProj: $scope.projects}).success(function(data){
+					$modalInstance.close();
+					$state.go($state.$current, null, { reload: true });
 				});
 			}
 

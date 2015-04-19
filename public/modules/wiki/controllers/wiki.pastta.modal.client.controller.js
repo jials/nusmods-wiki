@@ -28,8 +28,8 @@ angular.module('wiki').controller('PastTACtrl', [ '$scope', '$modal', '$log', '$
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('PastTAModalInstanceCtrl', [ '$scope', '$modalInstance', 'pastTAs', '$http', '$stateParams', 'Authentication', 
-	function ($scope, $modalInstance, pastTAs, $http, $stateParams, Authentication) {
+angular.module('wiki').controller('PastTAModalInstanceCtrl', [ '$scope', '$modalInstance', 'pastTAs', '$http', '$stateParams', 'Authentication', '$state'
+	function ($scope, $modalInstance, pastTAs, $http, $stateParams, Authentication, $state) {
 		for (var j = 0; j < pastTAs.length; j++) {
 			delete pastTAs[j]._id;
 			pastTAs[j].del = false;
