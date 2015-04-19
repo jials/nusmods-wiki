@@ -214,41 +214,6 @@
 							</div>
 						</div>
 
-						<div id="fun-facts" class="fun-facts-wrapper">
-							<div class="page-header"><h3>Fun Facts</h3></div>
-							<div ng-controller="FunFactsModalCtrl" class="edit">
-								<p ng-if="content === '' && !authentication.user">Login and start editing!</p>
-								<p>{{content}}</p>
-
-								<script type="text/ng-template" id="FunFactsModalContent.html">
-									<div class="modal-header">
-										<h3 class="modal-title">Edit Fun Facts</h3>
-									</div>
-									<div class="modal-body">
-										<form>
-										<div class="form-group">
-											<textarea class="form-control" ng-model="content" rows="4"></textarea>
-										</div>
-										</form>
-									</div>
-									<div class="modal-footer">
-										<div class="button label-blue" ng-click="save()">
-											<div class="text-center">SAVE</div>
-											<paper-ripple fit></paper-ripple>
-										</div>
-										<div class="button" ng-click="cancel()">
-											<div class="text-center">CANCEL</div>
-											<paper-ripple fit></paper-ripple>
-										</div>
-									</div>
-								</script>
-								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
-									<div class="text-center">EDIT</div>
-									<paper-ripple fit></paper-ripple>
-								</div>
-							</div>
-						</div>
-
 						<div id="projects" class="projects-wrapper">
 							<div class="page-header"><h3>Outstanding Projects</h3></div>
 							<div ng-controller="ProjectsModalCtrl" class="edit" set-ng-animate="false">
@@ -343,12 +308,45 @@
 							</div>
 						</div>
 
+						<div id="fun-facts" class="fun-facts-wrapper">
+							<div class="page-header"><h3>Fun Facts</h3></div>
+							<div ng-controller="FunFactsModalCtrl" class="edit">
+								<p ng-if="content === '' && !authentication.user">Login and start editing!</p>
+								<p>{{content}}</p>
+								<script type="text/ng-template" id="FunFactsModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Edit Fun Facts</h3>
+									</div>
+									<div class="modal-body">
+										<form>
+										<div class="form-group">
+											<textarea class="form-control" ng-model="content" rows="4"></textarea>
+										</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<div class="button label-blue" ng-click="save()">
+											<div class="text-center">SAVE</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+										<div class="button" ng-click="cancel()">
+											<div class="text-center">CANCEL</div>
+											<paper-ripple fit></paper-ripple>
+										</div>
+									</div>
+								</script>
+								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
+									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+							</div>
+						</div>
+
 						<div id="others" class="others-wrapper">
 							<div class="page-header"><h3>Others</h3></div>
 							<div ng-controller="OthersModalCtrl" class="edit">
 								<p ng-if="content === '' && !authentication.user">Login and start editing!</p>
 								<p>{{content}}</p>
-								
 								<script type="text/ng-template" id="OthersModalContent.html">
 									<div class="modal-header">
 										<h3 class="modal-title">Edit Others</h3>
