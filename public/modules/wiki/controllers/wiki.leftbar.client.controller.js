@@ -9,8 +9,8 @@ angular.module('wiki')
 		{ title: 'preclusion' },
 		{ title: 'past-lecturer' },
 		{ title: 'past-ta' },
-		{ title: 'fun-facts' },
 		{ title: 'projects' },
+		{ title: 'fun-facts' },
 		{ title: 'others' }];
 	}
 ]);
