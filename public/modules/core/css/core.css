@@ -13,6 +13,7 @@ body {
 .nm-wrapper {
 	padding-left: 200px;
 	/*height: 100%;*/
+	margin-top: 5px;
 }
 
 .sidebar-wrapper {
@@ -76,7 +77,7 @@ a.brand > span {
 }
 
 .nav-wrapper {
-	margin-top: 50px;
+	margin-top: 56px;
 }
 
 .navmenu-fixed-left {
@@ -269,7 +270,8 @@ body.modal-open {
 	height: 100%;
 	width: 100%;
 	position: fixed;
-	left:0;
+	left: 0;
+	/*top: 0;*/
 	z-index: 9999;
 }
 
