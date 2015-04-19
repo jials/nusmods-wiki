@@ -28,14 +28,15 @@ angular.module('wiki').controller('FunFactsModalCtrl', [ '$scope', '$modal', '$l
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('FunFactsModalInstanceCtrl', [ '$scope', '$modalInstance', 'content', '$http', '$stateParams', 'Authentication',
-    function ($scope, $modalInstance, content, $http, $stateParams, Authentication) {
+angular.module('wiki').controller('FunFactsModalInstanceCtrl', [ '$scope', '$modalInstance', 'content', '$http', '$stateParams', 'Authentication', '$state',
+    function ($scope, $modalInstance, content, $http, $stateParams, Authentication, $state) {
     	$scope.content = content;
 
         $scope.save = function () {
             $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'funFacts', funFacts: $scope.content}).success(function(data){     
+                $modalInstance.close();
+                $state.go($state.$current, null, { reload: true });
             });
-            $modalInstance.close();
         };
 
     	$scope.cancel = function () {

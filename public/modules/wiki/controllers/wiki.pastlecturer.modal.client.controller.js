@@ -50,8 +50,9 @@ angular.module('wiki').controller('PastLecturerModalInstanceCtrl', [ '$scope', '
 			$scope.pastLecturers = temp;
 
 			$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastLecturer', pastLecturer: $scope.pastLecturers}).success(function(data){
+				$modalInstance.close();
+				$state.go($state.$current, null, { reload: true });
 			});
-			$modalInstance.close();
 		};
 
 		$scope.cancel = function () {

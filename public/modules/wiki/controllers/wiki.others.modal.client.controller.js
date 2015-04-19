@@ -11,7 +11,6 @@ angular.module('wiki').controller('OthersModalCtrl', [ '$scope', '$modal', '$log
         });
 
         $scope.open = function (size) {
-
             var modalInstance = $modal.open({
                 templateUrl: 'OthersModalContent.html',
                 controller: 'OthersModalInstanceCtrl',
@@ -29,14 +28,15 @@ angular.module('wiki').controller('OthersModalCtrl', [ '$scope', '$modal', '$log
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('wiki').controller('OthersModalInstanceCtrl', [ '$scope', '$modalInstance', 'content', '$http', '$stateParams', 'Authentication',
-    function ($scope, $modalInstance, content, $http, $stateParams, Authentication) {
+angular.module('wiki').controller('OthersModalInstanceCtrl', [ '$scope', '$modalInstance', 'content', '$http', '$stateParams', 'Authentication', '$state',
+    function ($scope, $modalInstance, content, $http, $stateParams, Authentication, $state) {
         $scope.content = content;
 
         $scope.save = function () {
             $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'others', others: $scope.content}).success(function(data){
+                $modalInstance.close();
+                $state.go($state.$current, null, { reload: true });
             });
-            $modalInstance.close();
         };
 
         $scope.cancel = function () {

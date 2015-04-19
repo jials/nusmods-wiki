@@ -50,8 +50,9 @@ angular.module('wiki').controller('PastTAModalInstanceCtrl', [ '$scope', '$modal
 			$scope.pastTAs = temp;
 
 			$http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'pastTA', pastTA: $scope.pastTAs}).success(function(data){
+				$modalInstance.close();
+				$state.go($state.$current, null, { reload: true });
 			});
-			$modalInstance.close();
 		};
 
 		$scope.cancel = function () {

@@ -42,8 +42,8 @@ angular.module('wiki').controller('LinksModalInstanceCtrl', [ '$scope', '$modalI
                     maxSize: '1024*1024',
                 },
 
-                function(Blob){
-                    $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'logo', logo: Blob.url}).success(function(data){
+                function(Blob) {
+                    $http.put('/' + $stateParams.moduleTitle, {editedBy: Authentication.user.id, type: 'logo', logo: Blob.url}).success(function(data){ 
                     });
                 },
 
