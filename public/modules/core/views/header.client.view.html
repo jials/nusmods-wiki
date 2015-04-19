@@ -12,8 +12,8 @@
     <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
         <ul class="nav navbar-nav navbar-form">
             <li>
-                <!-- <form role="search" ng-controller="SearchController" ng-submit="submit()"> -->
-                    <!-- <div class="search-wrapper">
+                <form role="search" ng-controller="SearchController" ng-submit="submit()">
+                    <div class="search-wrapper">
                         <span class="icon"><i class="fa fa-search"></i></span>
                         <input type="search" class="search" placeholder="Search by Module Code" ng-model="selectedModule" typeahead="mod as mod.ModuleCode for mod in modules | filter:{ModuleCode:$viewValue}" typeahead-min-length='2' typeahead-template-url="searchTemplate.html" />
                         <script type="text/ng-template" id="searchTemplate.html">
@@ -27,31 +27,15 @@
                                 </table>
                             </a>
                         </script>
-                    </div> -->
-                <div ng-controller="SearchController as ctrl">
-                     <form ng-submit="ctrl.submit(ctrl.selectedItem.display)">
-                        <div class="search-wrapper">
-                            <md-autocomplete
-                                md-min-length="2"
-                                md-no-cache="false"
-                                md-selected-item="ctrl.selectedItem"
-                                md-search-text="ctrl.searchText"
-                                md-items="item in ctrl.querySearch(ctrl.searchText)"
-                                md-item-text="item.display"
-                                placeholder="Search by Module Code">
-                              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-                            </md-autocomplete>
-                        </div>
-                    </form>
-                </div>
-                <!-- </form>  -->
+                    </div>
+                </form> 
             </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
             <li ui-route="/signin" ng-class="{active: $uiRoute}">
                 <form class="signin form-horizontal" autocomplete="off" action="/auth/openid" method="post">
-                    <button type="submit" class="btn btn-link" style="height:56px;background-color:#FF9900;color:#FFFFFF;">
+                    <button type="submit" class="btn btn-link" style="height:50px;background-color:#FF9900;color:#FFFFFF;">
                         Sign in
                         <paper-ripple fit></paper-ripple>
                     </button>
@@ -60,7 +44,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
             <li class="dropdown" dropdown>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle style="line-height:26px;">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
                     <span data-ng-bind="authentication.user.displayName" class="signout" style="color:#FFFFFF;"></span> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
