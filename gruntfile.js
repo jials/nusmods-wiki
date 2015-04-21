@@ -96,6 +96,13 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		forever: {
+			dev: {
+				options: {
+					index: 'server.js',
+				}
+			}
+		},
 		'node-inspector': {
 			custom: {
 				options: {
@@ -117,7 +124,7 @@ module.exports = function(grunt) {
 			}
 		},
 		concurrent: {
-			default: ['nodemon', 'watch'],
+			default: ['nodemon', 'watch', 'forever'],
 			debug: ['nodemon', 'watch', 'node-inspector'],
 			options: {
 				logConcurrentOutput: true,
