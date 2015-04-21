@@ -57,6 +57,7 @@ angular.module('wiki').controller('PastTAModalInstanceCtrl', [ '$scope', '$modal
 
 		$scope.cancel = function () {
 			$modalInstance.dismiss('cancel');
+			$state.go($state.$current, null, { reload: true });
 		};
 
 		$scope.add = function () {

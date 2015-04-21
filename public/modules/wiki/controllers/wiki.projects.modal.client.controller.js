@@ -79,6 +79,7 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', [ '$scope', '$mod
 
 		$scope.cancel = function() {
 			$modalInstance.dismiss('cancel');
+			$state.go($state.$current, null, { reload: true });
 		};
 
 		$scope.uploadFile = function(index) {
