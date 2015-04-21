@@ -56,9 +56,9 @@ module.exports = function(app) {
 
 	app.get('/auth/openid/return', passport.authenticate('openid', {
 	    successRedirect: '/',
-	    failureRedirect: '/auth/openid'
+	    failureRedirect: '/'
 	}));
 
 	// Finish by binding the user middleware
-	app.param('userId', users.userByID);
+	// app.param('userId', users.userByID);
 };
