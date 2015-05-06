@@ -5,6 +5,7 @@ angular.module('wiki').controller('FunFactsModalCtrl', [ '$scope', '$modal', '$l
     	$http.get('/' + $stateParams.moduleTitle).success(function(data){
             if (data.funFacts.length !== 0) {
                 $scope.content = data.funFacts[data.funFacts.length - 1].content;
+                $scope.history = data.funFacts;
             } else {
                 $scope.content = '';
             }
@@ -22,6 +23,19 @@ angular.module('wiki').controller('FunFactsModalCtrl', [ '$scope', '$modal', '$l
     			}
     		});
     	};
+
+        $scope.openRev = function (size) {
+            var modalInstance = $modal.open({
+                templateUrl: 'FunFactsRevModalContent.html',
+                controller: 'FunFactsRevModalInstanceCtrl',
+                size: size,
+                resolve: {
+                    history: function () {
+                        return $scope.history;
+                    }
+                }
+            });
+        };
     }
 ]);
 
@@ -42,5 +56,15 @@ angular.module('wiki').controller('FunFactsModalInstanceCtrl', [ '$scope', '$mod
     	$scope.cancel = function () {
     		$modalInstance.dismiss('cancel');
     	};
+    }
+]);
+
+angular.module('wiki').controller('FunFactsRevModalInstanceCtrl', [ '$scope', '$modalInstance', 'history', '$http', '$stateParams', 'Authentication', '$state',
+    function ($scope, $modalInstance, history, $http, $stateParams, Authentication, $state) {
+        $scope.history = history;
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
     }
 ]);
