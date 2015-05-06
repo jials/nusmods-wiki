@@ -86,6 +86,16 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		imagemin: {
+			dynamic: {
+				files: [{
+					expand:true,
+					cwd: './public/',
+					src: ['**/*.{png,jpg,gif}'],
+					dest: './public/'
+				}]
+			}
+		},
 		nodemon: {
 			dev: {
 				script: 'server.js',
@@ -188,5 +198,9 @@ module.exports = function(grunt) {
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
 
+	//Minify Image
+	grunt.registerTask('imagemin', ['imagemin']);
+
 	grunt.loadNpmTasks('grunt-forever');
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
 };
