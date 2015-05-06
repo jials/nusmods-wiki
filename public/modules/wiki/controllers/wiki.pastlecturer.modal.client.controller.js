@@ -5,6 +5,7 @@ angular.module('wiki').controller('PastLecturerCtrl', [ '$scope', '$modal', '$lo
 		$http.get('/' + $stateParams.moduleTitle).success(function(data){
 			if (data.pastLecturer.length !== 0) {
 				$scope.pastLecturers = data.pastLecturer[data.pastLecturer.length - 1].faculties;
+				$scope.history = data.pastLecturer;
 			} else {
 				$scope.pastLecturers = [];
 			}
@@ -18,6 +19,19 @@ angular.module('wiki').controller('PastLecturerCtrl', [ '$scope', '$modal', '$lo
 				resolve: {
 					pastLecturers: function () {
 						return $scope.pastLecturers;
+					}
+				}
+			});
+		};
+
+		$scope.openRev = function (size) {
+			var modalInstance = $modal.open({
+				templateUrl: 'PastLecturerRevModalContent.html',
+				controller: 'PastLecturerRevModalInstanceCtrl',
+				size: size,
+				resolve: {
+					history: function () {
+						return $scope.history;
 					}
 				}
 			});
@@ -89,4 +103,14 @@ angular.module('wiki').controller('PastLecturerModalInstanceCtrl', [ '$scope', '
 			);
 		};
 	}
+]);
+
+angular.module('wiki').controller('PastLecturerRevModalInstanceCtrl', [ '$scope', '$modalInstance', 'history', '$http', '$stateParams', 'Authentication', '$state',
+    function ($scope, $modalInstance, history, $http, $stateParams, Authentication, $state) {
+        $scope.history = history;
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }
 ]);

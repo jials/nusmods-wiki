@@ -5,6 +5,7 @@ angular.module('wiki').controller('PastTACtrl', [ '$scope', '$modal', '$log', '$
 		$http.get('/' + $stateParams.moduleTitle).success(function(data){
 			if (data.pastTA.length !== 0) {
 				$scope.pastTAs = data.pastTA[data.pastTA.length - 1].faculties;
+				$scope.history = data.pastTA;
 			} else {
 				$scope.pastTAs = [];
 			}
@@ -18,6 +19,19 @@ angular.module('wiki').controller('PastTACtrl', [ '$scope', '$modal', '$log', '$
 				resolve: {
 					pastTAs: function () {
 						return $scope.pastTAs;
+					}
+				}
+			});
+		};
+
+		$scope.openRev = function (size) {
+			var modalInstance = $modal.open({
+				templateUrl: 'PastTARevModalContent.html',
+				controller: 'PastTARevModalInstanceCtrl',
+				size: size,
+				resolve: {
+					history: function () {
+						return $scope.history;
 					}
 				}
 			});
@@ -89,4 +103,14 @@ angular.module('wiki').controller('PastTAModalInstanceCtrl', [ '$scope', '$modal
 			);
 		};
 	}
+]);
+
+angular.module('wiki').controller('PastTARevModalInstanceCtrl', [ '$scope', '$modalInstance', 'history', '$http', '$stateParams', 'Authentication', '$state',
+    function ($scope, $modalInstance, history, $http, $stateParams, Authentication, $state) {
+        $scope.history = history;
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }
 ]);

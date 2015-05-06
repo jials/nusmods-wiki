@@ -17,8 +17,7 @@
 
 		<div class="page-content-wrapper main-container" ng-controller="MainContentCtrl">
 			<div class="loader-wrapper" ng-show="showSpinner"><rotating-plane-spinner ng-show="showSpinner"></rotating-plane-spinner></div>
-			<div class="main-content container-fluid">
-
+			<div class="main-content container-fluid" ng-hide="showSpinner">
 				<div class="row">
 					<div class="col-md-8">
 						<h1 class="module-code">{{module.ModuleCode}}</h1>
@@ -119,9 +118,44 @@
 										</div>
 									</div>
 								</script>
+
+								<script type="text/ng-template" id="PastLecturerRevModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Revision History</h3>
+									</div>
+									<div class="modal-body">
+									<table class="table table-striped">
+									    <thead>
+									      <tr>
+									        <th>Edited By</th>
+									        <th>Project Name</th>
+									        <th>Date</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									      <tr ng-repeat="history in history">
+									        <td>{{history.author}}</td>
+									        <td><div ng-repeat="faculty in history.faculties">{{faculty.name}}</div></td>
+									        <td>{{history.created | date:'medium'}}</td>
+									      </tr>
+									    </tbody>
+									  </table>
+									  </div>
+									  <div class="modal-footer">
+									  	<div class="button" ng-click="cancel()">
+									  		<div class="text-center">CLOSE</div>
+									  		<paper-ripple fit></paper-ripple>
+									  	</div>
+									  </div>
+								</script>
+
 								<br ng-show="authentication.user">
 								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+								<div class="button raised edit" ng-click="openRev()" ng-show="authentication.user">
+									<div class="text-center">HISTORY</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
 							</div>
@@ -206,9 +240,44 @@
 										</div>
 									</div>
 								</script>
+
+								<script type="text/ng-template" id="PastTARevModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Revision History</h3>
+									</div>
+									<div class="modal-body">
+									<table class="table table-striped">
+									    <thead>
+									      <tr>
+									        <th>Edited By</th>
+									        <th>Project Name</th>
+									        <th>Date</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									      <tr ng-repeat="history in history">
+									        <td>{{history.author}}</td>
+									        <td><div ng-repeat="faculty in history.faculties">{{faculty.name}}</div></td>
+									        <td>{{history.created | date:'medium'}}</td>
+									      </tr>
+									    </tbody>
+									  </table>
+									  </div>
+									  <div class="modal-footer">
+									  	<div class="button" ng-click="cancel()">
+									  		<div class="text-center">CLOSE</div>
+									  		<paper-ripple fit></paper-ripple>
+									  	</div>
+									  </div>
+								</script>
+
 								<br ng-show="authentication.user">
 								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+								<div class="button raised edit" ng-click="openRev()" ng-show="authentication.user">
+									<div class="text-center">HISTORY</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
 							</div>
@@ -300,9 +369,44 @@
 										</div>
 									</div>
 								</script>
+
+								<script type="text/ng-template" id="ProjectsRevModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Revision History</h3>
+									</div>
+									<div class="modal-body">
+									<table class="table table-striped">
+									    <thead>
+									      <tr>
+									        <th>Edited By</th>
+									        <th>Project Name</th>
+									        <th>Date</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									      <tr ng-repeat="history in history">
+									        <td>{{history.author}}</td>
+									        <td><div ng-repeat="project in history.projects">{{project.name}}</div></td>
+									        <td>{{history.created | date:'medium'}}</td>
+									      </tr>
+									    </tbody>
+									  </table>
+									  </div>
+									  <div class="modal-footer">
+									  	<div class="button" ng-click="cancel()">
+									  		<div class="text-center">CLOSE</div>
+									  		<paper-ripple fit></paper-ripple>
+									  	</div>
+									  </div>
+								</script>
+
 								<br ng-show="authentication.user">
 								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">ADD / EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+								<div class="button raised edit" ng-click="openRev()" ng-show="authentication.user">
+									<div class="text-center">HISTORY</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
 							</div>
@@ -335,8 +439,43 @@
 										</div>
 									</div>
 								</script>
+
+								<script type="text/ng-template" id="FunFactsRevModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Revision History</h3>
+									</div>
+									<div class="modal-body">
+									<table class="table table-striped">
+									    <thead>
+									      <tr>
+									        <th>Edited By</th>
+									        <th>Content</th>
+									        <th>Date</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									      <tr ng-repeat="history in history">
+									        <td>{{history.author}}</td>
+									        <td>{{history.content}}</td>
+									        <td>{{history.created | date:'medium'}}</td>
+									      </tr>
+									    </tbody>
+									  </table>
+									  </div>
+									  <div class="modal-footer">
+									  	<div class="button" ng-click="cancel()">
+									  		<div class="text-center">CLOSE</div>
+									  		<paper-ripple fit></paper-ripple>
+									  	</div>
+									  </div>
+								</script>
+
 								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+								<div class="button raised edit" ng-click="openRev()" ng-show="authentication.user">
+									<div class="text-center">History</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
 							</div>
@@ -369,8 +508,43 @@
 										</div>
 									</div>
 								</script>
+
+								<script type="text/ng-template" id="OthersRevModalContent.html">
+									<div class="modal-header">
+										<h3 class="modal-title">Revision History</h3>
+									</div>
+									<div class="modal-body">
+									<table class="table table-striped">
+									    <thead>
+									      <tr>
+									        <th>Edited By</th>
+									        <th>Content</th>
+									        <th>Date</th>
+									      </tr>
+									    </thead>
+									    <tbody>
+									      <tr ng-repeat="history in history">
+									        <td>{{history.author}}</td>
+									        <td>{{history.content}}</td>
+									        <td>{{history.created | date:'medium'}}</td>
+									      </tr>
+									    </tbody>
+									  </table>
+									  </div>
+									  <div class="modal-footer">
+									  	<div class="button" ng-click="cancel()">
+									  		<div class="text-center">CLOSE</div>
+									  		<paper-ripple fit></paper-ripple>
+									  	</div>
+									  </div>
+								</script>
+
 								<div class="button raised edit" ng-click="open()" ng-show="authentication.user">
 									<div class="text-center">EDIT</div>
+									<paper-ripple fit></paper-ripple>
+								</div>
+								<div class="button raised edit" ng-click="openRev()" ng-show="authentication.user">
+									<div class="text-center">HISTORY</div>
 									<paper-ripple fit></paper-ripple>
 								</div>
 							</div>

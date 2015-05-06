@@ -5,6 +5,7 @@ angular.module('wiki').controller('OthersModalCtrl', [ '$scope', '$modal', '$log
         $http.get('/' + $stateParams.moduleTitle).success(function(data){
             if (data.others.length !== 0) {
                 $scope.content = data.others[data.others.length - 1].content;
+                $scope.history = data.others;
             } else {
                 $scope.content = '';
             }
@@ -18,6 +19,19 @@ angular.module('wiki').controller('OthersModalCtrl', [ '$scope', '$modal', '$log
                 resolve: {
                     content: function () {
                         return $scope.content;
+                    }
+                }
+            });
+        };
+
+        $scope.openRev = function (size) {
+            var modalInstance = $modal.open({
+                templateUrl: 'OthersRevModalContent.html',
+                controller: 'OthersRevModalInstanceCtrl',
+                size: size,
+                resolve: {
+                    history: function () {
+                        return $scope.history;
                     }
                 }
             });
@@ -38,6 +52,16 @@ angular.module('wiki').controller('OthersModalInstanceCtrl', [ '$scope', '$modal
                 $state.go($state.$current, null, { reload: true });
             });
         };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }
+]);
+
+angular.module('wiki').controller('OthersRevModalInstanceCtrl', [ '$scope', '$modalInstance', 'history', '$http', '$stateParams', 'Authentication', '$state',
+    function ($scope, $modalInstance, history, $http, $stateParams, Authentication, $state) {
+        $scope.history = history;
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

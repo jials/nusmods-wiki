@@ -7,6 +7,7 @@ angular.module('wiki').controller('ProjectsModalCtrl', [ '$scope', '$modal', '$l
 		$http.get('/' + $stateParams.moduleTitle).success(function(data){
 			if (data.outstandingProj.length !== 0) {
 				$scope.projects = data.outstandingProj[data.outstandingProj.length - 1].projects;
+				$scope.history = data.outstandingProj;
 			} else {
 				$scope.projects = [];
 			}
@@ -20,6 +21,19 @@ angular.module('wiki').controller('ProjectsModalCtrl', [ '$scope', '$modal', '$l
 				resolve: {
 					projects: function () {
 						return $scope.projects;
+					}
+				}
+			});
+		};
+
+		$scope.openRev = function (size) {
+			var modalInstance = $modal.open({
+				templateUrl: 'ProjectsRevModalContent.html',
+				controller: 'ProjectsRevModalInstanceCtrl',
+				size: size,
+				resolve: {
+					history: function () {
+						return $scope.history;
 					}
 				}
 			});
@@ -105,6 +119,16 @@ angular.module('wiki').controller('ProjectsModalInstanceCtrl', [ '$scope', '$mod
 			);
 		};
 	}
+]);
+
+angular.module('wiki').controller('ProjectsRevModalInstanceCtrl', [ '$scope', '$modalInstance', 'history', '$http', '$stateParams', 'Authentication', '$state',
+    function ($scope, $modalInstance, history, $http, $stateParams, Authentication, $state) {
+        $scope.history = history;
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }
 ]);
 
 angular.module('wiki').filter('trusted', ['$sce', function ($sce) {

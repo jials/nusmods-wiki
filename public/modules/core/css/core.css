@@ -432,3 +432,18 @@ h4.section-title {
 .rightbar-header {
 	font-weight: 700;
 }
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait */
+@media only screen and (max-device-width: 667px) { 
+
+  	.sidebar-wrapper {
+  		display: none;
+  	}
+
+  	.nm-wrapper {
+  		padding-left: 0;
+  	}
+
+}
